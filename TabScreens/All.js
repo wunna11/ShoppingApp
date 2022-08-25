@@ -81,7 +81,7 @@ const All = ({ navigation }) => {
               <TouchableOpacity
                 onPress={() => navigation.navigate("ProductDetail", { item })}
               >
-                <Text style={{ color: "#fff", fontSize: 30 }}>{item.name}</Text>
+                <Text style={{ color: "#fff", fontSize: 20 }}>{item.name}</Text>
                 <Text style={{ color: "#fff", fontSize: 10 }}>{item.desc}</Text>
               </TouchableOpacity>
             </View>
@@ -89,8 +89,8 @@ const All = ({ navigation }) => {
         </Text>
       ) : null}
       <View style={{ flex: 1 }}>
-        <View style={{ paddingLeft: 16,  }}>
-          <Text style={styles.expoView}>Shop to be Smart with WTTH</Text>
+        <View style={{marginBottom:20}}>
+          <Text style={styles.expoView}>"Shop to be Smart with WTTH"</Text>
         </View>
         <SafeAreaView style={{ flex: 2, padding: 5, marginTop: -40 }}>
           <Animatable.View
@@ -107,8 +107,8 @@ const All = ({ navigation }) => {
               <TouchableOpacity
               onPress={() => navigation.navigate("ProductDetail", { item })}
               >
-                <View style={{ padding: 10, paddingTop: 0, }}>
-                <View style={{ paddingTop: 20, flexDirection: "column",}}>
+                <View style={{ padding: 15, paddingTop: 0, }}>
+                <View style={{ paddingTop: 5, flexDirection: "column",}}>
                   <View>
                     <Image
                       style={styles.iimage}
@@ -116,7 +116,7 @@ const All = ({ navigation }) => {
                     />
                   </View>
 
-                    <View>
+                    <View style={{width: 150,}}>
                       <Text style={styles.expoText}>{item.category_name}</Text>
                       <Text style={styles.text}>Name : {item.name}</Text>
                       <Text style={styles.text}>Price : $ {item.price}</Text>
@@ -149,17 +149,17 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   expoView: {
-    fontSize: 24,
-    color: "gold",
-    fontWeight: "500",
+    textAlign: 'center',
+    fontSize: 22,
+    color: '#FFE89C',
+    fontWeight: '500',
     letterSpacing: 1,
-    marginBottom: 5,
   },
   expoText: {
-    textAlign: 'center',
-    paddingTop: 10,
-    fontSize: 16,
-    color: "gold",
+    //textAlign: 'center',
+    paddingTop: 8,
+    fontSize: 14,
+    color: "#FFE89C",
     fontWeight: "900",
     letterSpacing: 1,
     lineHeight: 18,
@@ -174,10 +174,10 @@ const styles = StyleSheet.create({
 
   },
   text: {
-    marginTop: 10,
+    marginTop: 5,
     fontSize: 14,
     color: "#fff",
-    fontWeight: "400",
-    letterSpacing: 1,
+    fontWeight: "500",
+    letterSpacing: 0.5,
   },
 });

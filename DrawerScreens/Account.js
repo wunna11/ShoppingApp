@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { ImageBackground, TextInput, FlatList, Text, View, TouchableOpacity, StatusBar, StyleSheet, ScrollView, Image, Alert } from 'react-native'
+import { SafeAreaView, ImageBackground, Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import { firebase } from '../config'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { CommonActions } from '@react-navigation/native'
+import * as Animatable from 'react-native-animatable';
 export default function AccountScreen({ route, navigation }, props) {
     const firestore = firebase.firestore;
     const auth = firebase.auth;
@@ -51,57 +52,65 @@ export default function AccountScreen({ route, navigation }, props) {
                 source={require('../assets/bg6.jpg')}
                 style={{ width: '100%', height: "100%", }}
             >
-                <View style={{ justifyContent: "center", alignItems: 'center' }}>
+
+                <SafeAreaView style={{ flex: 1, padding: 5 }}>
+                    <Animatable.View
+                        animation="fadeInUp"
+                        duration={1000}
+
+                    >
+                        <View style={{ justifyContent: "center", alignItems: 'center' }}>
 
 
-                    <Image
-                        style={styles.acc}
-                        source={require('../assets/logo.png')}
-                    />
+                            <Image
+                                style={styles.acc}
+                                source={require('../assets/logo.png')}
+                            />
 
 
 
+                            <Text style={{ fontSize: 30, fontWeight: "500", color: "#f7d081" }}>Hello {user?.username}!</Text>
+                            <View style={{ paddingTop: 30, paddingBottom: 10 }}>
 
-                    <Text style={{ fontSize: 30, fontWeight: "500", color: "#f7d081" }}>Hello {user?.username}!</Text>
-                    <View style={{ paddingTop: 30, paddingBottom: 10 }}>
+                                <Text style={{ fontSize: 20, fontWeight: "500", color: "#f7d081", marginLeft: 20, marginBottom: 10, padding: 10 }}>Your Informations :</Text>
 
-                        <Text style={{ fontSize: 20, fontWeight: "500", color: "#f7d081", marginLeft: 20, marginBottom: 10, padding: 10 }}>Your Informations :</Text>
+                                <View style={{ flexDirection: 'row', padding: 10 }}>
+                                    <MaterialCommunityIcons name="email" color={'#f7d081'} size={30} />
+                                    <Text style={{ fontSize: 20, fontWeight: "500", color: "#f7d081", marginLeft: 20 }}> {user?.email}</Text>
+                                </View>
 
-                        <View style={{ flexDirection: 'row', padding: 10 }}>
-                            <MaterialCommunityIcons name="email" color={'#f7d081'} size={30} />
-                            <Text style={{ fontSize: 20, fontWeight: "500", color: "#f7d081", marginLeft: 20 }}> {user?.email}</Text>
+                                <View style={{ flexDirection: 'row', padding: 10 }}>
+                                    <MaterialCommunityIcons name="phone" color={'#f7d081'} size={30} />
+                                    <Text style={{ fontSize: 20, fontWeight: "500", color: "#f7d081", marginLeft: 20 }}> {user?.phone}</Text>
+                                </View>
+
+                                <View style={{ flexDirection: 'row', padding: 10 }}>
+                                    <MaterialCommunityIcons name="home" color={'#f7d081'} size={30} />
+                                    <Text style={{ fontSize: 20, fontWeight: "500", color: "#f7d081", marginLeft: 20 }}> {user?.address}</Text>
+                                </View>
+
+                            </View>
+
+
+                            <View style={{ paddingTop: 50, flexDirection: "row" }}>
+                                <TouchableOpacity
+                                    onPress={Edit}
+                                    style={styles.button}
+                                >
+                                    <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
+                                        Edit Profile</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    onPress={signOut}
+                                    style={styles.button}
+                                >
+                                    <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
+                                        Log Out</Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
-
-                        <View style={{ flexDirection: 'row', padding: 10 }}>
-                            <MaterialCommunityIcons name="phone" color={'#f7d081'} size={30} />
-                            <Text style={{ fontSize: 20, fontWeight: "500", color: "#f7d081", marginLeft: 20 }}> {user?.phone}</Text>
-                        </View>
-
-                        <View style={{ flexDirection: 'row', padding: 10 }}>
-                            <MaterialCommunityIcons name="home" color={'#f7d081'} size={30} />
-                            <Text style={{ fontSize: 20, fontWeight: "500", color: "#f7d081", marginLeft: 20 }}> {user?.address}</Text>
-                        </View>
-
-                    </View>
-
-
-                    <View style={{ paddingTop: 50, flexDirection: "row" }}>
-                        <TouchableOpacity
-                            onPress={Edit}
-                            style={styles.button}
-                        >
-                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
-                                Edit Profile</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={signOut}
-                            style={styles.button}
-                        >
-                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
-                                Log Out</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
+                    </Animatable.View>
+                </SafeAreaView>
             </ImageBackground>
         </View>
 
