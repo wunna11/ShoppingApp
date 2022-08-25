@@ -51,7 +51,7 @@ export default function Home(navigation) {
                         backgroundColor: '#000'
                     },
                     headerRight: () => <Image
-                        style={{ width: 40, height: 40, borderRadius: 50, marginRight: 10 }}
+                        style={{ width: 40, height: 40, borderRadius: 50, margin: 15, borderWidth: 1,borderColor: "#fff" }}
                         source={require('../assets/logo.png')}
                     />,
                 }}
@@ -73,6 +73,7 @@ export default function Home(navigation) {
                             style={{
                                 fontSize: 30,
                                 color: '#f7d081',
+                                margin: 10,
                             }}
                             onPress={() => navigation.navigate('MyCart')}
                         />
@@ -86,7 +87,10 @@ export default function Home(navigation) {
                     title: 'MyCart',
                     drawerIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="cart-outline" color={'#ffd700'} size={30} />
-                    )
+                    ),headerTintColor: '#fff',
+                    headerStyle: {
+                        backgroundColor: '#000'
+                    },
                 }}
             />
             <Drawer.Screen
@@ -96,7 +100,10 @@ export default function Home(navigation) {
                     title: 'OrderDetail',
                     drawerIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="clipboard-list-outline" color={'#ffd700'} size={30} />
-                    )
+                        ),headerTintColor: '#fff',
+                        headerStyle: {
+                            backgroundColor: '#000'
+                        },
                 }}
             />
             <Drawer.Screen
@@ -121,7 +128,11 @@ export default function Home(navigation) {
                     title: 'AboutUs',
                     drawerIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="information-outline" color={'#ffd700'} size={30} />
-                    )
+                    ), headerTintColor: '#fff',
+                    headerStyle: {
+                        backgroundColor: '#000'
+                    },
+                   
                 }}
             />
            

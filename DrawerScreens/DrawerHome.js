@@ -6,16 +6,18 @@ import {
     Image,
     SafeAreaView,
     TouchableOpacity,
+    Button
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { firebase } from '../config'
 import * as Animatable from 'react-native-animatable';
+import Video from 'react-native-video';
 export default function DrawerHome({ navigation }) {
     const firestore = firebase.firestore;
     const auth = firebase.auth;
     const [user, setUser] = useState(null)
-
-
+ 
+   
     useEffect(() => {
         firebase.firestore().collection("users")
             .doc(auth().currentUser.uid).get()
@@ -35,7 +37,7 @@ export default function DrawerHome({ navigation }) {
                     <Animatable.View
                         animation="fadeInUp"
                         duration={2000}
-
+                      
                     >
                         <Text style={styles.label1}>Welocome {user?.username}!</Text>
                     </Animatable.View>
@@ -45,7 +47,19 @@ export default function DrawerHome({ navigation }) {
                 </TouchableOpacity>
                 {/*<Image source={require("../assets/logo.png")} style={styles.imgLogo} />*/}
             </View>
+            <Video
+  style={{width:300,height:200}}
+  source={{
+    uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
+  }}
+  useNativeControls={true}
+  isLooping={true}
+/>
+
+           
+            
             <ScrollView style={{ flex: 0.5, margin: 3 }}>
+               
                 <View>
                     <ScrollView horizontal={true} style={styles.shadow}>
                         <Image source={require("../assets/acce1.jpg")} style={styles.img1} />
