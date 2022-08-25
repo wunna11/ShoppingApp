@@ -56,8 +56,8 @@ export default function Login({ navigation }) {
                             //console.log("firebase Data:",firestoreDocument.data())
 
                             if (!firestoreDocument.exists) {
-                                alert("User does not exist anymore.")
-                                //setPasswordError("User does not exist anymore");
+                                //alert("User does not exist anymore.")
+                                setPasswordError("User does not exist anymore");
                                 return;
                             }
 
@@ -72,16 +72,16 @@ export default function Login({ navigation }) {
                             }
                         })
 
-                        .catch(error => {
-                            alert(error)
-                            //    setPasswordError(error);
-                            //   console.log(error)
-                        })
+                        //.catch(error => {
+                        //    console.log(error)
+                        //        setPasswordError("Useremail or password is wrong");
+                        //    //   console.log(error)
+                        //})
                 })
                 .catch(error => {
-                    alert(error)
-                    //setPasswordError(error);
-                    //console.log(error)
+                    console.log(error)
+                    setPasswordError("Email or Password is wrong!Try Again...");
+                 
                 })
 
             setPasswordError("")

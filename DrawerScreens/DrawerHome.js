@@ -6,18 +6,34 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+import React, { useEffect, useState } from "react";
+import { firebase } from '../config'
+export default function DrawerHome({ navigation }) {
+  const firestore = firebase.firestore;
+  const auth = firebase.auth;
+  const [user, setUser] = useState(null)
 
-export default function DrawerHome( { navigation } ) {
+
+  useEffect(() => {
+    firebase.firestore().collection("users")
+      .doc(auth().currentUser.uid).get()
+      .then(user => {
+        setUser(user.data())
+      })
+  }, [])
+
   return (
     <View style={styles.container}>
-      <View style={{flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: "space-between",}}>
-        <Text style={styles.label1}>New Arrivals</Text>
+      <View style={{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: "space-between",
+      }}>
+        <Text style={styles.label1}>Welocome {user?.username}!</Text>
         <TouchableOpacity>
-          <Text style={styles.label1}>See More</Text>
+          <Text style={styles.label}>New Arrivals</Text>
         </TouchableOpacity>
-      {/*<Image source={require("../assets/logo.png")} style={styles.imgLogo} />*/}
+        {/*<Image source={require("../assets/logo.png")} style={styles.imgLogo} />*/}
       </View>
       <ScrollView style={{ flex: 0.5, margin: 3 }}>
         <View>
@@ -28,8 +44,8 @@ export default function DrawerHome( { navigation } ) {
             <Image source={require("../assets/women1.jpg")} style={styles.img1} />
           </ScrollView>
         </View>
-      
-          <Text style={styles.label2}> Shop today or Cry later..</Text>
+
+        <Text style={styles.label2}> Shop today or Cry later..</Text>
 
         <View style={[styles.row, styles.shadow]}>
           <Image source={require("../assets/img3.png")} style={styles.img2} />
@@ -66,7 +82,7 @@ export default function DrawerHome( { navigation } ) {
           </TouchableOpacity>
           <Image source={require("../assets/img6.png")} style={styles.Accimg} />
         </View>
-    </ScrollView>
+      </ScrollView>
     </View>
   );
 }
@@ -116,15 +132,19 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
   label1: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "gold",
+    fontSize: 16,
+    color: "#f7d081",
     padding: 10,
   },
   label2: {
     fontSize: 15,
-    //fontWeight: "bold",
     color: "gold",
+    padding: 10,
+  },
+  label: {
+    fontSize: 18,
+    color: "gold",
+    fontWeight: "bold",
     padding: 10,
   },
   row: {

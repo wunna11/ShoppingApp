@@ -30,7 +30,7 @@ export default function Home(navigation) {
        
     }
     return (
-        <Drawer.Navigator initialRouteName="Products"
+        <Drawer.Navigator initialRouteName="DrawerHome"
             drawerContent={props => <CustomDrawer {...props} />}
             screenOptions={{
                 drawerActiveBackgroundColor: "black",
