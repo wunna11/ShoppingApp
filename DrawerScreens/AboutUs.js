@@ -1,12 +1,46 @@
-import { Text, View, StyleSheet, TextInput, ScrollView, TouchableOpacity, Image } from "react-native";
+import { Alert,Text, View, StyleSheet, TextInput, ScrollView, TouchableOpacity, Image } from "react-native";
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useState } from "react";
+import { useState ,useEffect} from "react";
+import { firebase } from '../config';
 
 export default function AboutUs({ navigation }) {
-  
+  const firestore = firebase.firestore;
+  const auth = firebase.auth;
+  const [user, setUser] = useState(null)
+
+
+  useEffect(() => {
+    firebase.firestore().collection("users")
+      .doc(auth().currentUser.uid).get()
+      .then(user => {
+        setUser(user.data())
+      })
+  }, [])
   const [mesg, setMesg] = useState('');
+  const add = async () => {
+   
   
+    const dataRef = firebase.firestore().collection('feedback')
+      const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+      const data = {
+        userfeedback:mesg,
+        createdAt: timestamp,
+        username:user?.username,
+      };
+      dataRef
+        .add(data)
+        .then(() => {
+          setMesg("")
+        })
+        .then(() => {
+          Alert.alert("Thank You for your feedback!");
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    }
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -74,7 +108,7 @@ export default function AboutUs({ navigation }) {
               />
               <View style={styles.btn}>
                 <TouchableOpacity
-                  //onPress={add}
+                  onPress={add}
                 >
                         <Text>Send</Text>
                     </TouchableOpacity>

@@ -1,6 +1,7 @@
-import { ActivityIndicator, StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Image, ImageBackground } from 'react-native';
+import { SafeAreaView,ActivityIndicator, StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Image, ImageBackground } from 'react-native';
 import { firebase } from '../config'
 import React, { useState, useEffect } from 'react';
+import * as Animatable from 'react-native-animatable';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default function Login({ navigation }) {
@@ -89,6 +90,8 @@ export default function Login({ navigation }) {
         }
 
     }
+
+    
     return (
 
         <View style={styles.container}>
@@ -97,6 +100,11 @@ export default function Login({ navigation }) {
                 source={require('../assets/bg.jpg')}
                 style={{ width: '100%', height: "100%" }}
             >
+                 <SafeAreaView style={{ flex: 1, padding: 5,marginTop:-2 }}>
+                    <Animatable.View
+                        animation="fadeInUp"
+                        duration={3000}
+                    >
                 <KeyboardAwareScrollView>
                     <View style={{ flex: 1, marginLeft: 200, }}>
 
@@ -157,7 +165,10 @@ export default function Login({ navigation }) {
                         </View>
 
                     </View>
-                </KeyboardAwareScrollView>
+                        </KeyboardAwareScrollView>
+                        </Animatable.View>
+                </SafeAreaView>
+            
             </ImageBackground>
 
         </View>

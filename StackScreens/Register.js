@@ -1,7 +1,8 @@
-import { ImageBackground, ActivityIndicator, Image, StyleSheet, Text, View, TextInput, TouchableOpacity, Button } from 'react-native';
+import { SafeAreaView, ImageBackground, ActivityIndicator, Image, StyleSheet, Text, View, TextInput, TouchableOpacity, Button } from 'react-native';
 import { collection, doc, setDoc, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { firebase } from '../config'
 import React, { useState } from 'react';
+import * as Animatable from 'react-native-animatable';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default function Register({ navigation }) {
@@ -24,16 +25,7 @@ export default function Register({ navigation }) {
     }
     const onRegisterPress = () => {
         const timestamp = firebase.firestore.FieldValue.serverTimestamp();
-        //if (password !== confirmPassword) {
-        //    alert("Passwords don't match.")
-        //    return
-        //}
 
-
-        //.catch((error) => {
-        //    alert(error)
-        //});
-        //username validation
         var nameValid = false;
         if (username.length == 0) {
             setusernameError("Enter Full Name");
@@ -108,7 +100,7 @@ export default function Register({ navigation }) {
 
         else if (confirmPassword !== password) {
 
-            setconfirmPasswordError("Password and Confrim password should be the same!")
+            setconfirmPasswordError("Password and Confrim password must be the same!")
         }
 
         else {
@@ -151,116 +143,126 @@ export default function Register({ navigation }) {
                 source={require('../assets/bg.jpg')}
                 style={{ width: '100%', height: "100%", }}
             >
-                <KeyboardAwareScrollView>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text style={{
-                                fontSize: 28, fontWeight: "bold", color: "#f7d081", marginBottom: 40, marginLeft: 40, marginTop: 90
-                            }}>Sign Up</Text>
-                            <View style={{ flex: 1, marginLeft: 70 }}>
 
-                                <Text style={{ fontSize: 40, paddingLeft: 30, marginTop: 30, fontWeight: "900", color: "#000" }}>WTTH</Text>
-                                <Image
-                                    style={{
-                                        height: 80,
-                                        width: 80,
-                                        marginLeft: 45,
-                                        marginTop: 15,
-                                        borderRadius: 50
-                                    }}
-                                    source={require('../assets/logo.png')}
+                <SafeAreaView style={{ flex: 1, padding: 5 }}>
+                    <Animatable.View
+                        animation="fadeInUp"
+                        duration={1000}
+
+                    >
+                        <KeyboardAwareScrollView>
+                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={{
+                                        fontSize: 28, fontWeight: "bold", color: "#f7d081", marginBottom: 40, marginLeft: 40, marginTop: 90
+                                    }}>Sign Up</Text>
+                                    <View style={{ flex: 1, marginLeft: 70 }}>
+
+                                        <Text style={{ fontSize: 40, paddingLeft: 20, marginTop: 30, fontWeight: "900", color: "#000" }}>WTTH</Text>
+                                        <Image
+                                            style={{
+                                                height: 80,
+                                                width: 80,
+                                                marginLeft: 45,
+                                                marginTop: 15,
+                                                borderRadius: 50
+                                            }}
+                                            source={require('../assets/logo.png')}
+                                        />
+                                    </View>
+                                </View>
+                                <TextInput
+                                    placeholderTextColor="#fff"
+                                    value={username}
+                                    onChangeText={(text) => setName(text)}
+                                    placeholder='Enter Your Name'
+                                    style={styles.textBoxes} >
+
+                                </TextInput>
+                                {usernameError.length > 0 &&
+                                    <Text style={{ color: "red" }}>{usernameError}</Text>
+                                }
+
+                                <TextInput
+                                    value={email}
+                                    placeholderTextColor="#fff"
+                                    onChangeText={(text) => setEmail(text)}
+                                    placeholder='Email Address'
+                                    autoCapitalize="none"
+                                    keyboardType={'email-address'}
+                                    style={styles.textBoxes}
+                                >
+
+                                </TextInput>
+                                {emailError.length > 0 &&
+                                    <Text style={{ color: "red" }}>{emailError}</Text>
+                                }
+                                <TextInput
+                                    value={phone}
+                                    placeholderTextColor="#fff"
+                                    onChangeText={(text) => setphone(text)}
+                                    placeholder='Enter Phone Number'
+                                    style={styles.textBoxes}
+                                    keyboardType={'phone-pad'}
+                                >
+
+                                </TextInput>
+                                {phoneError.length > 0 &&
+
+                                    <Text style={{ color: "red" }}>{phoneError}</Text>
+                                }
+                                <TextInput
+                                    value={address}
+                                    placeholderTextColor="#fff"
+                                    onChangeText={(text) => setaddress(text)}
+                                    placeholder='Enter Your Address'
+                                    style={styles.textBoxes}
+                                >
+
+                                </TextInput>
+                                {addressError.length > 0 &&
+
+                                    <Text style={{ color: "red" }}>{addressError}</Text>
+                                }
+                                <TextInput
+                                    value={password}
+                                    placeholderTextColor="#fff"
+                                    secureTextEntry
+                                    onChangeText={(text) => setPassword(text)}
+                                    placeholder='Password'
+                                    style={styles.textBoxes} >
+
+                                </TextInput>
+                                {passwordError.length > 0 &&
+
+                                    <Text style={{ color: "red" }}>{passwordError}</Text>
+                                }
+
+                                <TextInput
+                                    placeholderTextColor="#fff"
+                                    secureTextEntry
+                                    placeholder='Confirm Password'
+                                    onChangeText={(text) => setConfirmPassword(text)}
+                                    value={confirmPassword}
+                                    style={styles.textBoxes}
                                 />
+                                {confirmpasswordError.length > 0 &&
+
+                                    <Text style={{ color: "red" }}>{confirmpasswordError}</Text>
+                                }
+                                <TouchableOpacity
+                                    style={styles.button}
+                                    onPress={() => onRegisterPress()}>
+                                    <Text style={styles.buttonTitle}>Create account</Text>
+                                </TouchableOpacity>
+                                <View style={{ marginTop: 30, marginBottom: 20 }}>
+                                    <Text style={{ fontSize: 18, color: "#fff" }}>Already got an account? <Text onPress={onFooterLinkPress} style={{ color: "#ffd700", fontSize: 20, fontWeight: "bold" }}>Log in</Text></Text>
+                                </View>
                             </View>
-                        </View>
-                        <TextInput
-                            placeholderTextColor="#fff"
-                            value={username}
-                            onChangeText={(text) => setName(text)}
-                            placeholder='Enter Your Name'
-                            style={styles.textBoxes} >
 
-                        </TextInput>
-                        {usernameError.length > 0 &&
-                            <Text style={{ color: "red" }}>{usernameError}</Text>
-                        }
-
-                        <TextInput
-                            value={email}
-                            placeholderTextColor="#fff"
-                            onChangeText={(text) => setEmail(text)}
-                            placeholder='Email Address'
-                            autoCapitalize="none"
-                            keyboardType={'email-address'}
-                            style={styles.textBoxes}
-                        >
-
-                        </TextInput>
-                        {emailError.length > 0 &&
-                            <Text style={{ color: "red" }}>{emailError}</Text>
-                        }
-                        <TextInput
-                            value={phone}
-                            placeholderTextColor="#fff"
-                            onChangeText={(text) => setphone(text)}
-                            placeholder='Enter Phone Number'
-                            style={styles.textBoxes}
-                            keyboardType={'phone-pad'}
-                        >
-
-                        </TextInput>
-                        {phoneError.length > 0 &&
-
-                            <Text style={{ color: "red" }}>{phoneError}</Text>
-                        }
-                        <TextInput
-                            value={address}
-                            placeholderTextColor="#fff"
-                            onChangeText={(text) => setaddress(text)}
-                            placeholder='Enter Your Address'
-                            style={styles.textBoxes}
-                        >
-
-                        </TextInput>
-                        {addressError.length > 0 &&
-
-                            <Text style={{ color: "red" }}>{addressError}</Text>
-                        }
-                        <TextInput
-                            value={password}
-                            placeholderTextColor="#fff"
-                            secureTextEntry
-                            onChangeText={(text) => setPassword(text)}
-                            placeholder='Password'
-                            style={styles.textBoxes} >
-
-                        </TextInput>
-                        {passwordError.length > 0 &&
-
-                            <Text style={{ color: "red" }}>{passwordError}</Text>
-                        }
-
-                        <TextInput
-                            placeholderTextColor="#fff"
-                            secureTextEntry
-                            placeholder='Confirm Password'
-                            onChangeText={(text) => setConfirmPassword(text)}
-                            value={confirmPassword}
-                            style={styles.textBoxes}
-                        />
-                        {confirmpasswordError.length > 0 &&
-
-                            <Text style={{ color: "red" }}>{confirmpasswordError}</Text>
-                        }
-                        <TouchableOpacity
-                            style={styles.button}
-                            onPress={() => onRegisterPress()}>
-                            <Text style={styles.buttonTitle}>Create account</Text>
-                        </TouchableOpacity>
-                        <View style={{ marginTop: 30, marginBottom: 20 }}>
-                            <Text style={{ fontSize: 18, color: "#fff" }}>Already got an account? <Text onPress={onFooterLinkPress} style={{ color: "#ffd700", fontSize: 20, fontWeight: "bold" }}>Log in</Text></Text>
-                        </View>
-                    </View>
-                </KeyboardAwareScrollView>
+                        </KeyboardAwareScrollView>
+                    </Animatable.View>
+                </SafeAreaView>
             </ImageBackground>
         </View>
 

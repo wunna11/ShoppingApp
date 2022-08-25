@@ -54,12 +54,12 @@ import * as Animatable from 'react-native-animatable';
   return (
     <View style={styles.container}>
       <ImageBackground
-    source={require('../assets/bg8.jpg')}
+    source={require('../assets/bag3.jpg')}
     style={{width: '100%', height: "100%",}}
 > 
       <View style={{ flex: 1 }}>
         <View style={{ padding: 10,paddingBottom: 20  }}>
-          <Text style={styles.expoView}>Shop to be Smart with WTTH</Text>
+          <Text style={styles.expoView}>"Welcome from Woman Collection"</Text>
         </View>
         <SafeAreaView style={{ flex: 2, padding: 5, marginTop: -40 }}>
           <Animatable.View
@@ -77,7 +77,7 @@ import * as Animatable from 'react-native-animatable';
               onPress={() => navigation.navigate("ProductDetail", { item })}
               >
                 <View style={{ padding: 10, paddingTop: 10, }}>
-                <View style={{ paddingTop: 20, flexDirection: "column",}}>
+                <View style={{ flexDirection: "row",}}>
                   <View>
                     <Image
                       style={styles.iimage}
@@ -85,9 +85,10 @@ import * as Animatable from 'react-native-animatable';
                     />
                   </View>
 
-                  <View>
-                      <Text style={styles.expoText}>{item.category_name}</Text>
+                  <View style={{padding: 10,}}>
+                      {/*<Text style={styles.expoText}>{item.category_name}</Text>*/}
                       <Text style={styles.text}>Name : {item.name}</Text>
+                      <Text style={[styles.text,styles.text2]}>About : {item.desc}</Text>
                       <Text style={styles.text}>Price : $ {item.price}</Text>
                   </View>
                 </View>
@@ -121,16 +122,18 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     fontSize: 16,
-    color: "gold",
+    color: "#FFE89C",
     fontWeight: "900",
     letterSpacing: 1,
     lineHeight: 18,
   },
   expoView: {
-    fontSize: 26,
-    color: 'gold',
+    textAlign: 'center',
+    fontSize: 20,
+    color: '#FFE89C',
     fontWeight: '500',
     letterSpacing: 1,
+    marginBottom: 30,
   },
   text: {
     fontSize: 14,
@@ -138,5 +141,8 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     letterSpacing: 1,
     paddingBottom: 15
+  },
+  text2: {
+    width: 200,
   }
 })

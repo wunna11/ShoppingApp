@@ -9,66 +9,83 @@ import Accessories from "../TabScreens/Accessories";
 
 export default function Products({ navigation }) {
   const Tab = createBottomTabNavigator();
-
   return (
+
     <Tab.Navigator
-      initialRouteName="All"
+      initialRouteName={"All"}
       screenOptions={{
         headerShown: false,
-        //tabBarIconStyle: { display: 'none' },
-        //tabBarStyle: {
-        //  paddingBottom: 20
-        //},
-        tabBarLabelStyle: {
-          fontSize: 12
-        },
-        tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="home" color={'#ffd700'} size={30} />
-        ),
-        
+         
+          "tabBarActiveTintColor": "#fff",
+          "tabBarInactiveTintColor": "#fff",
+          "tabBarActiveBackgroundColor": "#757271",
+          "tabBarInactiveBackgroundColor": "#000",
+          "tabBarStyle": [
+            {
+              "display": "flex"
+            },
+            null
+          ] 
+       
       }}
+      //tabBarOptions={{
+      // 
+      //  activeTintColor: '#fff',
+      //  inactiveTintColor: '#fff',
+      //  activeBackgroundColor: '#757271',
+      //  inactiveBackgroundColor: '#000',
+        //style: {
+        //      backgroundColor: '#000',
+        //}
+      //}}
     >
       <Tab.Screen
         name="All"
         component={All}
+        options={{
+          //tabBarLabel: 'WomanClothes',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home" color={'#FFE89C'} size={30} />
+          ),
+        }}
       />
       <Tab.Screen
         name="Woman"
         component={WomanClothing}
         options={{
-          tabBarLabel: 'WomanClothes',
+          //tabBarLabel: 'WomanClothes',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="woman" color={'#ffd700'} size={30} />
+            <Ionicons name="woman" color={'#FFE89C'} size={30} />
           ),
         }}
       />
       <Tab.Screen
-        name="Men"
+        name="Man"
         component={MenClothing}
         options={{
-          tabBarLabel: 'MenClothes',
+          //tabBarLabel: 'MenClothes',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="man" color={'#ffd700'} size={30} />
+            <Ionicons name="man" color={'#FFE89C'} size={30} />
           ),
         }}
       />
       <Tab.Screen
-        name="Shoes"
+        name="Shoe"
         component={Shoes}
         options={{
-          tabBarLabel: 'Shoes',
+          //tabBarLabel: 'Shoes',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="shoe-heel" color={'#ffd700'} size={30} />
+            <MaterialCommunityIcons name="shoe-heel" color={'#FFE89C'} size={30} />
           ),
         }}
       />
       <Tab.Screen
-        name="Accessories"
+        name="Accessory"
         component={Accessories}
         options={{
-          tabBarLabel: 'Accessories',
+          //tabBarLabel: 'Accessories',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="necklace" color={'#ffd700'} size={30} />
+            <MaterialCommunityIcons name="necklace" color={'#FFE89C'} size={30} />
           ),
         }}
       />

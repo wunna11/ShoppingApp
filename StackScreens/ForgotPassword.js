@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { ImageBackground, StyleSheet, View, Text, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
+import { SafeAreaView, ImageBackground, StyleSheet, View, Text, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
 import { firebase } from '../config';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import * as Animatable from 'react-native-animatable';
 export default function ForgotPassword({ navigation }) {
     const [email, setEmail] = useState('')
 
@@ -27,51 +28,62 @@ export default function ForgotPassword({ navigation }) {
                 source={require('../assets/bg.jpg')}
                 style={{ width: '100%', height: "100%" }}
             >
-                <KeyboardAwareScrollView>
-                    <View style={{ flex: 1, marginLeft: 200, }}>
-
-                        <Text style={{ fontSize: 40, paddingLeft: 30, marginTop: 60, fontWeight: "900", color: "#000" }}>WTTH</Text>
-                        <Image
-                            style={{
-                                height: 80,
-                                width: 80,
-                                marginLeft: 45,
-                                marginTop: 15,
-                                borderRadius: 50
-                            }}
-                            source={require('../assets/logo.png')}
-                        />
-                    </View>
-                    <View style={{ flex: 1, padding: 20, marginTop: 100 }}>
-
-                        <Text style={{ fontSize: 20, fontWeight: 'bold', color: "#fff" }}>Forgot Password?</Text>
-
-                        <TextInput style={styles.textBoxes}
-                            value={email}
-                            onChangeText={(text) => setEmail(text)}
-                            placeholderTextColor="#fff"
-                            placeholder="Email"
-                            keyboardType="email-address"
-                            autoCapitalize="none"
-                            autoCorrect={false}
 
 
-                        />
-                        <View style={{ flexDirection: 'row' }}>
-                            <TouchableOpacity
-                                style={styles.button}
-                                onPress={onResetPasswordPress} >
-                                <Text style={styles.buttonTitle}>ResetPassword</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={styles.button}
-                                onPress={onBackToLoginPress}>
-                                <Text style={styles.buttonTitle}>Back To Log in</Text>
-                            </TouchableOpacity>
+                <SafeAreaView style={{ flex: 1, padding: 5 }}>
+                    <Animatable.View
+                        animation="fadeInUp"
+                        duration={1000}
 
-                        </View>
-                    </View>
-                </KeyboardAwareScrollView>
+                    >
+                        <KeyboardAwareScrollView>
+
+                            <View style={{ flex: 1, marginLeft: 200, }}>
+
+                                <Text style={{ fontSize: 40, paddingLeft: 30, marginTop: 60, fontWeight: "900", color: "#000" }}>WTTH</Text>
+                                <Image
+                                    style={{
+                                        height: 80,
+                                        width: 80,
+                                        marginLeft: 45,
+                                        marginTop: 15,
+                                        borderRadius: 50
+                                    }}
+                                    source={require('../assets/logo.png')}
+                                />
+                            </View>
+                            <View style={{ flex: 1, padding: 20, marginTop: 100 }}>
+
+                                <Text style={{ fontSize: 20, fontWeight: 'bold', color: "#fff" }}>Forgot Password?</Text>
+
+                                <TextInput style={styles.textBoxes}
+                                    value={email}
+                                    onChangeText={(text) => setEmail(text)}
+                                    placeholderTextColor="#fff"
+                                    placeholder="Email"
+                                    keyboardType="email-address"
+                                    autoCapitalize="none"
+                                    autoCorrect={false}
+
+
+                                />
+                                <View style={{ flexDirection: 'row' }}>
+                                    <TouchableOpacity
+                                        style={styles.button}
+                                        onPress={onResetPasswordPress} >
+                                        <Text style={styles.buttonTitle}>ResetPassword</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity
+                                        style={styles.button}
+                                        onPress={onBackToLoginPress}>
+                                        <Text style={styles.buttonTitle}>Back To Log in</Text>
+                                    </TouchableOpacity>
+
+                                </View>
+                            </View>
+                        </KeyboardAwareScrollView>
+                    </Animatable.View>
+                </SafeAreaView>
             </ImageBackground>
         </View>
     );

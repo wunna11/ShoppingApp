@@ -14,7 +14,7 @@ import Accessories from './TabScreens/Accessories';
 import ProductDetail from './StackScreens/ProductDetail';
 
 //import AdminHome from './Admin/AdminHome';
-import AdminTab from './Admin/AdminTabs';
+import AdminTab from './AdminScreens/AdminTabs';
 import AboutUs from './DrawerScreens/AboutUs';
 export default function App() {
 

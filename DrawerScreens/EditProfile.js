@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { ImageBackground, TextInput, FlatList, Text, View, TouchableOpacity, StatusBar, StyleSheet, ScrollView, Image, Alert } from 'react-native'
+import {SafeAreaView, ImageBackground, TextInput, FlatList, Text, View, TouchableOpacity, StatusBar, StyleSheet, ScrollView, Image, Alert } from 'react-native'
 import { firebase } from '../config'
 import { useIsFocused } from '@react-navigation/native';
 import { CommonActions } from '@react-navigation/native'
+import * as Animatable from 'react-native-animatable';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 const EditProfile = ({ navigation }) => {
     const firestore = firebase.firestore;
@@ -126,6 +127,12 @@ const EditProfile = ({ navigation }) => {
                 source={require('../assets/bg6.jpg')}
                 style={{ width: '100%', height: "100%", }}
             >
+                 <SafeAreaView style={{ flex: 1, padding: 5 }}>
+                    <Animatable.View
+                        animation="fadeInUp"
+                        duration={1000}
+
+                    >
                 <KeyboardAwareScrollView>
 
                     <Image
@@ -228,7 +235,10 @@ const EditProfile = ({ navigation }) => {
                     </View>
 
 
-                </KeyboardAwareScrollView>
+                        </KeyboardAwareScrollView>
+                        </Animatable.View>
+                </SafeAreaView>
+                
             </ImageBackground>
         </View>
     );
