@@ -20,7 +20,6 @@ const Admin = ({ route, navigation }) => {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [price, setPrice] = useState("");
-  const [qty, setQty] = useState("");
   const [category, setCategory] = useState("");
   const [imgURL, setImageURL] = useState("");
   const [category_name, setCategory_name] = useState('');
@@ -40,7 +39,6 @@ const Admin = ({ route, navigation }) => {
         const { name } = doc.data();
         const { desc } = doc.data();
         const { price } = doc.data();
-        const { qty } = doc.data();
         const { category_name } = doc.data();
 
         data.push({
@@ -49,7 +47,6 @@ const Admin = ({ route, navigation }) => {
           name,
           desc,
           price,
-          qty,
           category_name,
         });
       });
@@ -138,10 +135,7 @@ const Admin = ({ route, navigation }) => {
                     <Text style={styles.text}>
                       Price: ${item.price}
                     </Text>
-                    <Text style={styles.text}>
-                      {/*Quantity:*/}
-                     Qty: {item.qty}
-                    </Text>
+                    
                   </View>
                  
                 </View>

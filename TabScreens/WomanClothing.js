@@ -70,7 +70,7 @@ import * as Animatable from 'react-native-animatable';
           <FlatList
               data={data}
               keyExtractor={(_,i) => String(i)}
-              numColumns={2}
+              numColumns={1}
               showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <TouchableOpacity

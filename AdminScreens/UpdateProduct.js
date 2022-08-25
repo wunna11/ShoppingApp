@@ -22,13 +22,12 @@ const UpdateProduct = ({ route, navigation }) => {
   const [desc, setDesc] = useState(route.params.item.desc);
   const [price, setPrice] = useState(route.params.item.price);
   const [size, setSize] = useState(route.params.item.size);
-  const [qty, setQty] = useState(route.params.item.qty);
   const [category_id, setCategory_id] = useState(route.params.item.category_id);
   const [category_name, setCategory_name] = useState(route.params.item.category_name);
 
 
     const [data, setData] = useState([]);
-    const catRef = firebase.firestore().collection('products');
+    const catRef = firebase.firestore().collection('categories');
     const [name, setName] = useState('')
 
     const [selectedItem, setSelectedItem] = useState();
@@ -81,9 +80,9 @@ const UpdateProduct = ({ route, navigation }) => {
       (image !== null )||
       (productName && productName.length > 0) ||
       (desc && desc.length > 0) ||
-      (price && price.length > 0) ||
-      //(category && category.length > 0) ||
-      (qty && qty.length > 0)
+      (price && price.length > 0) 
+    
+     
     ) {
       setUploading(true);
       const response = await fetch(image.uri);
@@ -113,7 +112,6 @@ const UpdateProduct = ({ route, navigation }) => {
           name: productName,
           desc: desc,
           price: parseFloat(price),
-          qty: parseFloat(qty),
           imgURL: setImageURL,
           category_id: selectedItem.id,
           category_name: selectedItem.name,
@@ -148,12 +146,6 @@ const UpdateProduct = ({ route, navigation }) => {
         <Text> Pick Update Image</Text>
       </TouchableOpacity>
 
-      {/*<TextInput
-        style={styles.input}
-        placeholder="Category"
-        onChangeText={(text) => setCategory(text)}
-        value={category}
-      />*/}
 
       <TextInput
         style={styles.input}
@@ -177,13 +169,6 @@ const UpdateProduct = ({ route, navigation }) => {
         keyboardType="numeric"
       />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Quantity"
-        onChangeText={(text) => setQty(text)}
-        value={parseFloat(qty)}
-        keyboardType="numeric"
-      />
 
 <View style={styles.select}>
           <SelectDropdown

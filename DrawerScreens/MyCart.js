@@ -1,17 +1,17 @@
-import { StyleSheet, Text, View, TouchableOpacity, Alert ,Image,ScrollView} from 'react-native'
-import React, { useState,useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Alert, Image, ScrollView } from 'react-native'
+import React, { useState, useEffect } from 'react';
 import { firebase } from '../config'
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from "@expo/vector-icons";
-
+import { CommonActions } from '@react-navigation/native'
 const MyCart = ({ route, navigation }) => {
 
     //const [data, setData] = useState([]);
     const dataRef = firebase.firestore().collection('products')
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
     const [total, setTotal] = useState('');
-      
+
     //Getting user id
     const firestore = firebase.firestore;
     const auth = firebase.auth;
@@ -30,12 +30,12 @@ const MyCart = ({ route, navigation }) => {
     console.log(uid);
     console.log(urname);
 
-      var [id] = useState('');
-      var [name, setName] = useState('');
-      var [imgURL, setImageURL] = useState('');
-      var [desc, setDesc] = useState('');
-      var [price, setPrice] = useState('');
-      var [qty, setQty] = useState('');
+    var [id] = useState('');
+    var [name, setName] = useState('');
+    var [imgURL, setImageURL] = useState('');
+    var [desc, setDesc] = useState('');
+    var [price, setPrice] = useState('');
+    var [qty, setQty] = useState('');
 
 
     const [cartList, setCartList] = useState([]);
@@ -45,7 +45,7 @@ const MyCart = ({ route, navigation }) => {
         navigation.addListener("focus", () => {
             AsyncStorage.getItem("carts").then((data) => {
                 if (data !== null) {
-                    setCartList(JSON.parse(data)) 
+                    setCartList(JSON.parse(data))
                     console.log(JSON.parse(data))
                     let sum = 10;
                     JSON.parse(data).map((item) => {
@@ -85,19 +85,19 @@ const MyCart = ({ route, navigation }) => {
         }
     }
 
-     // Add pending Order to firebase database
-     const order = () => {
+    // Add pending Order to firebase database
+    const order = () => {
         // if (uid !== null) {
-         
-         const cartOrder = {
-             cartList,
-             "total": total,
-             "username": user?.username,
-             "phone": user?.phone,
-             "address": user?.address,  
-             "note" : note,
-             'createdAt':timestamp,
-         };
+        const cartOrder = {
+            cartList,
+            "total": total,
+            "username": user?.username,
+            "phone": user?.phone,
+            "address": user?.address,
+            "note": note,
+            'createdAt': timestamp,
+            "status": "pending"
+        };
         // console.log(cartOrder);
         firebase
             .firestore()
@@ -106,28 +106,29 @@ const MyCart = ({ route, navigation }) => {
             //.collection("cart "+ uid )
             .doc(cartOrder.id)
             .set(cartOrder)
-            .then(() => {
-                console.log("Successfully order pending !!!");
-                Alert.alert("Your Orders are pending. Plz wait for confirmation...")
-                //navigation.navigate('Products')
+            .then(async () => {
+
+                await AsyncStorage.removeItem('carts')
                 navigation.dispatch(
                     CommonActions.reset({
                         index: 0,
                         routes: [{ name: 'Products' }]
                     })
                 )
-          });
+                Alert.alert("Your Orders are pending. Plz wait for confirmation...")
+
+            });
         // }
-     };
-    
-    const CartItemView = ({ item,index }) => {
+    };
+
+    const CartItemView = ({ item, index }) => {
         return (
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 10 }}>
-                <Text style={styles.text}>{ item.qty }</Text>
+                <Text style={styles.text}>{item.qty}</Text>
                 <Image
-                      style={styles.iimage}
-                      source={{ uri: item.imgURL }}
-                    />
+                    style={styles.iimage}
+                    source={{ uri: item.imgURL }}
+                />
                 <Text style={styles.text}> {item.name} </Text>
                 <Text style={styles.text}> $ {item.price} </Text>
                 <TouchableOpacity
@@ -141,58 +142,58 @@ const MyCart = ({ route, navigation }) => {
     }
 
     return (
-  
+
         <View style={styles.container}>
-            <Text style={{fontSize: 20,textAlign: 'center'}}>
+            <Text style={{ fontSize: 20, textAlign: 'center' }}>
                 Order Details
             </Text>
             <FlatList
-                        data={cartList}
-                        renderItem={CartItemView}
-                        showsVerticalScrollIndicator={true}
-                        style={{ flex: 1, marginTop: 16 }}
+                data={cartList}
+                renderItem={CartItemView}
+                showsVerticalScrollIndicator={true}
+                style={{ flex: 1, marginTop: 16 }}
             />
 
             <View style={{ flex: 0.5 }}>
-            <ScrollView>
-                <View>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'gold' }}>Information</Text>
-                    {/*<View style={{flexDirection: 'row', justifyContent: 'space-between', padding: 5}}>
+                <ScrollView>
+                    <View>
+                        <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'gold' }}>Information</Text>
+                        {/*<View style={{flexDirection: 'row', justifyContent: 'space-between', padding: 5}}>
                         <Text>ID</Text>
                         <Text>{user?.id}</Text>
                     </View>*/}
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between', padding: 5}}>
-                        <Text>Name</Text>
-                        <Text>{user?.username}</Text>
-                    </View>
-                    {/*<View style={{flexDirection: 'row', justifyContent: 'space-between', padding: 5}}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+                            <Text>Name</Text>
+                            <Text>{user?.username}</Text>
+                        </View>
+                        {/*<View style={{flexDirection: 'row', justifyContent: 'space-between', padding: 5}}>
                         <Text>Email</Text>
                         <Text>{user?.email}</Text>
                     </View>*/}
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between', padding: 5}}>
-                        <Text>Phone</Text>
-                        <Text>{user?.phone}</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+                            <Text>Phone</Text>
+                            <Text>{user?.phone}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+                            <Text>Address</Text>
+                            <Text>{user?.address}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+                            <Text>Note</Text>
+                            <TextInput
+                                style={styles.textBoxes}
+                                placeholder='Message'
+                                onChangeText={(note) => setNote(note)}
+                                placeholderTextColor="#c4c4c2"
+                            />
+                        </View>
                     </View>
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between', padding: 5}}>
-                        <Text>Address</Text>
-                        <Text>{user?.address}</Text>
-                    </View>
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between', padding: 5}}>
-                        <Text>Note</Text>
-                        <TextInput
-                            style={styles.textBoxes}
-                            placeholder='Message'
-                            onChangeText={(note) => setNote(note)}
-                            placeholderTextColor="#c4c4c2"
-                        />
-                    </View>
-                </View>
-                    <Text style={{fontSize: 20,fontWeight:'bold',color: 'gold'}}>Check Out</Text>
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between', padding: 10}}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'gold' }}>Check Out</Text>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 10 }}>
                         <Text>Shipping Fee</Text>
                         <Text>$ 10</Text>
                     </View>
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between', padding: 10}}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 10 }}>
                         <Text>Total</Text>
                         <Text>$ {total}</Text>
                     </View>
@@ -201,10 +202,10 @@ const MyCart = ({ route, navigation }) => {
                     </TouchableOpacity>
                 </ScrollView>
             </View>
-            
+
 
         </View>
-     
+
     )
 }
 
@@ -223,7 +224,7 @@ const styles = StyleSheet.create({
     },
     icon: {
         paddingTop: 20,
-      },
+    },
     textBoxes: {
         fontSize: 18,
         //padding: 5,
@@ -231,16 +232,16 @@ const styles = StyleSheet.create({
         width: '50%'
     },
     btn: {
-      alignItems: "center",
-      justifyContent: 'center',
-      backgroundColor: "#f7d081",
-      padding: 10,
-      width: '100%',
-      borderRadius: 20
+        alignItems: "center",
+        justifyContent: 'center',
+        backgroundColor: "#f7d081",
+        padding: 10,
+        width: '100%',
+        borderRadius: 20
     },
     iimage: {
         width: 80,
         height: 80,
         borderRadius: 15,
-      }
+    }
 })
