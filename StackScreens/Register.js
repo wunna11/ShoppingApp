@@ -104,6 +104,8 @@ export default function Register({ navigation }) {
         }
 
         else {
+            setconfirmPasswordError("")
+            confirmpasswordValid = true
             firebase
                 .auth()
                 .createUserWithEmailAndPassword(email, password)
@@ -126,16 +128,18 @@ export default function Register({ navigation }) {
                             navigation.navigate('Home')
                         })
                         .catch((error) => {
-                            con(error)
-                            Alert.alert("Your email has not sign in yet!")
-                        });
 
+                            alert(error)
+                        });
                 })
-            setconfirmPasswordError("")
-            confirmpasswordValid = true
+                .catch((error) => {
+
+                    alert("Email is already used")
+                });
         }
 
     }
+
 
     return (
         <View style={styles.container}>
@@ -145,17 +149,20 @@ export default function Register({ navigation }) {
             >
 
                 <SafeAreaView style={{ flex: 1, padding: 5 }}>
-                    <Animatable.View
-                        animation="fadeInUp"
-                        duration={1000}
 
-                    >
-                        <KeyboardAwareScrollView>
-                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text style={{
-                                        fontSize: 28, fontWeight: "bold", color: "#f7d081", marginBottom: 40, marginLeft: 40, marginTop: 90
-                                    }}>Sign Up</Text>
+                    <KeyboardAwareScrollView>
+
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={{
+                                    fontSize: 28, fontWeight: "bold", color: "#f7d081", marginBottom: 40, marginLeft: 40, marginTop: 90
+                                }}>Sign Up</Text>
+                                <Animatable.View
+                                    animation="pulse"
+                                    direction='alternate'
+                                    iterationCount='infinite'
+                                >
                                     <View style={{ flex: 1, marginLeft: 70 }}>
 
                                         <Text style={{ fontSize: 40, paddingLeft: 20, marginTop: 30, fontWeight: "900", color: "#000" }}>WTTH</Text>
@@ -169,8 +176,16 @@ export default function Register({ navigation }) {
                                             }}
                                             source={require('../assets/logo.png')}
                                         />
+
                                     </View>
-                                </View>
+                                </Animatable.View>
+                            </View>
+
+                            <Animatable.View
+                                animation="fadeInUp"
+                                duration={1000}
+
+                            >
                                 <TextInput
                                     placeholderTextColor="#fff"
                                     value={username}
@@ -258,10 +273,11 @@ export default function Register({ navigation }) {
                                 <View style={{ marginTop: 30, marginBottom: 20 }}>
                                     <Text style={{ fontSize: 18, color: "#fff" }}>Already got an account? <Text onPress={onFooterLinkPress} style={{ color: "#ffd700", fontSize: 20, fontWeight: "bold" }}>Log in</Text></Text>
                                 </View>
-                            </View>
+                            </Animatable.View>
+                        </View>
 
-                        </KeyboardAwareScrollView>
-                    </Animatable.View>
+                    </KeyboardAwareScrollView>
+
                 </SafeAreaView>
             </ImageBackground>
         </View>
