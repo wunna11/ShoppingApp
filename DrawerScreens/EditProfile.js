@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {SafeAreaView, ImageBackground, TextInput, FlatList, Text, View, TouchableOpacity, StatusBar, StyleSheet, ScrollView, Image, Alert } from 'react-native'
+import { SafeAreaView, ImageBackground, TextInput, FlatList, Text, View, TouchableOpacity, StatusBar, StyleSheet, ScrollView, Image, Alert } from 'react-native'
 import { firebase } from '../config'
 import { useIsFocused } from '@react-navigation/native';
 import { CommonActions } from '@react-navigation/native'
@@ -127,118 +127,124 @@ const EditProfile = ({ navigation }) => {
                 source={require('../assets/bg6.jpg')}
                 style={{ width: '100%', height: "100%", }}
             >
-                 <SafeAreaView style={{ flex: 1, padding: 5 }}>
-                    <Animatable.View
-                        animation="fadeInUp"
-                        duration={1000}
+                <SafeAreaView style={{ flex: 1, padding: 5 }}>
 
-                    >
-                <KeyboardAwareScrollView>
+                    <KeyboardAwareScrollView>
 
-                    <Image
-                        style={styles.acc}
-                        source={require('../assets/logo.png')}
-                    />
+                        <Image
+                            style={styles.acc}
+                            source={require('../assets/logo.png')}
+                        />
 
 
+                        <Animatable.View
+                            animation="jello"
+                            iterationCount='infinite'
+                        >
+                            <View style={{ paddingTop: 10, paddingBottom: 10 }}>
 
-                    <View style={{ paddingTop: 10, paddingBottom: 10 }}>
-                        <Text style={{ fontSize: 24, fontWeight: "bold", textAlign: "center", color: "#f7d081" }}> Edit Profile</Text>
-                    </View>
-                    <View style={{ width: "100%" }}>
-                        <View style={{ flexDirection: 'row' }}>
-
-                            <TextInput
-                                style={styles.textBoxes}
-                                value={username}
-                                placeholder="Enter Your New Name"
-                                placeholderTextColor="#fff"
-                                onChangeText={(text) => setUsername(text)}
-                                autoCapitalize="none"
-                            />
-
-                            <TouchableOpacity style={styles.button} onPress={UsernameUpdate}>
-                                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>OK</Text>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={{ flexDirection: 'row' }}>
-
-                            <TextInput
-                                style={styles.textBoxes}
-                                value={phone}
-                                placeholder="Enter New Phone Number"
-                                placeholderTextColor="#fff"
-                                onChangeText={(text) => setphone(text)}
-                                autoCapitalize="none"
-                            />
-
-                            <TouchableOpacity style={styles.button} onPress={PhoneUpdate}>
-                                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>OK</Text>
-                            </TouchableOpacity>
-
-
-                        </View>
-
-
-                        <View style={{ flexDirection: 'row' }}>
-
-                            <TextInput
-                                style={styles.textBoxes}
-                                value={address}
-                                placeholder="Enter New Address"
-                                placeholderTextColor="#fff"
-                                onChangeText={(text) => setaddress(text)}
-                                autoCapitalize="none"
-                            />
-                            <TouchableOpacity style={styles.button} onPress={AddressUpdate}>
-                                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>OK</Text>
-                            </TouchableOpacity>
-
-                        </View>
-                        <View style={{ flexDirection: "row" }}>
-                            <TextInput
-                                style={styles.textBoxes}
-                                value={newPassword}
-                                placeholderTextColor="#fff"
-                                autoCapitalize="none"
-                                secureTextEntry
-                                placeholder='Enter new Password'
-                                onChangeText={(text) => setnewPassword(text)}
-
-                            />
-
-                            <TouchableOpacity
-                                onPress={UpdatePassword}
-                                style={styles.button}
-                            >
-                                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
-                                    OK</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{ alignItems: 'center', justifyContent: "center", flexDirection: 'row', paddingTop: 40 }}>
-                            <TouchableOpacity
-                                onPress={GoProfile}
-                                style={styles.button}
-                            >
-                                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
-                                    Back</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={signOut}
-                                style={styles.button}
-                            >
-                                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
-                                    Log Out</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-
-
-                        </KeyboardAwareScrollView>
+                                <Text style={{ fontSize: 24, fontWeight: "bold", textAlign: "center", color: "#f7d081" }}> Edit Profile</Text>
+                            </View>
                         </Animatable.View>
+                        <Animatable.View
+                            animation="fadeInRightBig"
+                            duration={4000}
+                        >
+                            <View style={{ width: "100%" }}>
+                                <View style={{ flexDirection: 'row' }}>
+
+                                    <TextInput
+                                        style={styles.textBoxes}
+                                        value={username}
+                                        placeholder="Enter Your New Name"
+                                        placeholderTextColor="#fff"
+                                        onChangeText={(text) => setUsername(text)}
+                                        autoCapitalize="none"
+                                    />
+
+                                    <TouchableOpacity style={styles.button} onPress={UsernameUpdate}>
+                                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>OK</Text>
+                                    </TouchableOpacity>
+                                </View>
+
+                                <View style={{ flexDirection: 'row' }}>
+
+                                    <TextInput
+                                        style={styles.textBoxes}
+                                        value={phone}
+                                        placeholder="Enter New Phone Number"
+                                        placeholderTextColor="#fff"
+                                        onChangeText={(text) => setphone(text)}
+                                        autoCapitalize="none"
+                                    />
+
+                                    <TouchableOpacity style={styles.button} onPress={PhoneUpdate}>
+                                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>OK</Text>
+                                    </TouchableOpacity>
+
+
+                                </View>
+
+
+                                <View style={{ flexDirection: 'row' }}>
+
+                                    <TextInput
+                                        style={styles.textBoxes}
+                                        value={address}
+                                        placeholder="Enter New Address"
+                                        placeholderTextColor="#fff"
+                                        onChangeText={(text) => setaddress(text)}
+                                        autoCapitalize="none"
+                                    />
+                                    <TouchableOpacity style={styles.button} onPress={AddressUpdate}>
+                                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>OK</Text>
+                                    </TouchableOpacity>
+
+                                </View>
+                                <View style={{ flexDirection: "row" }}>
+                                    <TextInput
+                                        style={styles.textBoxes}
+                                        value={newPassword}
+                                        placeholderTextColor="#fff"
+                                        autoCapitalize="none"
+                                        secureTextEntry
+                                        placeholder='Enter new Password'
+                                        onChangeText={(text) => setnewPassword(text)}
+
+                                    />
+
+                                    <TouchableOpacity
+                                        onPress={UpdatePassword}
+                                        style={styles.button}
+                                    >
+                                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
+                                            OK</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{ alignItems: 'center', justifyContent: "center", flexDirection: 'row', paddingTop: 40 }}>
+                                    <TouchableOpacity
+                                        onPress={GoProfile}
+                                        style={styles.button}
+                                    >
+                                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
+                                            Back</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity
+                                        onPress={signOut}
+                                        style={styles.button}
+                                    >
+                                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
+                                            Log Out</Text>
+                                    </TouchableOpacity>
+                                </View>
+
+                            </View>
+
+                        </Animatable.View>
+                    </KeyboardAwareScrollView>
+
                 </SafeAreaView>
-                
+
             </ImageBackground>
         </View>
     );

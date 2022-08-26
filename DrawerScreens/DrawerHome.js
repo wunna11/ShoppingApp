@@ -34,16 +34,22 @@ export default function DrawerHome({ navigation }) {
             }}>
                 <SafeAreaView style={{ flex: 1, padding: 5 }}>
                     <Animatable.View
-                        animation="fadeInUp"
-                        duration={2000}
+                      animation="pulse"
+                      iterationCount='infinite'
                       
                     >
                         <Text style={styles.label1}>Welocome {user?.username}!</Text>
                     </Animatable.View>
                 </SafeAreaView>
+                <Animatable.View
+                      animation="jello"
+                      iterationCount='infinite'
+                      
+                    >
                 <TouchableOpacity>
                     <Text style={styles.label}>New Arrivals</Text>
-                </TouchableOpacity>
+                    </TouchableOpacity>
+                    </Animatable.View>
                 {/*<Image source={require("../assets/logo.png")} style={styles.imgLogo} />*/}
             </View>
 
@@ -123,8 +129,8 @@ const styles = StyleSheet.create({
         borderRadius: 40,
     },
     img1: {
-        width: 190,
-        height: 290,
+        width: 120,
+        height: 200,
         margin: 10,
         borderWidth: 1,
         borderColor: "#fff",

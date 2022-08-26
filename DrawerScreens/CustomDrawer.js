@@ -24,38 +24,42 @@ const CustomDrawer = (props) => {
   return (
 
     <View style={{ flex: 1 }}>
+
       <DrawerContentScrollView
         {...props}
         contentContainerStyle={{ backgroundColor: "#f7d081" }}
       >
-
+<View style={{borderBottomWidth:2,borderColor:"#fff" }}>
         <Image
           source={require('../assets/logo.png')}
-          style={{ height: 80, width: 80, marginLeft: 80, marginTop: 40, marginBottom: 10, borderRadius: 40 }}
+          style={{ height: 100, width: 100, marginLeft: 80, marginTop: 30, marginBottom: 10, borderRadius: 50 }}
         />
 
         <Text
-          style={{ marginLeft: 20, fontSize: 20, fontWeight: 'bold' }}>
+          style={{ marginLeft: "35%", fontSize: 20, fontWeight: 'bold' }}>
           WTTH
         </Text>
+        
         <Text
-          style={{ marginLeft: 20, fontSize: 16, marginTop: 8, paddingBottom: 10, }}>
+          style={{ marginLeft: "20%", fontSize: 16, marginTop: 8, paddingBottom: 40}}>
           wtth@brandmail.com
-        </Text>
-        <View style={{ flex: 1, backgroundColor: "#fff", paddingBottom: 5, paddingTop: 5 }}>
+          </Text>
+          </View>
+        <View style={{ flex: 1, backgroundColor: "#f7d081", paddingBottom: 20, paddingTop: 20 }}>
           <DrawerItemList {...props} />
         </View>
-      </DrawerContentScrollView>
-      <View style={{ Width: "70%", borderTopWidth: 2, paddingBottom: 120, paddingLeft: 20, borderTopColor: "#ccc" }}>
+    
+      <View style={{backgroundColor:"#f7d081", Width: "70%", borderTopWidth: 2, paddingBottom: 70, paddingLeft: 20, borderTopColor: "#fff" }}>
         <TouchableOpacity
           onPress={SignOut}
-          style={{ paddingVertical: 15 }}>
+          style={{ paddingTop:30}}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <MaterialCommunityIcons name="logout" color={"#f7d081"} size={30} />
-            <Text style={{ fontSize: 14, marginLeft: 25 }}> Sign Out</Text>
+            <MaterialCommunityIcons name="logout" color={"#000"} size={30} />
+            <Text style={{ fontSize: 16, marginLeft: 25 }}> Sign Out</Text>
           </View>
         </TouchableOpacity>
-      </View>
+        </View>
+        </DrawerContentScrollView>
     </View>
   )
 }

@@ -54,22 +54,26 @@ export default function AccountScreen({ route, navigation }, props) {
             >
 
                 <SafeAreaView style={{ flex: 1, padding: 5 }}>
-                    <Animatable.View
-                        animation="fadeInUp"
-                        duration={1000}
 
-                    >
-                        <View style={{ justifyContent: "center", alignItems: 'center' }}>
+                    <View style={{ justifyContent: "center", alignItems: 'center' }}>
 
 
-                            <Image
-                                style={styles.acc}
-                                source={require('../assets/logo.png')}
-                            />
+                        <Image
+                            style={styles.acc}
+                            source={require('../assets/logo.png')}
+                        />
 
 
-
+                        <Animatable.View
+                            animation="pulse"
+                            iterationCount='infinite'
+                        >
                             <Text style={{ fontSize: 30, fontWeight: "500", color: "#f7d081" }}>Hello {user?.username}!</Text>
+                        </Animatable.View>
+                        <Animatable.View
+                            animation="fadeIn"
+                            duration={4000}
+                        >
                             <View style={{ paddingTop: 30, paddingBottom: 10 }}>
 
                                 <Text style={{ fontSize: 20, fontWeight: "500", color: "#f7d081", marginLeft: 20, marginBottom: 10, padding: 10 }}>Your Informations :</Text>
@@ -108,8 +112,9 @@ export default function AccountScreen({ route, navigation }, props) {
                                         Log Out</Text>
                                 </TouchableOpacity>
                             </View>
-                        </View>
-                    </Animatable.View>
+                        </Animatable.View>
+                    </View>
+
                 </SafeAreaView>
             </ImageBackground>
         </View>

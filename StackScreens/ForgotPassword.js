@@ -31,13 +31,13 @@ export default function ForgotPassword({ navigation }) {
 
 
                 <SafeAreaView style={{ flex: 1, padding: 5 }}>
-                    <Animatable.View
-                        animation="fadeInUp"
-                        duration={1000}
 
-                    >
-                        <KeyboardAwareScrollView>
-
+                    <KeyboardAwareScrollView>
+                        <Animatable.View
+                            animation="pulse"
+                            direction='alternate'
+                            iterationCount='infinite'
+                        >
                             <View style={{ flex: 1, marginLeft: 200, }}>
 
                                 <Text style={{ fontSize: 40, paddingLeft: 30, marginTop: 60, fontWeight: "900", color: "#000" }}>WTTH</Text>
@@ -52,6 +52,12 @@ export default function ForgotPassword({ navigation }) {
                                     source={require('../assets/logo.png')}
                                 />
                             </View>
+                        </Animatable.View>
+                        <Animatable.View
+                            animation="fadeInUp"
+                            duration={1000}
+
+                        >
                             <View style={{ flex: 1, padding: 20, marginTop: 100 }}>
 
                                 <Text style={{ fontSize: 20, fontWeight: 'bold', color: "#fff" }}>Forgot Password?</Text>
@@ -81,8 +87,9 @@ export default function ForgotPassword({ navigation }) {
 
                                 </View>
                             </View>
-                        </KeyboardAwareScrollView>
-                    </Animatable.View>
+                        </Animatable.View>
+                    </KeyboardAwareScrollView>
+
                 </SafeAreaView>
             </ImageBackground>
         </View>
