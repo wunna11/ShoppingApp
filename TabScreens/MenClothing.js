@@ -52,7 +52,7 @@ const MenClothing = ({ route, navigation }) => {
     return (
         <View style={styles.container}>
             <ImageBackground
-                source={require('../assets/bg6.jpg')}
+                source={require('../assets/newBlack1.jpg')}
                 style={{ width: '100%', height: "100%", }}
             >
                 <View style={{ flex: 1 }}>

@@ -237,8 +237,8 @@ const styles = StyleSheet.create({
 
     },
     activityIndicator: {
-        paddingTop: "50%",
-        paddingLeft: "55%",
+        paddingTop: "95%",
+        paddingLeft: "65%",
         position: 'absolute',
     }
 });

@@ -7,10 +7,12 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  ImageBackground
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { firebase } from "../config";
+import * as Animatable from 'react-native-animatable';
 
 const Admin = ({ route, navigation }) => {
 
@@ -33,25 +35,25 @@ const Admin = ({ route, navigation }) => {
     dataRef
       .orderBy("createdAt", "desc")
       .onSnapshot((querySnapshot) => {
-      const data = [];
-      querySnapshot.forEach((doc) => {
-        const { imgURL } = doc.data();
-        const { name } = doc.data();
-        const { desc } = doc.data();
-        const { price } = doc.data();
-        const { category_name } = doc.data();
+        const data = [];
+        querySnapshot.forEach((doc) => {
+          const { imgURL } = doc.data();
+          const { name } = doc.data();
+          const { desc } = doc.data();
+          const { price } = doc.data();
+          const { category_name } = doc.data();
 
-        data.push({
-          id: doc.id,
-          imgURL,
-          name,
-          desc,
-          price,
-          category_name,
+          data.push({
+            id: doc.id,
+            imgURL,
+            name,
+            desc,
+            price,
+            category_name,
+          });
         });
+        setData(data);
       });
-      setData(data);
-    });
   };
 
   // delete data
@@ -70,80 +72,93 @@ const Admin = ({ route, navigation }) => {
 
   return (
     <View>
-      <View style={styles.container}>
-        <View style={styles.adminView}>
-        <Image
-        style={styles.tinyLogo}
-        source={require('../assets/logo.png')}
-          />
-         
-           <Text style={styles.adminText}>Add All Products</Text>
-          <TouchableOpacity
-            style={{backgroundColor: "gold", padding: 20,borderRadius: 40  }}
-            onPress={() => navigation.navigate("CreateProduct")}
-          >
-            <MaterialCommunityIcons name="plus" size={30} color={"black"} />
-          </TouchableOpacity>
-        </View>
+      <ImageBackground
+        source={require("../assets/admin2.jpg")}
+        style={{ width: "100%", height: "100%" }}
+      >
+        <View style={styles.container}>
+          <View style={styles.adminView}>
+            <Image
+              style={styles.tinyLogo}
+              source={require('../assets/logo.png')}
+            />
 
-        <View style={{ flex: 2, padding: 10, paddingTop: 0 }}>
-          <FlatList
-            data={data}
-            renderItem={({ item }) => (
-              <View
-                style={styles.Box}
-              >
-                <View style={{ flexDirection: "row" }}>
-                  <TouchableOpacity
-                    onPress={() =>
-                      navigation.navigate("UpdateProduct", { item })
-                    }
-                  >
-                    <MaterialCommunityIcons
-                      name="lead-pencil"
-                      size={30}
-                      color="gold"
-                    />
-                  </TouchableOpacity>
+            <Text style={styles.adminText}>Add All Products</Text>
+            <TouchableOpacity
+              style={{ backgroundColor: "gold", padding: 20, borderRadius: 40 }}
+              onPress={() => navigation.navigate("CreateProduct")}
+            >
+              <MaterialCommunityIcons name="plus" size={30} color={"black"} />
+            </TouchableOpacity>
+          </View>
 
-                  <Text style={ styles.padd }>
-                     {item.category_name}
+          <View style={{ flex: 2, padding: 10, paddingTop: 0 }}>
+          <Animatable.View
+              animation='fadeInRightBig'
+              duration={4000}
+              //iterationCount='infinite'
+            >
+            <FlatList
+              data={data}
+              keyExtractor={(_,i) => String(i)}
+              numColumns={1}
+              showsVerticalScrollIndicator={false}
+              renderItem={({ item }) => (
+                <View
+                  style={styles.Box}
+                >
+                  <View style={{ flexDirection: "row" }}>
+                    <TouchableOpacity
+                      onPress={() =>
+                        navigation.navigate("UpdateProduct", { item })
+                      }
+                    >
+                      <MaterialCommunityIcons
+                        name="lead-pencil"
+                        size={25}
+                        color="gold"
+                      />
+                    </TouchableOpacity>
+
+                    <Text style={styles.padd}>
+                      {item.category_name}
                     </Text>
 
 
-                  <TouchableOpacity onPress={() => destroy(item)} style={{left: 70,}}>
-                    <Ionicons name="trash" color={"#ffd700"} size={30} />
-                  </TouchableOpacity>
-                </View>
-                <View style={{ padding: 10, flexDirection: "row" }}>
-                  <View>
-                    <Image
-                      style={styles.iimage}
-                      source={{ uri: item.imgURL }}
-                    />
+                    <TouchableOpacity onPress={() => destroy(item)} style={{ left: 60, }}>
+                      <Ionicons name="trash" color={"#ffd700"} size={30} />
+                    </TouchableOpacity>
                   </View>
-                  <View style={{   padding: 10,  }}>
-                    <Text style={styles.text}>
-                      {/*Name:*/}
-                      {item.name}
-                    </Text>
-                    
-                    <Text style={[styles.text, styles.decText]}>
-                      {/*Description:*/}
-                      {item.desc}
-                    </Text>
-                    <Text style={styles.text}>
-                      Price: ${item.price}
-                    </Text>
-                    
+                  <View style={{ padding: 10, flexDirection: "row" }}>
+                    <View>
+                      <Image
+                        style={styles.iimage}
+                        source={{ uri: item.imgURL }}
+                      />
+                    </View>
+                    <View style={{ padding: 10, }}>
+                      <Text style={styles.text}>
+                        {/*Name:*/}
+                        {item.name}
+                      </Text>
+                      <Text style={styles.text}>
+                        Price: ${item.price}
+                      </Text>
+                      <Text style={[styles.text, styles.decText]}>
+                        {/*Description:*/}
+                        {item.desc}
+                      </Text>
+                      
+                    </View>
+
                   </View>
-                 
                 </View>
-              </View>
-            )}
-          />
+              )}
+              />
+            </Animatable.View>
+          </View>
         </View>
-      </View>
+      </ImageBackground>
     </View>
   );
 };
@@ -151,20 +166,6 @@ const Admin = ({ route, navigation }) => {
 export default Admin;
 
 const styles = StyleSheet.create({
-//  button: {
-//    width: "100%",
-//    backgroundColor: "gold",
-//    width: "40%",
-//    padding: 8,
-//    marginLeft: 20,
-//    marginRight: 30,
-//    borderRadius: 5,
-//    color: "#000",
-//    justifyContent: "center",
-//    alignItems: "center",
-//    flexDirection: "row",
-//  },
-// 
   adminView: {
     padding: 13,
     flexDirection: "row",
@@ -179,7 +180,7 @@ const styles = StyleSheet.create({
     paddingRight: 22,
   },
   text: {
-    fontSize: 18,
+    fontSize: 16,
     color: "#fff",
     paddingBottom: 5,
     fontWeight: "500",
@@ -193,27 +194,29 @@ const styles = StyleSheet.create({
   },
   padd: {
     width: 100,
-     marginLeft: '30%',
+    marginLeft: '30%',
     color: 'gold',
     fontWeight: "bold",
     fontSize: 18,
   },
   Box: {
-    padding: 10,
+    padding: 5,
     marginBottom: 10,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: "#fff",
-    backgroundColor: "gray",
+    backgroundColor: "#000",
     borderRadius: 15,
   },
   container: {
     width: "100%",
     height: "100%",
-    backgroundColor: "#000",
-    paddingTop: 18
+    //backgroundColor: "#000",
+    paddingTop: 18,
+    padding: 10
   },
   decText: {
-    fontSize: 10,
+    fontSize: 12,
+    letterSpacing: 1.5,
     color: 'gold',
     fontWeight: 'bold',
   },
