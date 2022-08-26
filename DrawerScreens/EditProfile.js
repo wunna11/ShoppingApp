@@ -124,7 +124,7 @@ const EditProfile = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <ImageBackground
-                source={require('../assets/bg6.jpg')}
+                source={require('../assets/newBlack3.jpg')}
                 style={{ width: '100%', height: "100%", }}
             >
                 <SafeAreaView style={{ flex: 1, padding: 5 }}>

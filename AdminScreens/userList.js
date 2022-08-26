@@ -7,20 +7,22 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  ImageBackground
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { firebase } from "../config";
+import * as Animatable from 'react-native-animatable';
 
 const UserList = ({ route, navigation }) => {
 
-    const [data, setData] = useState([]);
-    const dataRef = firebase.firestore().collection("users");
+  const [data, setData] = useState([]);
+  const dataRef = firebase.firestore().collection("users");
 
-    const [id, setId] = useState("");
-    const [username, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setphone] = useState("");
-    const [address, setaddress] = useState("");
+  const [id, setId] = useState("");
+  const [username, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setphone] = useState("");
+  const [address, setaddress] = useState("");
 
   useEffect(() => {
     read();
@@ -29,66 +31,88 @@ const UserList = ({ route, navigation }) => {
   // read data
   const read = () => {
     dataRef
-    .where('role', '==', 'Client')
+      .where('role', '==', 'Client')
       //.orderBy("createdAt")
       .onSnapshot((querySnapshot) => {
-      const data = [];
-      querySnapshot.forEach((doc) => {
-        const { username } = doc.data();
-        const { email } = doc.data();
-        const { phone } = doc.data();
-        const { address } = doc.data();
+        const data = [];
+        querySnapshot.forEach((doc) => {
+          const { username } = doc.data();
+          const { email } = doc.data();
+          const { phone } = doc.data();
+          const { address } = doc.data();
 
-        data.push({
-          id: doc.id,
-          username,
-          email,
-          phone,
-          address,
+          data.push({
+            id: doc.id,
+            username,
+            email,
+            phone,
+            address,
+          });
         });
+        setData(data);
       });
-      setData(data);
-    });
   };
 
 
   return (
     <View>
       <View style={styles.container}>
-        <View>
-           <Text style={styles.adminText}>View All Users</Text>
-        </View>
+        <ImageBackground
+          source={require("../assets/admin4.jpg")}
+          style={{ width: "100%", height: "100%" }}
+        >
+          <View>
+            <Text style={styles.adminText}>View All Users</Text>
+          </View>
 
-        <View style={{ flex: 2, padding: 10 }}>
-          <FlatList
-            data={data}
-            renderItem={({ item }) => (
-              <View style={styles.Box}>
-                <View>
-                  <Text style={ styles.padd }>
-                     {item.username}
-                  </Text>
-                </View>
-                
+          <View style={{ flex: 2 }}>
+            <FlatList
+              data={data}
+              renderItem={({ item }) => (
+                <Animatable.View
+                animation='fadeInDownBig'
+                    duration={4000}>
+                <View style={styles.Box}>
                   <View>
-                    <Text style={styles.text}>
-                      UserID : {item.id}
-                    </Text>
-                    <Text style={styles.text}>
-                     UserEmail : {item.email}
-                    </Text>
-                    
-                    <Text style={styles.text}>
-                      User Phone : {item.phone}
-                    </Text>
-                    <Text style={styles.text}>
-                     User Address : {item.address}
+                    <Text style={styles.padd}>
+                      {item.username}
                     </Text>
                   </View>
-              </View>
-            )}
-          />
-        </View>
+
+                  <View>
+                    <View style={{ flexDirection: 'row', padding: 5, }}>
+                      <Text style={styles.textID}>
+                        ID
+                      </Text>
+                      <Text style={styles.text}>
+                        {item.id}
+                      </Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', padding: 5 }}>
+                      <MaterialCommunityIcons name="email" color={'#ffd700'} size={25} />
+                      <Text style={styles.text}>
+                        {item.email}
+                      </Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', padding: 5 }}>
+                      <MaterialCommunityIcons name="phone" color={'#ffd700'} size={25} />
+                      <Text style={styles.text}>
+                        {item.phone}
+                      </Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', padding: 5 }}>
+                      <MaterialCommunityIcons name="map" color={'#ffd700'} size={25} />
+                      <Text style={styles.text}>
+                        {item.address}
+                      </Text>
+                    </View>
+                  </View>
+                  </View>
+                </Animatable.View>
+              )}
+            />
+          </View>
+        </ImageBackground>
       </View>
     </View>
   );
@@ -111,7 +135,17 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     letterSpacing: 1,
     padding: 5,
-    paddingTop: 10
+    //paddingTop: 10,
+    paddingLeft: 10
+  },
+  textID: {
+    fontSize: 18,
+    color: "#ffd700",
+    fontWeight: "bold",
+    letterSpacing: 1,
+    padding: 5,
+    //paddingTop: 10,
+    paddingRight: 10
   },
   padd: {
     color: 'gold',
@@ -120,12 +154,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   Box: {
-    marginBottom: 10,
-    borderWidth: 2,
+    //marginBottom: 10,
+    borderBottomWidth: 1,
     borderColor: "#fff",
-    backgroundColor: "gray",
     borderRadius: 15,
-    padding : 10
+    padding: 10
   },
   container: {
     width: "100%",

@@ -20,12 +20,21 @@ const Drawer = createDrawerNavigator();
 
 export default function Home(navigation) {
 
+    const SignOut = ({navigation}) => {
+        firebase.auth().signOut()
+       
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Login' }]
+            })
+       
+    }
     return (
         <Drawer.Navigator initialRouteName="DrawerHome"
             drawerContent={props => <CustomDrawer {...props} />}
             screenOptions={{
-                drawerActiveBackgroundColor: "#fff",
-                drawerActiveTintColor: '#000',
+                drawerActiveBackgroundColor: "black",
+                drawerActiveTintColor: '#fff',
                 drawerInactiveTintColor: '#333',
             }} >
             <Drawer.Screen
@@ -35,7 +44,7 @@ export default function Home(navigation) {
                     //headerShown: false,
                     title: 'Home',
                     drawerIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="home" color={'#000'} size={30} />
+                        <MaterialCommunityIcons name="home" color={'#ffd700'} size={30} />
                     ),
                     headerTintColor: '#fff',
                     headerStyle: {
@@ -53,7 +62,7 @@ export default function Home(navigation) {
                 options={({ navigation }) => ({
                     title: 'Products',
                     drawerIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="shopping" color={'#000'} size={30} />
+                        <MaterialCommunityIcons name="shopping" color={'#ffd700'} size={30} />
                     ), headerTintColor: '#fff',
                     headerStyle: {
                         backgroundColor: '#000'
@@ -77,7 +86,7 @@ export default function Home(navigation) {
                 options={{
                     title: 'MyCart',
                     drawerIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="cart-outline" color={'#000'} size={30} />
+                        <MaterialCommunityIcons name="cart-outline" color={'#ffd700'} size={30} />
                     ),headerTintColor: '#fff',
                     headerStyle: {
                         backgroundColor: '#000'
@@ -90,7 +99,7 @@ export default function Home(navigation) {
                 options={{
                     title: 'OrderDetail',
                     drawerIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="clipboard-list-outline" color={'#000'} size={30} />
+                        <MaterialCommunityIcons name="clipboard-list-outline" color={'#ffd700'} size={30} />
                         ),headerTintColor: '#fff',
                         headerStyle: {
                             backgroundColor: '#000'
@@ -103,7 +112,7 @@ export default function Home(navigation) {
                 options={{
                     title: 'Profile',
                     drawerIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="account" color={'#000'} size={30} />
+                        <MaterialCommunityIcons name="account" color={'#ffd700'} size={30} />
                     ), headerTintColor: '#fff',
                     headerStyle: {
                         backgroundColor: '#000'
@@ -118,7 +127,7 @@ export default function Home(navigation) {
                 options={{
                     title: 'AboutUs',
                     drawerIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="information-outline" color={'#000'} size={30} />
+                        <MaterialCommunityIcons name="information-outline" color={'#ffd700'} size={30} />
                     ), headerTintColor: '#fff',
                     headerStyle: {
                         backgroundColor: '#000'

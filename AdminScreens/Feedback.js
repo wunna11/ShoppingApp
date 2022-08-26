@@ -84,7 +84,7 @@ const Userfeedback = ({ route, navigation }) => {
                                         <View style={styles.Box}>
                                             <View style={{ flexDirection: 'row' }}>
 
-                                                <Text style={{ fontSize: 18, fontWeight: 'bold', paddingRight: 210 }}>From </Text>
+                                                <Text style={{ fontSize: 18, fontWeight: 'bold', paddingRight: 235 }}>From </Text>
                                                 <TouchableOpacity onPress={() => Deletefeedback(item)}>
                                                     <MaterialCommunityIcons name="delete" color={'red'} size={30} />
                                                 </TouchableOpacity>
