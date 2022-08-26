@@ -11,7 +11,6 @@ import {
 import React, { useEffect, useState } from "react";
 import { firebase } from '../config'
 import * as Animatable from 'react-native-animatable';
-import Video from 'react-native-video';
 export default function DrawerHome({ navigation }) {
     const firestore = firebase.firestore;
     const auth = firebase.auth;
@@ -47,14 +46,7 @@ export default function DrawerHome({ navigation }) {
                 </TouchableOpacity>
                 {/*<Image source={require("../assets/logo.png")} style={styles.imgLogo} />*/}
             </View>
-            <Video
-  style={{width:300,height:200}}
-  source={{
-    uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
-  }}
-  useNativeControls={true}
-  isLooping={true}
-/>
+
 
            
             
