@@ -101,17 +101,15 @@ export default function Login({ navigation }) {
         <View style={styles.container}>
 
             <ImageBackground
-                source={require('../assets/bg.jpg')}
+                source={require('../assets/bg.png')}
                 style={{ width: '100%', height: "100%" }}
             >
                 <SafeAreaView style={{ flex: 1, padding: 5, marginTop: -2 }}>
 
                     <KeyboardAwareScrollView>
-                        <Animatable.View
+                        {/*<Animatable.View
                             animation="pulse"
-                            direction='alternate'
-                            iterationCount='infinite'
-                        >
+                        >*/}
                             <View style={{ flex: 1, marginLeft: 200, }}>
 
                                 <Text style={{ fontSize: 40, paddingLeft: 30, marginTop: 90, fontWeight: "900", color: "#000" }}>WTTH</Text>
@@ -126,7 +124,7 @@ export default function Login({ navigation }) {
                                     source={require('../assets/logo.png')}
                                 />
                             </View>
-                        </Animatable.View>
+                        {/*</Animatable.View>*/}
 
                         <View style={styles.con}>
                             <Animatable.View
@@ -134,7 +132,7 @@ export default function Login({ navigation }) {
                                 duration={2000}
                             >
                                 <Text style={{
-                                    fontSize: 28, fontWeight: "bold", color: "#f7d081", marginBottom: 40, marginLeft: 10,
+                                    fontSize: 28, fontWeight: "bold", color: "#000", marginBottom: 40, marginLeft: 10,
                                 }}>LOG IN</Text>
 
                                 <TextInput
@@ -173,7 +171,7 @@ export default function Login({ navigation }) {
                                     <Text style={{ fontSize: 18, fontWeight: "bold", color: "#fff" }}>Forgot Password?</Text>
                                 </TouchableOpacity>
                                 <View style={{ flex: 1, marginTop: 20, marginLeft: 10, }}>
-                                    <Text style={{ fontSize: 18, color: "#fff" }}>Don't have an account? <Text style={{ color: "#f7d081", fontSize: 20, fontWeight: "bold" }}
+                                    <Text style={{ fontSize: 18, color: "#fff" }}>Don't have an account? <Text style={{ color: "#000", fontSize: 20, fontWeight: "bold" }}
                                         onPress={register}>Sign up</Text></Text>
                                 </View>
                             </Animatable.View>

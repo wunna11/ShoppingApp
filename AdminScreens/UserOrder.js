@@ -94,6 +94,7 @@ const UserOrder = ({ route, navigation }) => {
         <Text style={styles.adminText}>OrderDetail</Text>
         <View style={{ flex: 1, padding: 10 }}>
           <FlatList
+           keyExtractor={(_,i) => String(i)}
             data={data}
             showsVerticalScrollIndicator={true}
             style={{ flex: 1, marginTop: 16 }}
@@ -137,10 +138,11 @@ const UserOrder = ({ route, navigation }) => {
 
                         <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#fff', textAlign: 'center' }}>OrderList</Text>
                         {
-                          item.cartList.map((cartItem) => {
+                          item.cartList.map((cartItem,index) => {
                             //console.log("cart Item",cartItem)
                             return (
-                              <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+                              <View key={index}
+                                style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
                                 <Text style={styles.textInfo}>{cartItem.qty} x</Text>
                                 <Text style={styles.textInfo}>{cartItem.name}</Text>
                                 <Text style={styles.textInfo}>$ {cartItem.price}</Text>

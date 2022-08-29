@@ -144,7 +144,7 @@ export default function Register({ navigation }) {
     return (
         <View style={styles.container}>
             <ImageBackground
-                source={require('../assets/bg.jpg')}
+                source={require('../assets/bg.png')}
                 style={{ width: '100%', height: "100%", }}
             >
 
@@ -156,13 +156,13 @@ export default function Register({ navigation }) {
 
                             <View style={{ flexDirection: 'row' }}>
                                 <Text style={{
-                                    fontSize: 28, fontWeight: "bold", color: "#f7d081", marginBottom: 40, marginLeft: 40, marginTop: 90
+                                    fontSize: 28, fontWeight: "bold", color: "#000", marginBottom: 40, marginLeft: 40, marginTop: 90
                                 }}>Sign Up</Text>
-                                <Animatable.View
+                                {/*<Animatable.View
                                     animation="pulse"
                                     direction='alternate'
                                     iterationCount='infinite'
-                                >
+                                >*/}
                                     <View style={{ flex: 1, marginLeft: 70 }}>
 
                                         <Text style={{ fontSize: 40, paddingLeft: 20, marginTop: 30, fontWeight: "900", color: "#000" }}>WTTH</Text>
@@ -178,7 +178,7 @@ export default function Register({ navigation }) {
                                         />
 
                                     </View>
-                                </Animatable.View>
+                                {/*</Animatable.View>*/}
                             </View>
 
                             <Animatable.View
@@ -271,7 +271,7 @@ export default function Register({ navigation }) {
                                     <Text style={styles.buttonTitle}>Create account</Text>
                                 </TouchableOpacity>
                                 <View style={{ marginTop: 30, marginBottom: 20 }}>
-                                    <Text style={{ fontSize: 18, color: "#fff" }}>Already got an account? <Text onPress={onFooterLinkPress} style={{ color: "#ffd700", fontSize: 20, fontWeight: "bold" }}>Log in</Text></Text>
+                                    <Text style={{ fontSize: 18, color: "#fff" }}>Already got an account? <Text onPress={onFooterLinkPress} style={{ color: "#000", fontSize: 20, fontWeight: "bold" }}>Log in</Text></Text>
                                 </View>
                             </Animatable.View>
                         </View>
