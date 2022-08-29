@@ -28,7 +28,7 @@ export default function AdminTab({ navigation }) {
 
     return (
         <Tab.Navigator
-            initialRouteName="Admin"
+            initialRouteName="AdminHScreen"
             screenOptions={{
                 headerShown: false,
                 //tabBarIconStyle: { display: 'none' },
@@ -45,7 +45,7 @@ export default function AdminTab({ navigation }) {
             }}
         >
             <Tab.Screen
-                name="Admin"
+                name="AdminHScreen"
                 component={AdminHome}
             />
             <Tab.Screen

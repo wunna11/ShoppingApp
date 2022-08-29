@@ -14,7 +14,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { firebase } from "../config";
 import * as Animatable from 'react-native-animatable';
 
-const Admin = ({ route, navigation }) => {
+const AdminScreen = ({ route, navigation }) => {
 
   const [data, setData] = useState([]);
   const dataRef = firebase.firestore().collection("products");
@@ -163,7 +163,7 @@ const Admin = ({ route, navigation }) => {
   );
 };
 
-export default Admin;
+export default AdminScreen;
 
 const styles = StyleSheet.create({
   adminView: {

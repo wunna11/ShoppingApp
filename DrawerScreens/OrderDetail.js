@@ -101,7 +101,8 @@ export default function OrderDetail({ navigation }) {
       >
       {/*<Text style={{ fontSize: 30, fontWeight: "bold" }}>OrderDetail</Text>*/}
 
-      <FlatList
+        <FlatList
+        keyExtractor={(_,i) => String(i)}
         data={data}
         showsVerticalScrollIndicator={true}
         style={{ flex: 1, marginTop: 16 }}
@@ -233,10 +234,10 @@ export default function OrderDetail({ navigation }) {
                   <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#ffd700', textAlign: 'center' }}>OrderList</Text>
               </ScrollView>
 
-              {item.cartList.map((cartItem) => {
+              {item.cartList.map((cartItem,index) => {
                 console.log("cart Item", cartItem);
                 return (
-                  <View
+                  <View key={index}
                     style={{
                       flexDirection: "row",
                       justifyContent: "space-between",
