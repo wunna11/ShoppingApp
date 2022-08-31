@@ -11,7 +11,13 @@ const Tab = createMaterialTopTabNavigator();
 
 const AdminTopTabScreen = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{
+      tabBarActiveTintColor: '#174fe8',
+      tabBarInactiveTintColor: '#848554',
+      tabBarLabelStyle: { fontSize: 12, fontWeight: '900', },
+      tabBarItemStyle: { width: 100 },
+      tabBarStyle: { backgroundColor: '#f7d081' },
+    }}>
       <Tab.Screen name='Man' component={MenClothing} />
       <Tab.Screen name='Woman' component={WomanClothing} />
       <Tab.Screen name='Shoe' component={Shoes} />
