@@ -10,15 +10,24 @@ import { firebase } from '../config';
 import { Restart } from '../components/reload/reload'
 const CustomDrawer = (props) => {
 
-
-  const SignOut = () => {
-    firebase.auth().signOut()
-    CommonActions.reset({
-      index: 0,
-      routes: [{ name: 'Login' }]
-    })
-    Restart()
-  }
+//  const SignOut = ({navigation}) => {
+//    firebase.auth().signOut()
+//    navigation.dispatch(
+//        CommonActions.reset({
+//            index: 0,
+//            routes: [{ name: 'Login' }]
+//        })
+//    )
+//}
+//
+//  const SignOut = () => {
+//    firebase.auth().signOut()
+//    CommonActions.reset({
+//      index: 0,
+//      routes: [{ name: 'Login' }]
+//    })
+//    //Restart()
+//  }
 
 
   return (
@@ -31,7 +40,8 @@ const CustomDrawer = (props) => {
 
         <Image
           source={require('../assets/logo.png')}
-          style={{ height: 80, width: 80, marginLeft: 80, marginTop: 40, marginBottom: 10, borderRadius: 40 }}
+          style={{ height: 80, width: 80, marginLeft: 80, marginTop: 40, marginBottom: 10, borderRadius: 40 ,borderWidth: 1,
+            borderColor: "white",}}
         />
 
         <Text
@@ -46,7 +56,7 @@ const CustomDrawer = (props) => {
           <DrawerItemList {...props} />
         </View>
       </DrawerContentScrollView>
-      <View style={{ Width: "70%", borderTopWidth: 2, paddingBottom: 20, paddingLeft: 20, borderTopColor: "#ccc" }}
+      {/*<View style={{ Width: "70%", borderTopWidth: 2, paddingBottom: 20, paddingLeft: 20, borderTopColor: "#ccc" }}
       >
         <TouchableOpacity
           onPress={SignOut}
@@ -56,7 +66,7 @@ const CustomDrawer = (props) => {
             <Text style={{ fontSize: 14, marginLeft: 25 }}> Sign Out</Text>
           </View>
         </TouchableOpacity>
-      </View>
+      </View>*/}
     </View>
   )
 }

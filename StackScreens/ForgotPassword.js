@@ -25,19 +25,14 @@ export default function ForgotPassword({ navigation }) {
     return (
         <View style={styles.container}>
             <ImageBackground
-                source={require('../assets/bg.png')}
+                source={require('../assets/bg.jpg')}
                 style={{ width: '100%', height: "100%" }}
             >
-
 
                 <SafeAreaView style={{ flex: 1, padding: 5 }}>
 
                     <KeyboardAwareScrollView>
-                        {/*<Animatable.View
-                            animation="pulse"
-                            direction='alternate'
-                            iterationCount='infinite'
-                        >*/}
+                      
                             <View style={{ flex: 1, marginLeft: 200, }}>
 
                                 <Text style={{ fontSize: 40, paddingLeft: 30, marginTop: 60, fontWeight: "900", color: "#000" }}>WTTH</Text>
@@ -60,7 +55,7 @@ export default function ForgotPassword({ navigation }) {
                         >
                             <View style={{ flex: 1, padding: 20, marginTop: 100 }}>
 
-                                <Text style={{ fontSize: 20, fontWeight: 'bold', color: "#fff" }}>Forgot Password?</Text>
+                                <Text style={{ fontSize: 20, fontWeight: 'bold', color: "#fff",  }}>Forgot Password?</Text>
 
                                 <TextInput style={styles.textBoxes}
                                     value={email}
@@ -70,19 +65,17 @@ export default function ForgotPassword({ navigation }) {
                                     keyboardType="email-address"
                                     autoCapitalize="none"
                                     autoCorrect={false}
-
-
                                 />
                                 <View style={{ flexDirection: 'row' }}>
                                     <TouchableOpacity
                                         style={styles.button}
                                         onPress={onResetPasswordPress} >
-                                        <Text style={styles.buttonTitle}>ResetPassword</Text>
+                                        <Text style={styles.buttonTitle}>Reset Password</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                         style={styles.button}
                                         onPress={onBackToLoginPress}>
-                                        <Text style={styles.buttonTitle}>Back To Log in</Text>
+                                        <Text style={styles.buttonTitle}>Back</Text>
                                     </TouchableOpacity>
 
                                 </View>
@@ -135,8 +128,6 @@ const styles = StyleSheet.create({
         borderRadius: 20
     },
     buttonTitle: {
-
-        fontSize: 16,
-        fontWeight: "bold"
+        fontSize: 16, fontWeight: "bold", padding: 10,
     },
 });

@@ -14,6 +14,9 @@ import { FlatList, TextInput } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from "@expo/vector-icons";
 import { CommonActions } from "@react-navigation/native";
+import { set } from "react-native-reanimated";
+
+
 const MyCart = ({ route, navigation }) => {
     //const [data, setData] = useState([]);
     const dataRef = firebase.firestore().collection("products");
@@ -53,6 +56,7 @@ const MyCart = ({ route, navigation }) => {
 
     useEffect(() => {
         navigation.addListener("focus", () => {
+            //AsyncStorage.removeItem('carts');
             AsyncStorage.getItem("carts").then((data) => {
                 if (data !== null) {
                     setCartList(JSON.parse(data));
@@ -75,27 +79,35 @@ const MyCart = ({ route, navigation }) => {
             let cart = [...cartList];
             cart.splice(i, 1);
             setCartList(cart);
-
-            console.log(cartList.slice(-1)[0].price * cartList.slice(-1)[0].qty);
-            console.log(cartList.slice(-1)[0]);
-
-            let minusPrice = cartList.slice(-1)[0].price * cartList.slice(-1)[0].qty;
-            let subSum = total - minusPrice;
-            setTotal(subSum);
-
-            // delete cart item
-            let lastIndex = cartList.slice(-1)[0];
-
-            await AsyncStorage.removeItem("carts");
             console.log(cart);
-            console.log("successfully deleted");
+
+            await AsyncStorage.setItem('carts', JSON.stringify(cart))
+
+            AsyncStorage.getItem('carts').then((data) => {
+                setCartList(JSON.parse(data));
+                console.log(JSON.parse(data));
+
+                let sum = 10;
+                JSON.parse(data).map((item) => {
+                    sum += item.price * item.qty;
+                })
+
+                console.log(sum);
+                setTotal(sum)
+            })
         }
     };
 
+    useEffect(() => {
+        itemDelete();
+    }, [])
+
+    
+
     // Add pending Order to firebase database
-    const order = async() => {
+    const order = async () => {
         // if (uid !== null) {
-     await AsyncStorage.removeItem("carts");
+        await AsyncStorage.removeItem("carts");
         const cartOrder = {
             cartList,
             // "status" : "pending",
@@ -153,10 +165,7 @@ const MyCart = ({ route, navigation }) => {
 
     return (
         <View style={styles.container}>
-            <ImageBackground
-                source={require("../assets/black2.jpg")}
-                style={{ width: "100%", height: "100%" }}
-            >
+           
                 <Text
                     style={{
                         fontSize: 20,
@@ -174,8 +183,8 @@ const MyCart = ({ route, navigation }) => {
                     style={{ flex: 1, marginTop: 16 }}
                 />
 
-                <View style={{ flex: 0.8 }}>
-                    <ScrollView>
+                <View style={{ flex: 1.1 }}>
+               
                         <View>
                             <Text
                                 style={{
@@ -273,9 +282,9 @@ const MyCart = ({ route, navigation }) => {
                         <TouchableOpacity onPress={order} style={styles.btn}>
                             <Text>Order</Text>
                         </TouchableOpacity>
-                    </ScrollView>
+                 
                 </View>
-            </ImageBackground>
+         
         </View>
     );
 };

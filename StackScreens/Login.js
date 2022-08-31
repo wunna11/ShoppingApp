@@ -27,6 +27,7 @@ export default function Login({ navigation }) {
         var emailValid = false;
         if (email.length == 0) {
             setEmailError("Email is required");
+            setshow(false)
         }
         else if (email.length < 6) {
             setEmailError("Email should be minimum 6 characters");
@@ -46,6 +47,7 @@ export default function Login({ navigation }) {
         var passwordValid = false;
         if (password.length == 0) {
             setPasswordError("Password is Required!");
+            setshow(false)
         }
         else {
             firebase
@@ -86,6 +88,7 @@ export default function Login({ navigation }) {
                 .catch(error => {
                     console.log(error)
                     setPasswordError("Email or Password is wrong!Try Again...");
+                    setshow(false)
 
                 })
 
@@ -101,7 +104,7 @@ export default function Login({ navigation }) {
         <View style={styles.container}>
 
             <ImageBackground
-                source={require('../assets/bg.png')}
+                source={require('../assets/bg.jpg')}
                 style={{ width: '100%', height: "100%" }}
             >
                 <SafeAreaView style={{ flex: 1, padding: 5, marginTop: -2 }}>
@@ -132,7 +135,7 @@ export default function Login({ navigation }) {
                                 duration={2000}
                             >
                                 <Text style={{
-                                    fontSize: 28, fontWeight: "bold", color: "#000", marginBottom: 40, marginLeft: 10,
+                                    fontSize: 28, fontWeight: "bold", color: "#f7d081", marginBottom: 40, marginLeft: 10,
                                 }}>LOG IN</Text>
 
                                 <TextInput
@@ -171,7 +174,7 @@ export default function Login({ navigation }) {
                                     <Text style={{ fontSize: 18, fontWeight: "bold", color: "#fff" }}>Forgot Password?</Text>
                                 </TouchableOpacity>
                                 <View style={{ flex: 1, marginTop: 20, marginLeft: 10, }}>
-                                    <Text style={{ fontSize: 18, color: "#fff" }}>Don't have an account? <Text style={{ color: "#000", fontSize: 20, fontWeight: "bold" }}
+                                    <Text style={{ fontSize: 18, color: "#fff" }}>Don't have an account? <Text style={{ color: "#f7d081", fontSize: 20, fontWeight: "bold" }}
                                         onPress={register}>Sign up</Text></Text>
                                 </View>
                             </Animatable.View>
@@ -238,5 +241,6 @@ const styles = StyleSheet.create({
         paddingTop: "95%",
         paddingLeft: "65%",
         position: 'absolute',
+        //paddingTop: (Platform.OS === 'ios') ? 20 : 0,
     }
 });

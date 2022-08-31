@@ -1,93 +1,52 @@
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView, ImageBackground, TextInput, FlatList, Text, View, TouchableOpacity, StatusBar, StyleSheet, ScrollView, Image, Alert } from 'react-native'
+import { SafeAreaView, TextInput, Text, View, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native'
 import { firebase } from '../config'
 import { useIsFocused } from '@react-navigation/native';
 import { CommonActions } from '@react-navigation/native'
-import * as Animatable from 'react-native-animatable';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-const EditProfile = ({ navigation }) => {
-    const firestore = firebase.firestore;
-    const auth = firebase.auth;
-    const [username, setUsername] = useState('');
-    const [phone, setphone] = useState("");
-    const [address, setaddress] = useState("");
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+const EditProfile = ({ route, navigation }) => {
+
+    const [username, setUsername] = useState(route.params.user?.username)
+    const [phone, setphone] = useState(route.params.user?.phone)
+    const [address, setaddress] = useState(route.params.user?.address)
     const [newPassword, setnewPassword] = useState("");
-    const [user, setUser] = useState(null)
-    const [users, setUsers] = useState([])
+    const [user, setUser] = useState(route.params.user)
     const isFocused = useIsFocused();
-    useEffect(() => {
-        firebase.firestore().collection("users")
-            .doc(auth().currentUser.uid).get()
-            .then(user => {
-                setUser(user.data())
-            })
-    }, [])
-    useEffect(() => {
-        if (user)
-            firebase.firestore().collection("users").where("role", "==", (user?.role === "Admin" ? "Admin" : "Client"))
-                .onSnapshot(users => {
-                    if (!users.empty) {
-                        const USERS = []
-                        users.forEach(user => {
-                            USERS.push(user.data())
-                        })
-
-                        setUsers(USERS)
-                    }
-
-                })
-    }, [user])
-    const signOut = () => {
-        firebase.auth().signOut()
+    const Cancel = () => {
         navigation.dispatch(
             CommonActions.reset({
                 index: 0,
-                routes: [{ name: 'Login' }]
+                routes: [{ name: 'Account' }]
             })
         )
     }
     useEffect(() => {
 
     }, [isFocused])
-    const UsernameUpdate = async () => {
+    const UserInfoUpdate = async () => {
         const timestamp = firebase.firestore.FieldValue.serverTimestamp();
         const data = {
             id: user.id,
             username: username,
-            updatedAt: timestamp,
-        }
-        const userRef = firebase.firestore().collection('users').doc(user.id)
-        userRef.update(data)
-
-        Alert.alert('Your Name has been successfully changed!')
-
-    }
-    const PhoneUpdate = async () => {
-        const timestamp = firebase.firestore.FieldValue.serverTimestamp();
-        const data = {
-            id: user.id,
             phone: phone,
-            updatedAt: timestamp,
-        }
-        const userRef = firebase.firestore().collection('users').doc(user.id)
-        userRef.update(data)
-
-        Alert.alert('Phone Number has been successfully changed!')
-
-    }
-    const AddressUpdate = async () => {
-        const timestamp = firebase.firestore.FieldValue.serverTimestamp();
-        const data = {
-            id: user.id,
             address: address,
             updatedAt: timestamp,
         }
+
         const userRef = firebase.firestore().collection('users').doc(user.id)
         userRef.update(data)
 
-        Alert.alert('Address has been successfully changed!')
 
+        navigation.dispatch(
+            CommonActions.reset({
+                index: 0,
+                routes: [{ name: 'Account' }]
+            })
+        )
+        Alert.alert('Your Profile has been successfully changed!')
     }
+
     const UpdatePassword = () => {
         const user = firebase.auth().currentUser;
 
@@ -112,151 +71,154 @@ const EditProfile = ({ navigation }) => {
         )
     }
 
-    function GoProfile() {
-        navigation.dispatch(
-            CommonActions.reset({
-                index: 0,
-                routes: [{ name: 'Account' }]
-            })
-        )
 
-    }
     return (
         <View style={styles.container}>
-            <ImageBackground
-                source={require('../assets/newBlack3.jpg')}
-                style={{ width: '100%', height: "100%", }}
-            >
-                <SafeAreaView style={{ flex: 1, padding: 5 }}>
 
-                    <KeyboardAwareScrollView>
+            <SafeAreaView style={{ flex: 1, padding: 5 }}>
 
-                        <Image
-                            style={styles.acc}
-                            source={require('../assets/logo.png')}
-                        />
+                <KeyboardAwareScrollView>
+
+                    <Image
+                        style={styles.acc}
+                        source={require('../assets/logo.png')}
+                    />
 
 
-                        <Animatable.View
-                            animation="jello"
-                            iterationCount='infinite'
-                        >
-                            <View style={{ paddingTop: 10, paddingBottom: 10 }}>
 
-                                <Text style={{ fontSize: 24, fontWeight: "bold", textAlign: "center", color: "#f7d081" }}> Edit Profile</Text>
-                            </View>
-                        </Animatable.View>
-                        <Animatable.View
-                            animation="fadeInRightBig"
-                            duration={4000}
-                        >
-                            <View style={{ width: "100%" }}>
-                                <View style={{ flexDirection: 'row' }}>
+                    <View style={{ paddingTop: 10, paddingBottom: 10 }}>
 
-                                    <TextInput
-                                        style={styles.textBoxes}
-                                        value={username}
-                                        placeholder="Enter Your New Name"
-                                        placeholderTextColor="#fff"
-                                        onChangeText={(text) => setUsername(text)}
-                                        autoCapitalize="none"
-                                    />
+                        <Text style={{ fontSize: 24, fontWeight: "bold", textAlign: "center", color: "#f7d081" }}> Edit Profile</Text>
+                    </View>
 
-                                    <TouchableOpacity style={styles.button} onPress={UsernameUpdate}>
-                                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>OK</Text>
-                                    </TouchableOpacity>
-                                </View>
+                    <View style={{ width: "100%" }}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <MaterialCommunityIcons name="account" color={'#f7d081'} size={30} style={{ paddingTop: 25 }} />
 
-                                <View style={{ flexDirection: 'row' }}>
-
-                                    <TextInput
-                                        style={styles.textBoxes}
-                                        value={phone}
-                                        placeholder="Enter New Phone Number"
-                                        placeholderTextColor="#fff"
-                                        onChangeText={(text) => setphone(text)}
-                                        autoCapitalize="none"
-                                    />
-
-                                    <TouchableOpacity style={styles.button} onPress={PhoneUpdate}>
-                                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>OK</Text>
-                                    </TouchableOpacity>
+                            <TextInput
+                                style={styles.textBoxes}
+                                onChangeText={(text) => setUsername(text)}
+                                value={username}
+                                placeholderTextColor="#fff"
+                                autoCapitalize="none"
+                            />
 
 
-                                </View>
+                        </View>
+
+                        <View style={{ flexDirection: 'row' }}>
+
+                            <MaterialCommunityIcons name="phone" color={'#f7d081'} size={30} style={{ paddingTop: 25 }} />
+
+                            <TextInput
+                                style={styles.textBoxes}
+                                onChangeText={(text) => setphone(text)}
+                                value={phone}
+                                keyboardType={'phone-pad'}
+                                placeholderTextColor="#fff"
+                                autoCapitalize="none"
+                            />
 
 
-                                <View style={{ flexDirection: 'row' }}>
 
-                                    <TextInput
-                                        style={styles.textBoxes}
-                                        value={address}
-                                        placeholder="Enter New Address"
-                                        placeholderTextColor="#fff"
-                                        onChangeText={(text) => setaddress(text)}
-                                        autoCapitalize="none"
-                                    />
-                                    <TouchableOpacity style={styles.button} onPress={AddressUpdate}>
-                                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>OK</Text>
-                                    </TouchableOpacity>
+                        </View>
 
-                                </View>
-                                <View style={{ flexDirection: "row" }}>
-                                    <TextInput
-                                        style={styles.textBoxes}
-                                        value={newPassword}
-                                        placeholderTextColor="#fff"
-                                        autoCapitalize="none"
-                                        secureTextEntry
-                                        placeholder='Enter new Password'
-                                        onChangeText={(text) => setnewPassword(text)}
 
-                                    />
+                        <View style={{ flexDirection: 'row' }}>
 
-                                    <TouchableOpacity
-                                        onPress={UpdatePassword}
-                                        style={styles.button}
-                                    >
-                                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
-                                            OK</Text>
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={{ alignItems: 'center', justifyContent: "center", flexDirection: 'row', paddingTop: 40 }}>
-                                    <TouchableOpacity
-                                        onPress={GoProfile}
-                                        style={styles.button}
-                                    >
-                                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
-                                            Back</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity
-                                        onPress={signOut}
-                                        style={styles.button}
-                                    >
-                                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
-                                            Log Out</Text>
-                                    </TouchableOpacity>
-                                </View>
+                            <MaterialCommunityIcons name="home" color={'#f7d081'} size={30} style={{ paddingTop: 25 }} />
 
-                            </View>
+                            <TextInput
+                                style={styles.textBoxes}
+                                onChangeText={(text) => setaddress(text)}
+                                value={address}
+                                placeholderTextColor="#fff"
 
-                        </Animatable.View>
-                    </KeyboardAwareScrollView>
 
-                </SafeAreaView>
+                            />
 
-            </ImageBackground>
+
+                        </View>
+
+                        <View style={{ alignItems: 'center', justifyContent: "center", flexDirection: 'row', paddingTop: 10, marginBottom: 60 }}>
+                            <TouchableOpacity
+                                onPress={UserInfoUpdate}
+                                style={styles.button}
+                            >
+                                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
+                                    Save</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={Cancel}
+                                style={styles.button}
+                            >
+                                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
+                                    Cancel</Text>
+                            </TouchableOpacity>
+
+                        </View>
+                        <Text style={{ fontSize: 24, fontWeight: "bold", textAlign: "center", color: "#f7d081" }}>Change Password</Text>
+                        <View style={{ flexDirection: "row" }}>
+                            <TextInput
+                                style={{
+                                    width: '60%',
+                                    marginLeft: 20,
+                                    fontSize: 16,
+                                    padding: 10,
+                                    borderColor: 'grey',
+                                    borderBottomWidth: 2,
+                                    borderRadius: 10,
+                                    marginTop: 10,
+                                    marginBottom: 10,
+                                    color: "#fff"
+                                }}
+                                onChangeText={(text) => setnewPassword(text)}
+                                value={newPassword}
+                                placeholderTextColor="#fff"
+                                autoCapitalize="none"
+                                secureTextEntry
+                                placeholder='Enter new Password'
+
+
+                            />
+
+                            <TouchableOpacity
+                                onPress={UpdatePassword}
+                                style={{
+                                    backgroundColor: '#f7d081',
+                                    marginLeft: 30,
+                                    marginRight: 30,
+                                    marginTop: 20,
+                                    borderRadius: 15,
+                                    alignItems: "center",
+                                    width: 70,
+                                    height: 50,
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
+                                    Change</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+
+
+                </KeyboardAwareScrollView>
+
+            </SafeAreaView>
+
         </View>
     );
-}
 
+}
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#000",
+        color: "#fff"
     },
     textBoxes: {
-        width: '60%',
+        width: '80%',
         marginLeft: 20,
         fontSize: 16,
         padding: 10,
@@ -283,7 +245,9 @@ const styles = StyleSheet.create({
         width: 80,
         alignSelf: "center",
         margin: 30,
-        borderRadius: 50
+        borderRadius: 50,
+        borderWidth: 1,
+        borderColor: "white",
     },
 })
 export default EditProfile;

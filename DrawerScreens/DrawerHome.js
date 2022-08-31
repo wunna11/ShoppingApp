@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useEffect, useState } from "react";
+import { useIsFocused } from '@react-navigation/native';
 import { firebase } from "../config";
 import { SearchBar } from "react-native-elements";
 import * as Animatable from "react-native-animatable";
@@ -44,7 +45,7 @@ function BackDrop({ scrollX }) {
   const dataRef = firebase.firestore().collection("products");
   const [search, setSearch] = useState("");
   const [filterProduct, setFilterProduct] = useState([]);
-
+  const isFocused = useIsFocused();
   useEffect(() => {
     firebase
       .firestore()
@@ -54,7 +55,7 @@ function BackDrop({ scrollX }) {
       .then((user) => {
         setUser(user.data());
       });
-  }, []);
+  }, [isFocused]);
 
   // Search item
   useEffect(() => {
@@ -96,6 +97,7 @@ function BackDrop({ scrollX }) {
   useEffect(() => {
     read();
   }, []);
+
 
   return (
     <View

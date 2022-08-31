@@ -4,19 +4,16 @@ import {
   View,
   Text,
   FlatList,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-  ImageBackground
+  ActivityIndicator
 } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { firebase } from "../config";
-import * as Animatable from 'react-native-animatable';
 
 const UserList = ({ route, navigation }) => {
 
   const [data, setData] = useState([]);
   const dataRef = firebase.firestore().collection("users");
+  const [show, setshow] = useState(false);
 
   const [id, setId] = useState("");
   const [username, setName] = useState("");
@@ -30,6 +27,10 @@ const UserList = ({ route, navigation }) => {
 
   // read data
   const read = () => {
+    setshow(true)
+        setTimeout(() => {
+            setshow(false)
+        }, 1000)
     dataRef
       .where('role', '==', 'Client')
       //.orderBy("createdAt")
@@ -57,21 +58,16 @@ const UserList = ({ route, navigation }) => {
   return (
     <View>
       <View style={styles.container}>
-        <ImageBackground
-          source={require("../assets/admin4.jpg")}
-          style={{ width: "100%", height: "100%" }}
-        >
           <View>
             <Text style={styles.adminText}>View All Users</Text>
           </View>
 
-          <View style={{ flex: 2 }}>
+        <View style={{ flex: 2 }}>
+        <ActivityIndicator size="small" color="gold" animating={show}></ActivityIndicator>
             <FlatList
               data={data}
+              keyExtractor={(_,i) => String(i)}
               renderItem={({ item }) => (
-                <Animatable.View
-                animation='fadeInDownBig'
-                    duration={4000}>
                 <View style={styles.Box}>
                   <View>
                     <Text style={styles.padd}>
@@ -101,18 +97,16 @@ const UserList = ({ route, navigation }) => {
                       </Text>
                     </View>
                     <View style={{ flexDirection: 'row', padding: 5 }}>
-                      <MaterialCommunityIcons name="map" color={'#ffd700'} size={25} />
+                      <MaterialCommunityIcons name='map-check-outline' color={'#ffd700'} size={25} />
                       <Text style={styles.text}>
                         {item.address}
                       </Text>
                     </View>
                   </View>
                   </View>
-                </Animatable.View>
               )}
             />
           </View>
-        </ImageBackground>
       </View>
     </View>
   );
