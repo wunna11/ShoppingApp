@@ -11,7 +11,7 @@ export default function AccountScreen({ route, navigation }, props) {
     const [users, setUsers] = useState([])
 
     function Edit() {
-        navigation.navigate('EditProfile')
+        navigation.navigate('EditProfile',{user})
     }
 
     useEffect(() => {
@@ -48,10 +48,7 @@ export default function AccountScreen({ route, navigation }, props) {
 
     return (
         <View style={styles.container}>
-            <ImageBackground
-                source={require('../assets/newBlack3.jpg')}
-                style={{ width: '100%', height: "100%", }}
-            >
+            
 
                 <SafeAreaView style={{ flex: 1, padding: 5 }}>
 
@@ -64,12 +61,12 @@ export default function AccountScreen({ route, navigation }, props) {
                         />
 
 
-                        <Animatable.View
+                        {/*<Animatable.View
                             animation="pulse"
                             iterationCount='infinite'
-                        >
+                        >*/}
                             <Text style={{ fontSize: 30, fontWeight: "500", color: "#f7d081" }}>Hello {user?.username}!</Text>
-                        </Animatable.View>
+                        {/*</Animatable.View>*/}
                         <Animatable.View
                             animation="fadeIn"
                             duration={4000}
@@ -116,7 +113,7 @@ export default function AccountScreen({ route, navigation }, props) {
                     </View>
 
                 </SafeAreaView>
-            </ImageBackground>
+            
         </View>
 
 
@@ -160,6 +157,8 @@ const styles = StyleSheet.create({
         width: 80,
         alignSelf: "center",
         margin: 30,
+        borderWidth: 1,
+        borderColor: "white",
         borderRadius: 50
     },
 })

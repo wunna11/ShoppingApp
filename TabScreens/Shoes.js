@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Text, FlatList ,Image,TouchableOpacity,SafeAreaView ,ImageBackground} from 'react-native';
 import { firebase } from '../config'
-import * as Animatable from 'react-native-animatable';
 
   const Shoes = ({ route, navigation }) => {
 
@@ -51,20 +50,11 @@ import * as Animatable from 'react-native-animatable';
 
   return (
     <View style={styles.container}>
-      <ImageBackground
-                source={require('../assets/shoe.jpg')}
-                style={{width: '100%', height: "100%",}}
-            >
       <View style={{ flex: 1 }}>
         <View style={{ padding: 10,paddingBottom: 20  }}>
           <Text style={styles.expoView}>"Welcome from Shoe Collection"</Text>
         </View>
         <SafeAreaView style={{ flex: 2, padding: 5, marginTop: -40 }}>
-          <Animatable.View
-            animation="fadeInUp"
-            duration={1000}
-        
-          >
           <FlatList
               data={data}
               keyExtractor={(_,i) => String(i)}
@@ -94,10 +84,8 @@ import * as Animatable from 'react-native-animatable';
               </TouchableOpacity>
             )}
             />
-            </Animatable.View>
         </SafeAreaView>
         </View>
-        </ImageBackground>
     </View>
   )
 }
@@ -109,6 +97,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     height: '100%',
+    backgroundColor: "black",
   },
   iimage: {
     width: 150,

@@ -54,10 +54,7 @@ export default function AboutUs({ navigation }) {
     };
     return (
         <View style={styles.container}>
-            <ImageBackground
-                source={require('../assets/bgaboutus.jpg')}
-                style={{ width: '100%', height: "100%", }}
-            >
+           
                 <ScrollView>
                     <View style={{ marginBottom: 30 }}>
                         <Animatable.View
@@ -66,12 +63,11 @@ export default function AboutUs({ navigation }) {
                         >
                             <View style={{ flexDirection: 'row', padding: 10 }}>
 
-                                <View style={{ width: '60%', alignItems: 'center' }}>
+                                <View style={{ width: '66%', alignItems: 'center' }}>
 
                                     <Text style={styles.text}>
-                                        WTTH Brands Shop is the e-commerce site for Men & Woman Clothings , Shoes and Accessories INc.
-                                        uses to manage online order fulfillment providing customers with a convenient, fast,
-                                        and secure shopping experience.
+                                    WTTH is the shopping application of e-commerce for Men & Women's items of clothing, Shoes and Accessories.
+                                    It manages online order fulfilment by providing customers with a convenient, fast, and secure shopping experience.
                                     </Text>
                                 </View>
 
@@ -94,13 +90,12 @@ export default function AboutUs({ navigation }) {
                                 <View style={{ flexDirection: 'row' }}>
                                     <Image
                                         style={styles.tinyLogo}
-                                        source={require('../assets/logo.png')}
+                                        source={require('../assets/map.png')}
                                     />
                                     <View style={styles.mission}>
                                         <Text style={styles.textGold}>
-                                            We have become a part of the community’s common knowledge but we continue to move
-                                            forward to catch the mindset of the future generation by taking one step ahead of
-                                            the norm and being the first to establish a new trend.
+                                            Our primary goal is to reach the highest number of customers at the right time to increase sales and profitability of the business.
+                                            We move forward to catch the mindset of the future generation by taking one step ahead of the norm and being the first to establish a new trend.
                                         </Text>
                                     </View>
                                 </View>
@@ -116,8 +111,7 @@ export default function AboutUs({ navigation }) {
                                     Our Vision
                                 </Text>
                                 <Text style={styles.textGold}>
-                                    Our vision is to improve the standard of living of the all customers consumers
-                                    and provide them a great buying experience of our brand Products that have been at the core of our business.
+                                Our vision is to improve the standard of living of all customers and clients and provide them with a great buying experience with our brand Products that have been at the core of our business.
                                 </Text>
                             </View>
                         </Animatable.View>
@@ -170,7 +164,7 @@ export default function AboutUs({ navigation }) {
                             duration={4000}
                         >
                             <View>
-                                <Text style={{ fontSize: 18, fontWeight: 'bold', paddingBottom: 10, paddingTop: 10, color: '#FFE89C', letterSpacing: 1 }}>Developed By</Text>
+                                <Text style={{ fontSize: 18, fontWeight: 'bold', padding: 10, color: '#FFE89C', letterSpacing: 1 }}>Developed By</Text>
                                 <Text style={styles.devName}>Wunna</Text>
                                 <Text style={styles.devName}>Theint Yadanar Lwin</Text>
                                 <Text style={styles.devName}>Thiri Sein</Text>
@@ -179,7 +173,7 @@ export default function AboutUs({ navigation }) {
                         </Animatable.View>
                     </View>
                 </ScrollView>
-            </ImageBackground>
+          
         </View>
 
     );
@@ -188,16 +182,18 @@ export default function AboutUs({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingHorizontal:7,
         alignItems: 'center',
         justifyContent: 'flex-start',
         backgroundColor: 'black'
     },
     devName: {
-        fontSize: 16,
-        fontWeight: '800',
+        fontSize: 14,
+        fontWeight: '600',
         padding: 5,
         color: '#FFE89C',
         letterSpacing: 1,
+        paddingLeft: 10,
     },
     aboutText: {
         fontSize: 30,
@@ -207,15 +203,16 @@ const styles = StyleSheet.create({
         letterSpacing: 1,
     },
     tinyLogo: {
-        width: 140,
-        height: 140,
-        borderRadius: 10,
+        width: 110,
+        height: 110,
+        borderRadius: 70,
         borderWidth: 1,
         borderColor: "#fff",
-        marginTop: 20
+        marginTop: 20,
+        marginRight:-4,
     },
     text: {
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: '500',
         lineHeight: 16,
         letterSpacing: 1,
@@ -223,7 +220,7 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     textGold: {
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: '500',
         lineHeight: 16,
         letterSpacing: 1,
@@ -232,7 +229,7 @@ const styles = StyleSheet.create({
     },
     mission: {
         paddingTop: 5,
-        width: '60%',
+        width: '66%',
         marginBottom: 10,
         marginTop: 5
     },

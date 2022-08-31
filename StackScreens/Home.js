@@ -1,13 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState,Component} from 'react'
 import { Image } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Entypo } from '@expo/vector-icons';
 import 'react-native-gesture-handler';
 import 'react-native-reanimated';
-import { firebase } from '../config';
 import { TouchableOpacity } from 'react-native';
-
 import DrawerHome from '../DrawerScreens/DrawerHome';
 import Products from '../DrawerScreens/Products';
 import MyCart from '../DrawerScreens/MyCart';
@@ -16,19 +13,29 @@ import AboutUs from '../DrawerScreens/AboutUs';
 import CustomDrawer from '../DrawerScreens/CustomDrawer';
 import UserAccount from '../DrawerScreens/UserAccount'
 import { CommonActions } from '@react-navigation/native'
+import { firebase } from '../config';
+import { useIsFocused } from '@react-navigation/native';
 const Drawer = createDrawerNavigator();
 
 export default function Home(navigation) {
 
-    const SignOut = ({navigation}) => {
-        firebase.auth().signOut()
-       
-            navigation.reset({
+    const isFocused = useIsFocused();
+    function Logout({ navigation }) {
+            
+        useEffect(() => {
+            firebase.auth().signOut();
+
+               navigation.dispatch(
+               CommonActions.reset({
                 index: 0,
                 routes: [{ name: 'Login' }]
             })
+                )
+        },[isFocused])
+            
+        }
        
-    }
+    
     return (
         <Drawer.Navigator initialRouteName="DrawerHome"
             drawerContent={props => <CustomDrawer {...props} />}
@@ -44,7 +51,7 @@ export default function Home(navigation) {
                     //headerShown: false,
                     title: 'Home',
                     drawerIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="home" color={'#ffd700'} size={30} />
+                        <MaterialCommunityIcons name="home" color={'#f7d081'} size={30} />
                     ),
                     headerTintColor: '#fff',
                     headerStyle: {
@@ -62,7 +69,7 @@ export default function Home(navigation) {
                 options={({ navigation }) => ({
                     title: 'Products',
                     drawerIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="shopping" color={'#ffd700'} size={30} />
+                        <MaterialCommunityIcons name="shopping" color={'#f7d081'} size={30} />
                     ), headerTintColor: '#fff',
                     headerStyle: {
                         backgroundColor: '#000'
@@ -86,7 +93,7 @@ export default function Home(navigation) {
                 options={{
                     title: 'MyCart',
                     drawerIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="cart-outline" color={'#ffd700'} size={30} />
+                        <MaterialCommunityIcons name="cart-outline" color={'#f7d081'} size={30} />
                     ),headerTintColor: '#fff',
                     headerStyle: {
                         backgroundColor: '#000'
@@ -99,7 +106,7 @@ export default function Home(navigation) {
                 options={{
                     title: 'OrderDetail',
                     drawerIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="clipboard-list-outline" color={'#ffd700'} size={30} />
+                        <MaterialCommunityIcons name="clipboard-list-outline" color={'#f7d081'} size={30} />
                         ),headerTintColor: '#fff',
                         headerStyle: {
                             backgroundColor: '#000'
@@ -112,7 +119,7 @@ export default function Home(navigation) {
                 options={{
                     title: 'Profile',
                     drawerIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="account" color={'#ffd700'} size={30} />
+                        <MaterialCommunityIcons name="account" color={'#f7d081'} size={30} />
                     ), headerTintColor: '#fff',
                     headerStyle: {
                         backgroundColor: '#000'
@@ -127,7 +134,7 @@ export default function Home(navigation) {
                 options={{
                     title: 'AboutUs',
                     drawerIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="information-outline" color={'#ffd700'} size={30} />
+                        <MaterialCommunityIcons name="information-outline" color={'#f7d081'} size={30} />
                     ), headerTintColor: '#fff',
                     headerStyle: {
                         backgroundColor: '#000'
@@ -135,6 +142,16 @@ export default function Home(navigation) {
                    
                 }}
             />
+             <Drawer.Screen
+        name="Logout"
+        component={Logout}
+        options={{
+          title: 'Logout',
+          drawerIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="logout" color={'#f7d081'} size={30} />
+          )
+        }}
+      />
            
         </Drawer.Navigator>
     );

@@ -3,7 +3,7 @@ import {
   Text,
   View,
   TextInput,
-  Button,
+  ActivityIndicator,
   Image,
   TouchableOpacity,
   Alert,
@@ -14,7 +14,6 @@ import { firebase } from "../config";
 import * as ImagePicker from "expo-image-picker";
 import SelectDropdown from 'react-native-select-dropdown'
 import { CommonActions } from '@react-navigation/native'
-import * as Animatable from 'react-native-animatable';
 
 const UpdateProduct = ({ route, navigation }) => {
 
@@ -27,12 +26,18 @@ const UpdateProduct = ({ route, navigation }) => {
   const [category_id, setCategory_id] = useState(route.params.item.category_id);
   const [category_name, setCategory_name] = useState(route.params.item.category_name);
 
+  const [show, setshow] = useState(false);
+
+  const [callImage, setCallImage] = useState(route.params.item.imgURL);
 
   const [data, setData] = useState([]);
   const catRef = firebase.firestore().collection('categories');
   const [name, setName] = useState('')
 
   const [selectedItem, setSelectedItem] = useState();
+  const [error, setError] = useState({});
+  const [perror, setPerror] = useState({});
+  
 
   useEffect(() => {
     readCat();
@@ -78,78 +83,98 @@ const UpdateProduct = ({ route, navigation }) => {
   };
 
   const update = async () => {
-    if (
-      (image !== null) ||
-      (productName && productName.length > 0) ||
-      (desc && desc.length > 0) ||
-      (price && price.length > 0)
-    ) {
-      setUploading(true);
-      const response = await fetch(image.uri);
-      const blob = await response.blob();
-      const filename = image.uri.substring(image.uri.lastIndexOf("/") + 1);
-      var ref = firebase.storage().ref("Shoes/").child(filename).put(blob);
-      try {
-        await ref;
-      } catch (e) {
-        console.log(e);
-      }
-      const setImageURL = await firebase
-        .storage()
-        .ref(`Shoes/${filename}`)
-        .getDownloadURL();
-      console.log("print ref :", setImageURL);
-
-      setUploading(false);
-      setImage(null);
-      //  Alert.alert("Update Photo uploaded..!!");  //optional
-      const FireImage = { fireuri: filename }; //optional
-      console.log(FireImage); //optional
-
-      dataRef
-        .doc(route.params.item.id)
-        .update({
-          name: productName,
-          desc: desc,
-          price: parseFloat(price),
-          imgURL: setImageURL,
-          category_id: selectedItem.id,
-          category_name: selectedItem.name,
-        })
-        .then(async () => {
-
-          Alert.alert("Successfully updated!");
-
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{ name: "Admin" }],
-            })
-          );
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
+    setshow(true)
+            setTimeout(() => {
+                setshow(false)
+            }, 4000)
+    if (!imgURL) {
+      setPerror((prev) => {
+        return {
+          ...prev,
+          imgURL: 'Please select Photo'
+        }
+      })
     }
-  };
+    if (!selectedItem) {
+        setError((prev) => {
+          return {
+            ...prev,
+            selectedItem: 'Please select category'
+          }
+        })
+      } else {
+        if (
+          (image !== null) ||
+          (productName && productName.length > 0) ||
+          (desc && desc.length > 0) ||
+          (price && price.length > 0)
+        ) {
+          setUploading(true);
+          const response = await fetch(image.uri);
+          const blob = await response.blob();
+          const filename = image.uri.substring(image.uri.lastIndexOf("/") + 1);
+          var ref = firebase.storage().ref("Shoes/").child(filename).put(blob);
+          try {
+            await ref;
+          } catch (e) {
+            console.log(e);
+          }
+          const setImageURL = await firebase
+            .storage()
+            .ref(`Shoes/${filename}`)
+            .getDownloadURL();
+          console.log("print ref :", setImageURL);
+  
+          setUploading(false);
+          setImage(null);
+          //  Alert.alert("Update Photo uploaded..!!");  //optional
+          const FireImage = { fireuri: filename }; //optional
+          console.log(FireImage); //optional
+  
+          dataRef
+            .doc(route.params.item.id)
+            .update({
+              name: productName,
+              desc: desc,
+              price: parseFloat(price),
+              imgURL: setImageURL,
+              category_id: selectedItem.id,
+              category_name: selectedItem.name,
+            })
+            .then(async () => {
+  
+              Alert.alert("Successfully updated!");
+  
+              navigation.dispatch(
+                CommonActions.reset({
+                  index: 0,
+                  routes: [{ name: "Admin" }],
+                })
+              );
+            })
+            .catch((error) => {
+              Alert.alert("Error");
+              console.warn(error.message);
+            });
+        }
+      }
+  
+      };
 
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={require("../assets/black2.jpg")}
-        style={{ width: "100%", height: "100%" }}
-      >
-
-        <Animatable.View
-          animation="bounceIn"
-          easing={"ease-in-out-cubic"}>
           <View style={styles.imageContainer}>
+            <Image
+              source={{ uri: callImage }}
+              style={{ width: 150, height: 150 ,borderRadius: 15, }}
+            />
             {image && (
               <Image
                 source={{ uri: image.uri }}
-                style={{ width: 150, height: 150 }}
+                style={{ width: 150, height: 150, borderRadius: 15, position: "absolute"  }}
               />
-            )}
+        )}
+        <Text style={{ color: 'red', fontSize: 20 ,fontWeight: 'bold' }}>{perror.imgURL}</Text>
           </View>
           <TouchableOpacity
             style={[styles.selectButton, styles.ImgBot]}
@@ -178,7 +203,7 @@ const UpdateProduct = ({ route, navigation }) => {
             style={styles.input}
             placeholder="Price"
             onChangeText={(text) => setPrice(text)}
-            value={parseFloat(price)}
+            value={price}
             keyboardType="numeric"
             placeholderTextColor="#c4c4c2"
           />
@@ -198,27 +223,15 @@ const UpdateProduct = ({ route, navigation }) => {
               rowTextForSelection={(item, index) => {
                 return item.name
               }}
-            />
+        />
+        <Text style={{ color: 'red', fontSize: 20 ,fontWeight: 'bold' }}>{error.selectedItem}</Text>
           </View>
           <View style={{ justifyContent: "center", alignItems: "center", }}>
+          <ActivityIndicator size="large" color="#fff700"  animating={show} style={{marginTop: -15,paddingBottom:10,}}></ActivityIndicator>
             <TouchableOpacity style={styles.btn} onPress={() => update()}>
               <Text>Update </Text>
             </TouchableOpacity>
-
-            {/*<TouchableOpacity
-            style={styles.btn}
-            onPress={() => navigation.dispatch(
-              CommonActions.reset({
-                index: 0,
-                routes: [{ name: 'Admin' }]
-              })
-            )}
-          >
-            <Text>Back </Text>
-          </TouchableOpacity>*/}
           </View>
-        </Animatable.View>
-      </ImageBackground>
     </View>
   );
 };
@@ -228,7 +241,7 @@ export default UpdateProduct;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //paddingTop: 60
+    backgroundColor: '#000',
   },
 
   select: {

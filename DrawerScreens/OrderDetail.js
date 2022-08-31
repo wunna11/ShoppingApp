@@ -50,7 +50,8 @@ export default function OrderDetail({ navigation }) {
   const read = (userId) => {
     console.log("inside read function", userId);
     //console.log("inside read function");
-    dataRef.where("userid", "==", userId).onSnapshot((querySnapshot) => {
+    dataRef.where("userid", "==", userId)
+      .onSnapshot((querySnapshot) => {
       const data = [];
       //console.log("Data", querySnapshot.docs.data());
       querySnapshot.forEach((doc) => {
@@ -94,189 +95,178 @@ export default function OrderDetail({ navigation }) {
 
 
   return (
-    <View style={{ flex: 1 }}>
-      <ImageBackground
-        source={require('../assets/admin5.jpg')}
-        style={{ width: '100%', height: "100%", }}
-      >
-      {/*<Text style={{ fontSize: 30, fontWeight: "bold" }}>OrderDetail</Text>*/}
-
-        <FlatList
-        keyExtractor={(_,i) => String(i)}
-        data={data}
-        showsVerticalScrollIndicator={true}
-        style={{ flex: 1, marginTop: 16 }}
-        renderItem={({ item }) => (
-          <Animatable.View
-              animation='fadeInLeftBig'
-              duration={4000}>
-          <View>
-            <View
-              style={{
-                //flex: 0.5,
-                borderWidth: 1,
-                borderColor: "#fff",
-                //marginBottom: 10,
-              }}
-            >
-              <ScrollView>
+    <View style={styles.container}>
+        {/*<Text style={styles.adminText}>OrderDetail</Text>*/}
+        <View style={{ flex: 1, padding: 10 }}>
+          <FlatList
+            data={data}
+            showsVerticalScrollIndicator={true}
+            style={{ flex: 1, marginTop: 16 }}
+            keyExtractor={(_,i) => String(i)}
+            renderItem={({ item }) => (
                 <View>
-                  {
-                    item.status.pending === true ?
-                      (
-                        <View>
- <MaterialCommunityIcons name="marker-check" size={30} color={'green'}/>
-                          <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'gold', textAlign: 'center' }}>{item.status.pending} Confirm</Text>
+                  {/*<TouchableOpacity onPress={showConfirmDialog}>*/}
+                  <View style={{
+                    borderWidth: 1, borderColor: 'gold', backgroundColor: "#000", padding: 10, borderRadius: 10,
+                    marginBottom: 10
+                  }}>
+                    <ScrollView>
 
-
-                        </View>
-                      )
-                      :
                       <View>
+                        {
+                          item.status.pending === true ?
+                            (
+                              <View style={{ flexDirection: 'row' }}>
+                                <MaterialCommunityIcons name="marker-check" size={35} color={'green'} />
+                                <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'gold', textAlign: 'center', paddingLeft: 30, paddingRight: 30 }}>This Order is{item.status.pending} Confirmed</Text>
 
-                        <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'gold', textAlign: 'center' }}>{item.status.pending} Pending</Text>
+                                {/*<TouchableOpacity onPress={() => Deletefeedback(item)}>
+                                  <MaterialCommunityIcons name="delete" color={'red'} size={30} />
+                                </TouchableOpacity>*/}
+                              </View>
+                            )
+                            :
+                            <View style={{ flexDirection: 'row' }}>
+                              <MaterialCommunityIcons name="alert" size={35} color={'orange'} />
+                              <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'gold', textAlign: 'center', paddingLeft: 30, paddingRight: 30 }}>This Order is{item.status.pending} Pending</Text>
+
+                              {/*<TouchableOpacity onPress={() => Deletefeedback(item)}>
+                                <MaterialCommunityIcons name="delete" color={'red'} size={30} />
+                              </TouchableOpacity>*/}
+
+                            </View>
+                        }
 
 
+                        <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#fff', textAlign: 'center' }}>OrderList</Text>
+                        {
+                          item.cartList.map((cartItem,index) => {
+                            //console.log("cart Item",cartItem)
+                            return (
+                              <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }} key={index}>
+                                <Text style={styles.textInfo}>{cartItem.qty} x</Text>
+                                <Text style={styles.textInfo}>{cartItem.name}</Text>
+                                <Text style={styles.textInfo}>$ {cartItem.price}</Text>
+                              </View>
+                            )
+                          }
+                          )
+                        }
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
+                          <MaterialCommunityIcons name="truck-delivery-outline" color={'#f7d081'} size={25} />
+                          <Text style={styles.textInfo}>$ 10</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
+                          <MaterialCommunityIcons name="cash-100" color={'#f7d081'} size={25} />
+                          <Text style={styles.textInfo}>$ {item.total}</Text>
+                        </View>
+
+
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
+                          <MaterialCommunityIcons name="clock" color={'#f7d081'} size={25} />
+                          <Text style={styles.textInfo}> {item.createdAt}</Text>
+                        </View>
+                        <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#fff', textAlign: 'center' }}>Your Info</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
+                          <MaterialCommunityIcons name="id-card" color={'#f7d081'} size={25} />
+                          <Text style={styles.textInfo}>{item.userid}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
+                          <MaterialCommunityIcons name="account" color={'#f7d081'} size={25} />
+                          <Text style={styles.textInfo}>{item.username}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
+                          <MaterialCommunityIcons name="phone" color={'#f7d081'} size={25} />
+                          <Text style={styles.textInfo}>{item.phone}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
+                          <MaterialCommunityIcons name="home" color={'#f7d081'} size={25} />
+                          <Text style={styles.textInfo}>{item.address}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
+                          <MaterialCommunityIcons name="text-box" color={'#f7d081'} size={25} />
+                          <Text style={styles.textInfo}>{item.note}</Text>
+                        </View>
                       </View>
-                  }
-
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      padding: 5,
-                    }}
-                  >
-                    <Text style={styles.textInfo}>ID</Text>
-                    <Text style={styles.textInfo}>{user?.id}</Text>
-                  </View>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      padding: 5,
-                    }}
-                  >
-                    <Text style={styles.textInfo}>Name</Text>
-                    <Text style={styles.textInfo}>{item.username}</Text>
-                  </View>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      padding: 5,
-                    }}
-                  >
-                    <Text style={styles.textInfo}>Phone</Text>
-                    <Text style={styles.textInfo}>{item.phone}</Text>
-                  </View>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      padding: 5,
-                    }}
-                  >
-                    <Text style={styles.textInfo}>Address</Text>
-                    <Text style={styles.textInfo}>{item.address}</Text>
-                  </View>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      padding: 5,
-                    }}
-                  >
-                    <Text style={styles.textInfo}>Note</Text>
-                    <Text style={styles.textInfo}>{item.note}</Text>
+                    </ScrollView>
                   </View>
                 </View>
-                {/*<Text style={{fontSize: 20,fontWeight:'bold',color: 'gold'}}>Check Out</Text>*/}
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    padding: 5,
-                  }}
-                >
-                  <Text style={styles.textInfo}>Shipping Tax</Text>
-                  <Text style={styles.textInfo}>$ 10</Text>
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    padding: 5,
-                  }}
-                >
-                  <Text style={styles.textInfo}>Total</Text>
-                  <Text style={styles.textInfo}>$ {item.total}</Text>
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    padding: 5,
-                  }}
-                >
-                  <Text style={styles.textInfo}>Order Date</Text>
-                  <Text style={styles.textInfo}>
-                    {/*{" "}
-                    {new Date(item.createdAt.seconds * 1000).toLocaleDateString(
-                      "en-US"
-                    )}*/}
-                    {/*{new Date(item.createdAt.seconds * 1000).toLocaleDateString(
-                      "en-US"
-                    )}*/}
-                      {item.createdAt}
-                  </Text>
-                  </View>
-                  <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#ffd700', textAlign: 'center' }}>OrderList</Text>
-              </ScrollView>
-
-              {item.cartList.map((cartItem,index) => {
-                console.log("cart Item", cartItem);
-                return (
-                  <View key={index}
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      padding: 5,
-                    }}
-                  >
-                    <Text style={styles.textInfo}>{cartItem.qty} x</Text>
-                    <Text style={styles.textInfo}>{cartItem.name}</Text>
-                    <Text style={styles.textInfo}>$ {cartItem.price}</Text>
-                  </View>
-                );
-              })}
-            </View>
-
-            {/*<Text>Address: {item.address}</Text>
-          <Text>Phone: {item.phone}</Text>
-          <Text>Total Price: {item.total}</Text>
-          <Text>Name : {item.username}</Text>*/}
-            </View>
-            </Animatable.View>
-        )}
-        />
-        </ImageBackground>
+            )}
+          />
+        </View>
     </View>
+
   );
 }
 
 const styles = StyleSheet.create({
-  iimage: {
-    width: 80,
-    height: 80,
-    borderRadius: 15,
+  adminText: {
+    fontSize: 20,
+    color: "white",
+    fontWeight: "500",
+    letterSpacing: 1,
+    padding: 20,
+    textAlign: 'center',
+  },
+  textBoxes: {
+    width: '60%',
+    marginLeft: 20,
+    fontSize: 16,
+    padding: 10,
+    borderColor: 'black',
+    borderBottomWidth: 2,
+    borderRadius: 10,
+    marginTop: 10,
+    marginBottom: 10,
+    color: "black"
+  },
+  text: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "500",
+    letterSpacing: 1,
+
   },
   textInfo: {
     fontSize: 16,
-    color: "#ffd700",
+    color: "#f7d081",
     fontWeight: "500",
     letterSpacing: 1,
     padding: 5,
     paddingTop: 8
   },
-});
+  padd: {
+    color: 'gold',
+    fontWeight: "bold",
+    fontSize: 18,
+    textAlign: 'center',
+  },
+  Box: {
+    marginBottom: 10,
+    borderWidth: 2,
+    borderColor: "#fff",
+    backgroundColor: "gray",
+    borderRadius: 15,
+    padding: 10
+  },
+  container: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "#000",
+    justifyContent: "flex-start",
+  },
+  decText: {
+    fontSize: 10,
+    color: 'gold',
+    fontWeight: 'bold',
+  },
+  button: {
+    backgroundColor: '#ffd700',
+    marginLeft: 10,
+    marginTop: 10,
+    borderRadius: 5,
+    alignItems: "center",
+    padding: 10,
+    justifyContent: 'center'
+  },
+})

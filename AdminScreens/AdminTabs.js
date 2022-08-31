@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import AdminHome from './AdminHome';
@@ -9,22 +10,42 @@ import UserList from './userList';
 import Feedback from './Feedback';
 import { firebase } from '../config';
 import { CommonActions } from '@react-navigation/native';
-import { Restart } from '../components/reload/reload'
+import { Restart } from '../components/reload/reload';
+import AdminTopTabScreen from './AdminTopTabScreen';
+import { useIsFocused } from '@react-navigation/native';
 export default function AdminTab({ navigation }) {
+
     const Tab = createBottomTabNavigator();
 
+//
+//    const SignOut = () => {
+//        firebase.auth().signOut()
+//        //  navigation.dispatch(
+//        CommonActions.reset({
+//            index: 0,
+//            routes: [{ name: 'Login' }]
+//        })
+//
+//        //navigation.navigate('Login')
+//        Restart()
+//    }
+const isFocused = useIsFocused();
+function SignOut({ navigation }) {
+        
+    useEffect(() => {
+        firebase.auth().signOut();
 
-    const SignOut = () => {
-        firebase.auth().signOut()
-        //  navigation.dispatch(
-        CommonActions.reset({
+           navigation.dispatch(
+           CommonActions.reset({
             index: 0,
             routes: [{ name: 'Login' }]
         })
-
-        //navigation.navigate('Login')
-        Restart()
+            )
+    },[isFocused])
+        
     }
+   
+
 
     return (
         <Tab.Navigator
@@ -47,6 +68,17 @@ export default function AdminTab({ navigation }) {
             <Tab.Screen
                 name="AdminHScreen"
                 component={AdminHome}
+            />
+            <Tab.Screen
+                name='Categories'
+                component={AdminTopTabScreen}
+                options={{
+                    //tabBarLabel: 'SignOut',
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialIcons name="category" size={30} color={'#ffd700'} />
+                    ),
+                }}
+
             />
             <Tab.Screen
                 name="UserOrder"

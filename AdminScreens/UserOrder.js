@@ -4,18 +4,12 @@ import {
   View,
   Text,
   FlatList,
-  TextInput,
   TouchableOpacity,
   ScrollView,
-  Alert,
-  ImageBackground
+  ActivityIndicator
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { firebase } from "../config";
-//import { useIsFocused } from '@react-navigation/native';//
-import { collection, doc, setDoc, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
-import { db } from "../config";
-import * as Animatable from 'react-native-animatable';
 
 const UserOrder = ({ route, navigation }) => {
 
@@ -23,12 +17,19 @@ const UserOrder = ({ route, navigation }) => {
   const [data, setData] = useState([]);
   const [cartList, setCartList] = useState([]);
   const dataRef = firebase.firestore().collection('orders')
+  const [show, setshow] = useState(false);
 
   const [status, setStatus] = useState('');
   // read data
   const read = () => {
+    setshow(true)
+        setTimeout(() => {
+            setshow(false)
+        }, 2000)
+    
     console.log("inside read function");
     dataRef
+      .orderBy("createdAt")
       .onSnapshot((querySnapshot) => {
         const data = [];
         //console.log("Data", querySnapshot.docs.data());
@@ -87,21 +88,15 @@ const UserOrder = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={require('../assets/newBlack6.jpg')}
-        style={{ width: '100%', height: "100%", }}
-      >
         <Text style={styles.adminText}>OrderDetail</Text>
-        <View style={{ flex: 1, padding: 10 }}>
+      <View style={{ flex: 1 }}>
+      <ActivityIndicator size="small" color="gold" animating={show}></ActivityIndicator>
           <FlatList
-           keyExtractor={(_,i) => String(i)}
             data={data}
             showsVerticalScrollIndicator={true}
             style={{ flex: 1, marginTop: 16 }}
+            keyExtractor={(_,i) => String(i)}
             renderItem={({ item }) => (
-              <Animatable.View
-                animation='fadeInUpBig'
-                duration={4000}>
                 <View>
                   {/*<TouchableOpacity onPress={showConfirmDialog}>*/}
                   <View style={{
@@ -141,8 +136,7 @@ const UserOrder = ({ route, navigation }) => {
                           item.cartList.map((cartItem,index) => {
                             //console.log("cart Item",cartItem)
                             return (
-                              <View key={index}
-                                style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+                              <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }} key={index}>
                                 <Text style={styles.textInfo}>{cartItem.qty} x</Text>
                                 <Text style={styles.textInfo}>{cartItem.name}</Text>
                                 <Text style={styles.textInfo}>$ {cartItem.price}</Text>
@@ -152,19 +146,16 @@ const UserOrder = ({ route, navigation }) => {
                           )
                         }
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
-                          {/*<Text style={styles.textInfo}>Shipping Tax</Text>*/}
                           <MaterialCommunityIcons name="truck-delivery-outline" color={'#f7d081'} size={25} />
                           <Text style={styles.textInfo}>$ 10</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
-                          {/*<Text style={styles.textInfo}>Total</Text>*/}
                           <MaterialCommunityIcons name="cash-100" color={'#f7d081'} size={25} />
                           <Text style={styles.textInfo}>$ {item.total}</Text>
                         </View>
 
 
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
-                          {/*<Text style={styles.textInfo}>Order Date</Text>*/}
                           <MaterialCommunityIcons name="clock" color={'#f7d081'} size={25} />
                           <Text style={styles.textInfo}> {item.createdAt}</Text>
                         </View>
@@ -174,34 +165,31 @@ const UserOrder = ({ route, navigation }) => {
                           <Text style={styles.textInfo}>{item.userid}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
-                          {/*<Text style={styles.textInfo}>Name</Text>*/}
                           <MaterialCommunityIcons name="account" color={'#f7d081'} size={25} />
                           <Text style={styles.textInfo}>{item.username}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
-                          {/*<Text style={styles.textInfo}>Phone</Text>*/}
                           <MaterialCommunityIcons name="phone" color={'#f7d081'} size={25} />
                           <Text style={styles.textInfo}>{item.phone}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
-                          {/*<Text style={styles.textInfo}>Address</Text>*/}
                           <MaterialCommunityIcons name="home" color={'#f7d081'} size={25} />
                           <Text style={styles.textInfo}>{item.address}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
-                          {/*<Text style={styles.textInfo}>Note</Text>*/}
                           <MaterialCommunityIcons name="text-box" color={'#f7d081'} size={25} />
                           <Text style={styles.textInfo}>{item.note}</Text>
                         </View>
                       </View>
-                      {/*<Text style={{fontSize: 20,fontWeight:'bold',color: 'gold'}}>Check Out</Text>*/}
 
-
-
-
-
-
-                      <TouchableOpacity
+                    {
+                      item.status.pending === true ?
+                        (
+                            null
+                          
+                        )
+                          :
+                          <TouchableOpacity
                         onPress={() => navigation.navigate('orderConfirm', { item })}
                         style={styles.button}
                       >
@@ -209,6 +197,8 @@ const UserOrder = ({ route, navigation }) => {
                         <Text style={{ borderwidth: 1, padding: 5, fontWeight: 'bold' }}>Order Confirm</Text>
 
                       </TouchableOpacity>
+                    }
+                           
 
                     </ScrollView>
 
@@ -217,11 +207,9 @@ const UserOrder = ({ route, navigation }) => {
                   </View>
                   {/*</TouchableOpacity> */}
                 </View>
-              </Animatable.View>
             )}
           />
         </View>
-      </ImageBackground>
     </View>
 
   );
@@ -234,7 +222,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "500",
     letterSpacing: 1,
-    padding: 20,
+    padding: 10,
     textAlign: 'center',
   },
   textBoxes: {
@@ -282,7 +270,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     backgroundColor: "#000",
-    paddingTop: 20,
+    padding: 20,
     justifyContent: "flex-start",
   },
   decText: {

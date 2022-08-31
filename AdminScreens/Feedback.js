@@ -8,7 +8,6 @@ import {
     SafeAreaView,
     TouchableOpacity
 } from "react-native";
-import * as Animatable from 'react-native-animatable';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { firebase } from "../config";
 
@@ -63,10 +62,6 @@ const Userfeedback = ({ route, navigation }) => {
     return (
         <View>
             <View style={styles.container}>
-                <ImageBackground
-                    source={require('../assets/bg5.jpg')}
-                    style={{ width: '100%', height: "100%", }}
-                >
                     <View>
                         <Text style={styles.adminText}>Users' Feedback</Text>
                     </View>
@@ -74,53 +69,44 @@ const Userfeedback = ({ route, navigation }) => {
                     <View style={{ flex: 2, padding: 10, marginTop: -10 }}>
                         <FlatList
                             data={data}
+                            keyExtractor={(_,i) => String(i)}
                             renderItem={({ item }) => (
                                 <SafeAreaView style={{ flex: 1, padding: 5 }}>
-                                    <Animatable.View
-                                        animation="fadeInUp"
-                                        duration={1000}
-
-                                    >
                                         <View style={styles.Box}>
                                             <View style={{ flexDirection: 'row' }}>
 
-                                                <Text style={{ fontSize: 18, fontWeight: 'bold', paddingRight: 235 }}>From </Text>
+                                                <Text style={{ fontSize: 18, fontWeight: 'bold', paddingRight: 235, color: '#ffd700' }}>From </Text>
                                                 <TouchableOpacity onPress={() => Deletefeedback(item)}>
                                                     <MaterialCommunityIcons name="delete" color={'red'} size={30} />
                                                 </TouchableOpacity>
                                             </View>
 
                                             <View style={{ flexDirection: 'row' }}>
-                                                <MaterialCommunityIcons name="account" color={'#000'} size={30} />
-                                                <Text style={{ paddingLeft: 20, color: "#000", fontSize: 18 }}>
+                                                <MaterialCommunityIcons name="account" color={'#ffd700'} size={30} />
+                                                <Text style={{ paddingLeft: 20, color: "#fff", fontSize: 18 }}>
                                                     {item.username}
                                                 </Text>
                                             </View>
 
                                             <View style={{ flexDirection: 'row' }}>
-                                                <MaterialCommunityIcons name="clock" color={'#000'} size={30} />
-                                                <Text style={{ paddingLeft: 20, color: "#000", fontSize: 18 }}>
+                                                <MaterialCommunityIcons name="clock" color={'#ffd700'} size={30} />
+                                                <Text style={{ paddingLeft: 20, color: "#fff", fontSize: 18 }}>
                                                     {item.createdAt}
                                                 </Text>
                                             </View>
 
                                             <View style={{ flexDirection: 'row' }}>
-                                                <MaterialCommunityIcons name="message" color={'#000'} size={30} />
-                                                <Text style={{ paddingLeft: 20, color: "#000", fontSize: 18 }}>
+                                                <MaterialCommunityIcons name="message" color={'#ffd700'} size={30} />
+                                                <Text style={{ paddingLeft: 20, color: "#fff", fontSize: 18 }}>
                                                     {item.userfeedback}
                                                 </Text>
                                             </View>
                                         </View>
-                                    </Animatable.View>
                                 </SafeAreaView>
 
                             )}
                         />
                     </View>
-
-
-
-                </ImageBackground>
             </View>
         </View>
     );
@@ -131,7 +117,7 @@ export default Userfeedback;
 const styles = StyleSheet.create({
     adminText: {
         fontSize: 20,
-        color: "#f7d081",
+        color: "#ffd700",
         fontWeight: "bold",
         letterSpacing: 1,
         padding: 20,
@@ -149,8 +135,8 @@ const styles = StyleSheet.create({
     Box: {
         padding: 10,
         borderWidth: 2,
-        borderColor: '#000',
-        backgroundColor: "#f7d081",
+        borderColor: '#ffd700',
+        //backgroundColor: "#f7d081",
         borderRadius: 20,
     },
     container: {

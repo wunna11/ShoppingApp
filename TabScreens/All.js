@@ -12,7 +12,6 @@ import {
 import { firebase } from "../config";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { SearchBar } from "react-native-elements";
-import * as Animatable from 'react-native-animatable';
 
 const All = ({ navigation }) => {
   
@@ -28,13 +27,15 @@ const All = ({ navigation }) => {
   // Search item
   useEffect(() => {
     setFilterProduct(
-      data.filter(
-        (res) =>
-          res.name.toLowerCase().includes(search.toLowerCase()) ||
-          res.desc.toLowerCase().includes(search.toLowerCase())
-      )
+        data.filter(
+            (res) =>
+                res.name.toLowerCase().includes(search.toLowerCase()) ||
+                res.desc.toLowerCase().includes(search.toLowerCase()) ||
+                res.category_name.toLowerCase().includes(search.toLowerCase())
+        )
     );
-  }, [search, data]);
+}, [search, data]);
+
 
   // read data
   const read = () => {
@@ -64,40 +65,37 @@ const All = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground
-                source={require('../assets/bg5.jpg')}
-                style={{width: '100%', height: "100%",}}
-            > 
       <SearchBar
         placeholder="Search"
         onChangeText={(search) => setSearch(search)}
         value={search}
       />
 
-      {search.length ? (
-        <Text>
-          {filterProduct.map((item) => (
-            <View>
-              <TouchableOpacity
-                onPress={() => navigation.navigate("ProductDetail", { item })}
-              >
-                <Text style={{ color: "#fff", fontSize: 20 }}>{item.name}</Text>
-                <Text style={{ color: "#fff", fontSize: 10 }}>{item.desc}</Text>
-              </TouchableOpacity>
-            </View>
-          ))}
-        </Text>
-      ) : null}
+{search.length ? (
+                    <Text>
+                        {filterProduct.map((item,index) => (
+                            <View key={index} style={{flexDirection: 'column', paddingHorizontal: 10, paddingVertical: 10}}>
+                                <TouchableOpacity
+                                    onPress={() => navigation.navigate("ProductDetail", { item })}
+                                >
+                                    <View>
+                                        <Image
+                                            style={styles.iimage1}
+                                            source={{ uri: item.imgURL }}
+                                        />
+                                    </View>
+                                    <Text style={{ color: "#fff", fontSize: 20 }}>{item.name.substr(0, 10)}</Text>
+                                    <Text style={{ color: "#fff", fontSize: 10 }}>{item.desc.substr(0, 20)}</Text>
+                                </TouchableOpacity>
+                            </View>
+                        ))}
+                    </Text>
+                ) : null}
       <View style={{ flex: 1 }}>
         <View style={{marginBottom:20}}>
           <Text style={styles.expoView}>"Shop to be Smart with WTTH"</Text>
         </View>
         <SafeAreaView style={{ flex: 2, padding: 5, marginTop: -40 }}>
-          <Animatable.View
-            animation="fadeInUp"
-            duration={1000}
-        
-          >
           <FlatList
               data={data}
               keyExtractor={(_,i) => String(i)}
@@ -126,10 +124,8 @@ const All = ({ navigation }) => {
               </TouchableOpacity>
             )}
             />
-            </Animatable.View>
         </SafeAreaView>
         </View>
-        </ImageBackground>
     </View>
   );
 };
@@ -148,6 +144,11 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 20,
   },
+  iimage1: {
+    width: 80,
+    height: 80,
+    borderRadius: 10,
+},
   expoView: {
     textAlign: 'center',
     fontSize: 22,

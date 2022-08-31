@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, Alert, Image, ScrollView, TextInput, TouchableOpacity, ImageBackground } from 'react-native'
+import { StyleSheet, Text, View, ActivityIndicator, Alert, Image, ScrollView, TextInput, TouchableOpacity, ImageBackground } from 'react-native'
 import React, { useState, useEffect } from 'react';
 import { firebase } from '../config';
 import { CommonActions } from '@react-navigation/native'
@@ -23,7 +23,7 @@ const CreateProduct = ({ navigation }) => {
 
   const [selectedItem, setSelectedItem] = useState();
 
-
+  const [show, setshow] = useState(false);
   //image
   const [image, setImage] = useState(null);
   const [uploading, setUploading] = useState(false);
@@ -70,6 +70,10 @@ const CreateProduct = ({ navigation }) => {
 
   //Add image and product data
   const add = async () => {
+    setshow(true)
+            setTimeout(() => {
+                setshow(false)
+            }, 4000)
 
     if (
       (image !== null) ||
@@ -141,15 +145,7 @@ const CreateProduct = ({ navigation }) => {
   return (
 
     <View style={styles.container}>
-      <ImageBackground
-        source={require("../assets/admin4.jpg")}
-        style={{ width: "100%", height: "100%" }}
-      >
-        {/*<Text style={styles.header}>CreateProduct</Text>*/}
-
-        <Animatable.View
-                animation='fadeInLeftBig'
-                    duration={4000}>
+      
         <View style={styles.imageContainer}>
           {image && (
             <Image
@@ -206,25 +202,12 @@ const CreateProduct = ({ navigation }) => {
             }}
           />
         </View>
-        <View style={{ justifyContent: "center", alignItems: 'center' }}>
+      <View style={{ justifyContent: "center", alignItems: 'center' }}>
+      <ActivityIndicator size="large" color="#fff700"  animating={show} style={{marginTop: -15,paddingBottom:10,}}></ActivityIndicator>
           <TouchableOpacity style={styles.btn} onPress={() => add()}>
             <Text>Create </Text>
           </TouchableOpacity>
-          {/*
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{ name: 'Admin' }]
-            })
-          )}
-        >
-          <Text>Back </Text>
-        </TouchableOpacity>*/}
           </View>
-        </Animatable.View>
-      </ImageBackground>
     </View>
   )
 }
@@ -234,7 +217,7 @@ export default CreateProduct
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //paddingTop: 60
+    backgroundColor: '#000'
   },
 
   select: {
