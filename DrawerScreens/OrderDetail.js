@@ -48,6 +48,7 @@ export default function OrderDetail({ navigation }) {
 
   // read data
   const read = (userId) => {
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
     console.log("inside read function", userId);
     //console.log("inside read function");
     dataRef.where("userid", "==", userId)
@@ -81,7 +82,8 @@ export default function OrderDetail({ navigation }) {
           username,
           status,
           note,
-          createdAt: new Date(createdAt.seconds * 1000).toLocaleDateString("en-US"),
+          //createdAt: new Date(createdAt.seconds * 1000).toLocaleDateString("en-US"),
+          createdAt:timestamp,
         });
       });
       setData(data);
