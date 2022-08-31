@@ -91,7 +91,7 @@ const UpdateProduct = ({ route, navigation }) => {
       setPerror((prev) => {
         return {
           ...prev,
-          imgURL: 'Please select Photo'
+          imgURL: 'Please select photo'
         }
       })
     }
@@ -174,7 +174,7 @@ const UpdateProduct = ({ route, navigation }) => {
                 style={{ width: 150, height: 150, borderRadius: 15, position: "absolute"  }}
               />
         )}
-        <Text style={{ color: 'red', fontSize: 20 ,fontWeight: 'bold' }}>{perror.imgURL}</Text>
+        <Text style={{ color: 'red', fontSize: 20 ,fontWeight: '300', width: 300 }}>{perror.imgURL}</Text>
           </View>
           <TouchableOpacity
             style={[styles.selectButton, styles.ImgBot]}
@@ -224,7 +224,7 @@ const UpdateProduct = ({ route, navigation }) => {
                 return item.name
               }}
         />
-        <Text style={{ color: 'red', fontSize: 20 ,fontWeight: 'bold' }}>{error.selectedItem}</Text>
+        <Text style={{ color: 'red', fontSize: 20 ,fontWeight: '300' }}>{error.selectedItem}</Text>
           </View>
           <View style={{ justifyContent: "center", alignItems: "center", }}>
           <ActivityIndicator size="large" color="#fff700"  animating={show} style={{marginTop: -15,paddingBottom:10,}}></ActivityIndicator>
@@ -301,11 +301,12 @@ const styles = StyleSheet.create({
   selectButton: {
     backgroundColor: "gold",
     marginTop: 20,
-    marginLeft: "31%",
+    marginLeft: "29%",
     padding: 10,
     borderRadius: 5,
   },
   ImgBot: {
-    width: "35%",
+    width: "37%",
+    marginTop: 30,
   },
 })

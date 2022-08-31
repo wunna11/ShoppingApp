@@ -22,10 +22,11 @@ const UserOrder = ({ route, navigation }) => {
   const [status, setStatus] = useState('');
   // read data
   const read = () => {
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
     setshow(true)
         setTimeout(() => {
             setshow(false)
-        }, 2000)
+        }, 1000)
     
     console.log("inside read function");
     dataRef
@@ -60,7 +61,8 @@ const UserOrder = ({ route, navigation }) => {
             username,
             status,
             note,
-            createdAt: new Date(createdAt.seconds * 1000).toLocaleDateString("en-US"),
+            //createdAt: new Date(createdAt.seconds * 1000).toLocaleDateString("en-US"),
+            createdAt : timestamp,
           });
         });
         setData(data);
@@ -71,7 +73,8 @@ const UserOrder = ({ route, navigation }) => {
   useEffect(() => {
     read();
   }, []);
-  const Deletefeedback = (data) => {
+
+  const DeleteOrder = (data) => {
     dataRef
       .doc(data.id)
       .delete()
@@ -113,7 +116,7 @@ const UserOrder = ({ route, navigation }) => {
                                 <MaterialCommunityIcons name="marker-check" size={35} color={'green'} />
                                 <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'gold', textAlign: 'center', paddingLeft: 30, paddingRight: 30 }}>This Order is{item.status.pending} Confirmed</Text>
 
-                                <TouchableOpacity onPress={() => Deletefeedback(item)}>
+                                <TouchableOpacity onPress={() => DeleteOrder(item)}>
                                   <MaterialCommunityIcons name="delete" color={'red'} size={30} />
                                 </TouchableOpacity>
                               </View>
@@ -123,7 +126,7 @@ const UserOrder = ({ route, navigation }) => {
                               <MaterialCommunityIcons name="alert" size={35} color={'orange'} />
                               <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'gold', textAlign: 'center', paddingLeft: 30, paddingRight: 30 }}>This Order is{item.status.pending} Pending</Text>
 
-                              <TouchableOpacity onPress={() => Deletefeedback(item)}>
+                              <TouchableOpacity onPress={() => DeleteOrder(item)}>
                                 <MaterialCommunityIcons name="delete" color={'red'} size={30} />
                               </TouchableOpacity>
 
