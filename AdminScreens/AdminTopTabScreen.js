@@ -22,6 +22,7 @@ const AdminTopTabScreen = () => {
       <Tab.Screen name='Woman' component={AdminWomen} />
       <Tab.Screen name='Shoe' component={AdminShoes} />
       <Tab.Screen name='Accessory' component={AdminAccessories} />
+
     </Tab.Navigator>
   )
 }
