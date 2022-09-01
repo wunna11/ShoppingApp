@@ -8,7 +8,8 @@ import Confirm from './confirm';
 
 const Stack = createStackNavigator();
 
-export default function AdminHome({navigation}) {
+export default function AdminHome({ navigation }) {
+ 
     return (
     
       <Stack.Navigator

@@ -48,7 +48,7 @@ export default function OrderDetail({ navigation }) {
 
   // read data
   const read = (userId) => {
-    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+    //const timestamp = firebase.firestore.FieldValue.serverTimestamp();
     console.log("inside read function", userId);
     //console.log("inside read function");
     dataRef.where("userid", "==", userId)
@@ -68,7 +68,9 @@ export default function OrderDetail({ navigation }) {
         const { username } = doc.data();
         const { status } = doc.data();
         const { note } = doc.data();
-        const { createdAt } = doc.data();
+        const { createdAt } =
+          //doc.data();
+          firebase.firestore.FieldValue.serverTimestamp();
         //id : doc.id,
         setCartList(doc.data().cartList);
         //console.log("arr obj=" + cartList);
@@ -82,8 +84,10 @@ export default function OrderDetail({ navigation }) {
           username,
           status,
           note,
-          //createdAt: new Date(createdAt.seconds * 1000).toLocaleDateString("en-US"),
-          createdAt:timestamp,
+          createdAt,
+            //: timestamp,
+            //new Date(createdAt.seconds * 1000).toLocaleDateString("en-US"),
+          //createdAt,
         });
       });
       setData(data);
@@ -120,7 +124,7 @@ export default function OrderDetail({ navigation }) {
                             (
                               <View style={{ flexDirection: 'row' }}>
                                 <MaterialCommunityIcons name="marker-check" size={35} color={'green'} />
-                                <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'gold', textAlign: 'center', paddingLeft: 30, paddingRight: 30 }}>This Order is{item.status.pending} Confirmed</Text>
+                                <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'gold', textAlign: 'center', paddingLeft: 30, paddingRight: 30 }}>Your Order is{item.status.pending} Confirmed</Text>
 
                                 {/*<TouchableOpacity onPress={() => Deletefeedback(item)}>
                                   <MaterialCommunityIcons name="delete" color={'red'} size={30} />
@@ -130,7 +134,7 @@ export default function OrderDetail({ navigation }) {
                             :
                             <View style={{ flexDirection: 'row' }}>
                               <MaterialCommunityIcons name="alert" size={35} color={'orange'} />
-                              <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'gold', textAlign: 'center', paddingLeft: 30, paddingRight: 30 }}>This Order is{item.status.pending} Pending</Text>
+                              <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'gold', textAlign: 'center', paddingLeft: 30, paddingRight: 30 }}>Your Order is{item.status.pending} Pending</Text>
 
                               {/*<TouchableOpacity onPress={() => Deletefeedback(item)}>
                                 <MaterialCommunityIcons name="delete" color={'red'} size={30} />

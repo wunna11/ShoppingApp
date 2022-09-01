@@ -12,7 +12,7 @@ import MenClothing from './TabScreens/MenClothing';
 import Shoes from './TabScreens/Shoes';
 import Accessories from './TabScreens/Accessories';
 import ProductDetail from './StackScreens/ProductDetail';
-
+import Role from './StackScreens/Role';
 //import AdminHome from './Admin/AdminHome';
 import AdminTab from './AdminScreens/AdminTabs';
 import AboutUs from './DrawerScreens/AboutUs';
@@ -20,7 +20,7 @@ export default function App() {
 
     const Stack = createStackNavigator();
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-
+    
     firebase.auth().onAuthStateChanged((user) => {
         if (user != null) {
             setIsLoggedIn(true)
@@ -34,8 +34,8 @@ export default function App() {
             {isLoggedIn ?
                 <Stack.Navigator>
                     <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-                    <Stack.Screen name="AdminHome" component={AdminTab} options={{ headerShown: false }} />
                     <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+                    <Stack.Screen name="AdminHome" component={AdminTab} options={{ headerShown: false }} />
                     <Stack.Screen name="Woman" component={WomanClothing} options={{ headerShown: true }} />
                     <Stack.Screen name="Men" component={MenClothing} options={{ headerShown: true }} />
                     <Stack.Screen name="Shoes" component={Shoes} options={{ headerShown: true }} />
@@ -52,4 +52,3 @@ export default function App() {
 
     );
 }
-
