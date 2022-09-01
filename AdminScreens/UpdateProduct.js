@@ -72,7 +72,7 @@ const UpdateProduct = ({ route, navigation }) => {
   const pickImage = async () => {
     //No permission request is needed to upload photo
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
@@ -113,7 +113,7 @@ const UpdateProduct = ({ route, navigation }) => {
           const response = await fetch(image.uri);
           const blob = await response.blob();
           const filename = image.uri.substring(image.uri.lastIndexOf("/") + 1);
-          var ref = firebase.storage().ref("Shoes/").child(filename).put(blob);
+          var ref = firebase.storage().ref("products_images/").child(filename).put(blob);
           try {
             await ref;
           } catch (e) {
@@ -121,7 +121,7 @@ const UpdateProduct = ({ route, navigation }) => {
           }
           const setImageURL = await firebase
             .storage()
-            .ref(`Shoes/${filename}`)
+            .ref(`products_images/${filename}`)
             .getDownloadURL();
           console.log("print ref :", setImageURL);
   

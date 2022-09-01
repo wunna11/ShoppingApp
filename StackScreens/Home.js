@@ -1,4 +1,4 @@
-import React, { useEffect, useState,Component} from 'react'
+import React, { useEffect, useState, Component } from 'react'
 import { Image } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -15,27 +15,41 @@ import UserAccount from '../DrawerScreens/UserAccount'
 import { CommonActions } from '@react-navigation/native'
 import { firebase } from '../config';
 import { useIsFocused } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const Drawer = createDrawerNavigator();
 
 export default function Home(navigation) {
 
     const isFocused = useIsFocused();
+
+
     function Logout({ navigation }) {
-            
+
         useEffect(() => {
             firebase.auth().signOut();
 
-               navigation.dispatch(
-               CommonActions.reset({
-                index: 0,
-                routes: [{ name: 'Login' }]
-            })
-                )
-        },[isFocused])
-            
+            navigation.dispatch(
+                CommonActions.reset({
+                    index: 0,
+                    routes: [{ name: 'Login' }]
+                })
+            )
+        }, [isFocused])
+
+        clear();
+
+    }
+
+    const clear = async () => {
+        try {
+            AsyncStorage.clear()
+        } catch (e) {
+            console.warn(e)
         }
-       
-    
+    }
+
+
     return (
         <Drawer.Navigator initialRouteName="DrawerHome"
             drawerContent={props => <CustomDrawer {...props} />}
@@ -58,7 +72,7 @@ export default function Home(navigation) {
                         backgroundColor: '#000'
                     },
                     headerRight: () => <Image
-                        style={{ width: 40, height: 40, borderRadius: 50, margin: 15, borderWidth: 1,borderColor: "#fff" }}
+                        style={{ width: 40, height: 40, borderRadius: 50, margin: 15, borderWidth: 1, borderColor: "#fff" }}
                         source={require('../assets/logo.png')}
                     />,
                 }}
@@ -94,7 +108,7 @@ export default function Home(navigation) {
                     title: 'MyCart',
                     drawerIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="cart-outline" color={'#f7d081'} size={30} />
-                    ),headerTintColor: '#fff',
+                    ), headerTintColor: '#fff',
                     headerStyle: {
                         backgroundColor: '#000'
                     },
@@ -107,10 +121,10 @@ export default function Home(navigation) {
                     title: 'OrderDetail',
                     drawerIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="clipboard-list-outline" color={'#f7d081'} size={30} />
-                        ),headerTintColor: '#fff',
-                        headerStyle: {
-                            backgroundColor: '#000'
-                        },
+                    ), headerTintColor: '#fff',
+                    headerStyle: {
+                        backgroundColor: '#000'
+                    },
                 }}
             />
             <Drawer.Screen
@@ -124,10 +138,10 @@ export default function Home(navigation) {
                     headerStyle: {
                         backgroundColor: '#000'
                     },
-                   
+
                 }}
             />
-           
+
             <Drawer.Screen
                 name="AboutUs"
                 component={AboutUs}
@@ -139,20 +153,20 @@ export default function Home(navigation) {
                     headerStyle: {
                         backgroundColor: '#000'
                     },
-                   
+
                 }}
             />
-             <Drawer.Screen
-        name="Logout"
-        component={Logout}
-        options={{
-          title: 'Logout',
-          drawerIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="logout" color={'#f7d081'} size={30} />
-          )
-        }}
-      />
-           
+            <Drawer.Screen
+                name="Logout"
+                component={Logout}
+                options={{
+                    title: 'Logout',
+                    drawerIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="logout" color={'#f7d081'} size={30} />
+                    )
+                }}
+            />
+
         </Drawer.Navigator>
     );
 }

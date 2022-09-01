@@ -11,6 +11,7 @@ import {
   Dimensions,
   Animated,
 } from "react-native";
+import { BackHandler } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useEffect, useState } from "react";
 import { useIsFocused } from '@react-navigation/native';
@@ -98,7 +99,11 @@ function BackDrop({ scrollX }) {
     read();
   }, []);
 
-
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress",()=>{
+      BackHandler.exitApp();
+    });
+  }, []);
   return (
     <View
       style={

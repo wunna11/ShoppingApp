@@ -47,7 +47,7 @@ const UserOrder = ({ route, navigation }) => {
           const { username } = doc.data();
           const { status } = doc.data();
           const { note } = doc.data();
-          const { createdAt } = doc.data();
+          const { createdAt } = firebase.firestore.FieldValue.serverTimestamp();
           //id : doc.id,
           setCartList(doc.data().cartList);
           //console.log("arr obj=" + cartList);
@@ -62,7 +62,7 @@ const UserOrder = ({ route, navigation }) => {
             status,
             note,
             //createdAt: new Date(createdAt.seconds * 1000).toLocaleDateString("en-US"),
-            createdAt : timestamp,
+            createdAt,
           });
         });
         setData(data);
@@ -95,7 +95,13 @@ const UserOrder = ({ route, navigation }) => {
       <View style={{ flex: 1 }}>
       <ActivityIndicator size="small" color="gold" animating={show}></ActivityIndicator>
           <FlatList
-            data={data}
+          data={data}
+          initialNumToRender={10}
+          windowSize={5}
+          maxToRenderPerBatch={5}
+          updateCellsBatchingPeriod={30}
+          removeClippedSubviews={false}
+          onEndReachedThreshold={0.1}
             showsVerticalScrollIndicator={true}
             style={{ flex: 1, marginTop: 16 }}
             keyExtractor={(_,i) => String(i)}

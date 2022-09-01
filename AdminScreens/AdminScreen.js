@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { BackHandler } from "react-native";
 import {
   StyleSheet,
   View,
@@ -107,7 +108,11 @@ const AdminScreen = ({ route, navigation }) => {
       ]
     );
   };
-
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress",()=>{
+      BackHandler.exitApp();
+    });
+  }, []);
   return (
     <View>
       <View style={styles.container}>

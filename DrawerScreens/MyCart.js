@@ -15,6 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from "@expo/vector-icons";
 import { CommonActions } from "@react-navigation/native";
 import { set } from "react-native-reanimated";
+import { useIsFocused } from '@react-navigation/native';
 
 
 const MyCart = ({ route, navigation }) => {
@@ -22,6 +23,8 @@ const MyCart = ({ route, navigation }) => {
     const dataRef = firebase.firestore().collection("products");
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
     const [total, setTotal] = useState("");
+    const isFocused = useIsFocused();
+
 
     //Getting user id
     const firestore = firebase.firestore;
@@ -38,11 +41,14 @@ const MyCart = ({ route, navigation }) => {
             .then((user) => {
                 setUser(user.data());
             });
-    }, []);
+    }, [isFocused]);
     const uid = user?.id;
     const urname = user?.username;
     console.log(uid);
-    console.log(urname);
+    console.log('username', urname);
+
+    const uaddress = user?.address;
+    console.log('address', uaddress);
 
     var [id] = useState("");
     var [name, setName] = useState("");
@@ -141,6 +147,8 @@ const MyCart = ({ route, navigation }) => {
             });
         // }
     };
+
+    
 
 
     const CartItemView = ({ item, index }) => {
