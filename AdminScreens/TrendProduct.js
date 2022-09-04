@@ -63,20 +63,22 @@ const TrendProduct = ({ route, navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Image style={styles.iimage} source={{ uri: imgURL }} />
-            <Text style={styles.text}>{id}</Text>
-            <Text style={styles.text}>{productName}</Text>
-            <Text style={styles.text}>$ {price}</Text>
-            <Text style={styles.text}>{desc}</Text>
-            <Text style={styles.text}>{category_name}</Text>
-            <View style={{ marginTop: 80 }}>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={trending}
-                >
-                    <Text style={{ fontSize: 16, color: '#444', fontWeight: 'bold' }}>Add To Trending List</Text>
-                </TouchableOpacity>
-            </View>
+            <ScrollView>
+                <Image style={styles.iimage} source={{ uri: imgURL }} />
+                <Text style={styles.text}>{id}</Text>
+                <Text style={styles.text}>{productName}</Text>
+                <Text style={styles.text}>$ {price}</Text>
+                <Text style={styles.text}>{desc}</Text>
+                <Text style={styles.text}>{category_name}</Text>
+                <View style={{ marginTop: 80 }}>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={trending}
+                    >
+                        <Text style={{ fontSize: 16, color: '#444', fontWeight: 'bold' }}>Add To Trending List</Text>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
         </View>
     );
 };

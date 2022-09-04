@@ -1,28 +1,15 @@
-<<<<<<< HEAD
 import { SafeAreaView, StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import { firebase } from '../config'
 import React, { useState} from 'react';
 import * as Animatable from 'react-native-animatable';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-=======
-import { SafeAreaView, ActivityIndicator, StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Image, ImageBackground } from 'react-native';
-import { firebase } from '../config'
-import React, { useState, useEffect } from 'react';
-import * as Animatable from 'react-native-animatable';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { set } from 'react-native-reanimated';
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 export default function Login({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-<<<<<<< HEAD
-=======
-    const [show, setshow] = useState(false);
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
     function register() {
         navigation.navigate('Register')
@@ -32,21 +19,10 @@ export default function Login({ navigation }) {
     }
 
     const onLoginPress = () => {
-<<<<<<< HEAD
 
         var emailValid = false;
         if (email.length == 0) {
             setEmailError("Email is required");
-=======
-        setshow(true)
-        setTimeout(() => {
-            setshow(false)
-        }, 4000)
-        var emailValid = false;
-        if (email.length == 0) {
-            setEmailError("Email is required");
-            setshow(false)
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
         }
         else if (email.length < 6) {
             setEmailError("Email should be minimum 6 characters");
@@ -66,10 +42,6 @@ export default function Login({ navigation }) {
         var passwordValid = false;
         if (password.length == 0) {
             setPasswordError("Password is Required!");
-<<<<<<< HEAD
-=======
-            setshow(false)
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
         }
         else {
             firebase
@@ -82,29 +54,16 @@ export default function Login({ navigation }) {
                         .doc(uid)
                         .get()
                         .then(firestoreDocument => {
-<<<<<<< HEAD
                          
 
                             if (!firestoreDocument.exists) {
-=======
-                            //console.log("firebase Data:",firestoreDocument.data())
-
-                            if (!firestoreDocument.exists) {
-                                //alert("User does not exist anymore.")
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                                 setPasswordError("User does not exist anymore");
                                 return;
                             }
 
                             else {
-<<<<<<< HEAD
    //Split UserView
                                 const userrole = firestoreDocument.data()?.role
-=======
-
-                                const userrole = firestoreDocument.data()?.role
-                                //console.log(userrole)
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                                 if (userrole == "Admin") {
                                     navigation.navigate("AdminHome")
                                 } else
@@ -112,23 +71,11 @@ export default function Login({ navigation }) {
                             }
                         })
 
-<<<<<<< HEAD
                     
-=======
-                    //.catch(error => {
-                    //    console.log(error)
-                    //        setPasswordError("Useremail or password is wrong");
-                    //    //   console.log(error)
-                    //})
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                 })
                 .catch(error => {
                     console.log(error)
                     setPasswordError("Email or Password is wrong!Try Again...");
-<<<<<<< HEAD
-=======
-                    setshow(false)
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
                 })
 
@@ -148,19 +95,11 @@ export default function Login({ navigation }) {
                 style={{ width: '100%', height: "100%" }}
             >
                 <SafeAreaView style={{ flex: 1, padding: 5, marginTop: -2 }}>
-<<<<<<< HEAD
                     <Animatable.View
                         animation="fadeInUp"
                         duration={2000}
                     >
                         <KeyboardAwareScrollView>
-=======
-
-                    <KeyboardAwareScrollView>
-                        {/*<Animatable.View
-                            animation="pulse"
-                        >*/}
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                             <View style={{ flex: 1, marginLeft: 200, }}>
 
                                 <Text style={{ fontSize: 40, paddingLeft: 30, marginTop: 90, fontWeight: "900", color: "#000" }}>WTTH</Text>
@@ -170,30 +109,16 @@ export default function Login({ navigation }) {
                                         width: 100,
                                         marginLeft: 45,
                                         marginTop: 25,
-<<<<<<< HEAD
                                         borderRadius: 50,
                                         borderWidth: 1,
                                         borderColor: "#000"
-=======
-                                        borderRadius: 50
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                                     }}
                                     source={require('../assets/logo.png')}
                                 />
                             </View>
-<<<<<<< HEAD
 
                             <View style={styles.con}>
 
-=======
-                        {/*</Animatable.View>*/}
-
-                        <View style={styles.con}>
-                            <Animatable.View
-                                animation='fadeInUp'
-                                duration={2000}
-                            >
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                                 <Text style={{
                                     fontSize: 28, fontWeight: "bold", color: "#f7d081", marginBottom: 40, marginLeft: 10,
                                 }}>LOG IN</Text>
@@ -221,18 +146,9 @@ export default function Login({ navigation }) {
 
                                     <Text style={{ color: "red" }}>{passwordError}</Text>
                                 }
-<<<<<<< HEAD
                                 <TouchableOpacity
                                     style={styles.button}
                                     onPress={() => onLoginPress()}>
-=======
-
-                                <ActivityIndicator size="large" color="gold" animating={show} style={styles.activityIndicator}></ActivityIndicator>
-                                <TouchableOpacity
-                                    style={styles.button}
-                                    onPress={() => onLoginPress()}
-                                >
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                                     <Text style={styles.buttonTitle}>Log in</Text>
                                 </TouchableOpacity>
 
@@ -243,18 +159,10 @@ export default function Login({ navigation }) {
                                     <Text style={{ fontSize: 18, color: "#fff" }}>Don't have an account? <Text style={{ color: "#f7d081", fontSize: 20, fontWeight: "bold" }}
                                         onPress={register}>Sign up</Text></Text>
                                 </View>
-<<<<<<< HEAD
 
                             </View>
                         </KeyboardAwareScrollView>
                     </Animatable.View>
-=======
-                            </Animatable.View>
-                        </View>
-
-                    </KeyboardAwareScrollView>
-
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                 </SafeAreaView>
 
             </ImageBackground>
@@ -267,10 +175,6 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-<<<<<<< HEAD
-=======
-        position: 'relative'
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
     },
     con: {
@@ -313,13 +217,4 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
 
     },
-<<<<<<< HEAD
-=======
-    activityIndicator: {
-        paddingTop: "95%",
-        paddingLeft: "65%",
-        position: 'absolute',
-        //paddingTop: (Platform.OS === 'ios') ? 20 : 0,
-    }
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 });

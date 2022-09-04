@@ -1,20 +1,12 @@
 import React, { useEffect, useState } from 'react'
-<<<<<<< HEAD
 import { SafeAreaView, Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native'
-=======
-import { SafeAreaView, ImageBackground, Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native'
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 import { firebase } from '../config'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { CommonActions } from '@react-navigation/native'
 import * as Animatable from 'react-native-animatable';
-<<<<<<< HEAD
 import { BackHandler } from 'react-native';
 
 export default function AccountScreen({ route, navigation }) {
-=======
-export default function AccountScreen({ route, navigation }, props) {
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
     const firestore = firebase.firestore;
     const auth = firebase.auth;
     const [user, setUser] = useState(null)
@@ -56,7 +48,6 @@ export default function AccountScreen({ route, navigation }, props) {
         )
     }
 
-<<<<<<< HEAD
     function handleBackButtonClick() {
         navigation.goBack();
         return true;
@@ -73,73 +64,34 @@ export default function AccountScreen({ route, navigation }, props) {
         <View style={styles.container}>
                 <SafeAreaView style={{ flex: 1, padding: 5 }}>
                     <View style={{ justifyContent: "center", alignItems: 'center' }}>
-=======
-    return (
-        <View style={styles.container}>
-            
-
-                <SafeAreaView style={{ flex: 1, padding: 5 }}>
-
-                    <View style={{ justifyContent: "center", alignItems: 'center' }}>
-
-
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                         <Image
                             style={styles.acc}
                             source={require('../assets/logo.png')}
                         />
-<<<<<<< HEAD
                             <Text style={{ fontSize: 30, fontWeight: "500", color: "#f7d081" }}>Hello {user?.username}!</Text>
-=======
-
-
-                        {/*<Animatable.View
-                            animation="pulse"
-                            iterationCount='infinite'
-                        >*/}
-                            <Text style={{ fontSize: 30, fontWeight: "500", color: "#f7d081" }}>Hello {user?.username}!</Text>
-                        {/*</Animatable.View>*/}
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                         <Animatable.View
                             animation="fadeIn"
-                            duration={4000}
+                            duration={2000}
                         >
                             <View style={{ paddingTop: 30, paddingBottom: 10 }}>
-<<<<<<< HEAD
                                 <Text style={{ fontSize: 20, fontWeight: "500", color: "#f7d081", marginLeft: 20, marginBottom: 10, padding: 10 }}>Your Informations :</Text>
-=======
 
                                 <Text style={{ fontSize: 20, fontWeight: "500", color: "#f7d081", marginLeft: 20, marginBottom: 10, padding: 10 }}>Your Informations :</Text>
 
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                                 <View style={{ flexDirection: 'row', padding: 10 }}>
                                     <MaterialCommunityIcons name="email" color={'#f7d081'} size={30} />
                                     <Text style={{ fontSize: 20, fontWeight: "500", color: "#f7d081", marginLeft: 20 }}> {user?.email}</Text>
                                 </View>
-<<<<<<< HEAD
-=======
 
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                                 <View style={{ flexDirection: 'row', padding: 10 }}>
                                     <MaterialCommunityIcons name="phone" color={'#f7d081'} size={30} />
                                     <Text style={{ fontSize: 20, fontWeight: "500", color: "#f7d081", marginLeft: 20 }}> {user?.phone}</Text>
                                 </View>
-<<<<<<< HEAD
-=======
-
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                                 <View style={{ flexDirection: 'row', padding: 10 }}>
                                     <MaterialCommunityIcons name="home" color={'#f7d081'} size={30} />
                                     <Text style={{ fontSize: 20, fontWeight: "500", color: "#f7d081", marginLeft: 20 }}> {user?.address}</Text>
                                 </View>
-<<<<<<< HEAD
                             </View>
-=======
-
-                            </View>
-
-
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                             <View style={{ paddingTop: 50, flexDirection: "row" }}>
                                 <TouchableOpacity
                                     onPress={Edit}
@@ -158,32 +110,14 @@ export default function AccountScreen({ route, navigation }, props) {
                             </View>
                         </Animatable.View>
                     </View>
-<<<<<<< HEAD
                 </SafeAreaView>
         </View>
-=======
-
-                </SafeAreaView>
-            
-        </View>
-
-
-
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
     )
 }
 
 const styles = StyleSheet.create({
-<<<<<<< HEAD
     container: {
         flex: 1,
-=======
-
-    container: {
-        flex: 1,
-
-
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
         backgroundColor: "#000"
     },
     textBoxes: {
@@ -208,10 +142,6 @@ const styles = StyleSheet.create({
         padding: 10,
         justifyContent: 'center'
     },
-<<<<<<< HEAD
-=======
-
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
     acc: {
         height: 80,
         width: 80,

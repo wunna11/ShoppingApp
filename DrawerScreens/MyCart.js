@@ -14,13 +14,8 @@ import { FlatList, TextInput } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from "@expo/vector-icons";
 import { CommonActions } from "@react-navigation/native";
-<<<<<<< HEAD
 import { useIsFocused } from '@react-navigation/native';
 import { BackHandler } from "react-native";
-=======
-import { set } from "react-native-reanimated";
-import { useIsFocused } from '@react-navigation/native';
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
 
 const MyCart = ({ route, navigation }) => {
@@ -113,7 +108,6 @@ const MyCart = ({ route, navigation }) => {
         itemDelete();
     }, [])
 
-<<<<<<< HEAD
     function handleBackButtonClick() {
         navigation.goBack();
         return true;
@@ -126,9 +120,6 @@ const MyCart = ({ route, navigation }) => {
         };
       }, []);
 
-=======
-    
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
     // Add pending Order to firebase database
     const order = async () => {
@@ -168,7 +159,6 @@ const MyCart = ({ route, navigation }) => {
         // }
     };
 
-<<<<<<< HEAD
 
 
 
@@ -322,153 +312,6 @@ const MyCart = ({ route, navigation }) => {
                     )
             }
 
-=======
-    
-
-
-    const CartItemView = ({ item, index }) => {
-        return (
-            <View
-                style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    padding: 10,
-                }}
-            >
-                <Text style={styles.qtyText}>{item.qty} x</Text>
-                <Image style={styles.iimage} source={{ uri: item.imgURL }} />
-                <Text style={styles.text}> {item.name} </Text>
-                <Text style={styles.priceText}> $ {item.price} </Text>
-                <TouchableOpacity onPress={() => itemDelete(index)} style={styles.icon}>
-                    <Ionicons name="trash" color={"#fc842d"} size={30} />
-                </TouchableOpacity>
-            </View>
-        );
-    };
-
-    return (
-        <View style={styles.container}>
-           
-                <Text
-                    style={{
-                        fontSize: 20,
-                        textAlign: "center",
-                        fontWeight: "600",
-                        color: "#fff",
-                    }}
-                >
-                    Order Details
-                </Text>
-                <FlatList
-                    data={cartList}
-                    renderItem={CartItemView}
-                    showsVerticalScrollIndicator={true}
-                    style={{ flex: 1, marginTop: 16 }}
-                />
-
-                <View style={{ flex: 1.1 }}>
-               
-                        <View>
-                            <Text
-                                style={{
-                                    fontSize: 18,
-                                    fontWeight: "bold",
-                                    color: "#f7d081",
-                                    margin: 5,
-                                }}
-                            >
-                                Delivery Information
-                            </Text>
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    justifyContent: "space-between",
-                                    padding: 5,
-                                }}
-                            >
-                                <Text style={{ color: "#fff" }}>User ID</Text>
-                                <Text style={{ color: "#fff" }}>{user?.id}</Text>
-                            </View>
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    justifyContent: "space-between",
-                                    padding: 5,
-                                }}
-                            >
-                                <Text style={{ color: "#fff" }}>Name</Text>
-                                <Text style={{ color: "#fff" }}>{user?.username}</Text>
-                            </View>
-
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    justifyContent: "space-between",
-                                    padding: 5,
-                                }}
-                            >
-                                <Text style={{ color: "#fff" }}>Phone</Text>
-                                <Text style={{ color: "#fff" }}>{user?.phone}</Text>
-                            </View>
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    justifyContent: "space-between",
-
-                                    borderBottomWidth: 1,
-                                    paddingBottom: 10,
-                                    borderBottomColor: "#ccc",
-                                    margin: 5,
-                                }}
-                            >
-                                <Text style={{ color: "#fff" }}>Address</Text>
-                                <Text style={{ color: "#fff" }}>{user?.address}</Text>
-                            </View>
-                        </View>
-
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                justifyContent: "space-between",
-                                padding: 5,
-                            }}
-                        >
-                            <Text style={{ color: "#fff" }}>Shipping Fee</Text>
-                            <Text style={{ color: "#fff" }}>$ 10</Text>
-                        </View>
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                justifyContent: "space-between",
-                                padding: 5,
-                            }}
-                        >
-                            <Text style={{ color: "#fff" }}>Total</Text>
-                            <Text style={{ color: "#fff" }}>$ {total}</Text>
-                        </View>
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                justifyContent: "space-between",
-                                padding: 5,
-                                marginBottom: 10,
-                            }}
-                        >
-                            <Text style={{ color: "#fff" }}>Note</Text>
-                            <TextInput
-                                style={styles.textBoxes}
-                                placeholder="Message..."
-                                onChangeText={(note) => setNote(note)}
-                                placeholderTextColor="#c4c4c2"
-                            />
-                        </View>
-                        <TouchableOpacity onPress={order} style={styles.btn}>
-                            <Text>Order</Text>
-                        </TouchableOpacity>
-                 
-                </View>
-         
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
         </View>
     );
 };
@@ -527,12 +370,9 @@ const styles = StyleSheet.create({
         height: 80,
         borderRadius: 15,
     },
-<<<<<<< HEAD
     noItem: {
         fontSize: 20,
         fontWeight: 'bold',
         color: '#fff'
     }
-=======
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 });

@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Text, FlatList ,Image,TouchableOpacity,SafeAreaView,ImageBackground } from 'react-native';
 import { firebase } from '../config'
-<<<<<<< HEAD
 import { BackHandler } from 'react-native';
-=======
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
   const AdminAccessories = ({ route, navigation }) => {
 
@@ -52,7 +49,6 @@ import { BackHandler } from 'react-native';
   });
 };
 
-<<<<<<< HEAD
 function handleBackButtonClick() {
   navigation.goBack();
   return true;
@@ -64,25 +60,16 @@ useEffect(() => {
     BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
   };
 }, []);
-=======
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
     return (
     
 
       <View style={styles.container}>
       <View style={{ flex: 1 }}>
-<<<<<<< HEAD
         {/*<View style={{ padding: 10,paddingBottom: 20  }}>
           <Text style={styles.expoView}>"Welcome from Accessory Collection"</Text>
         </View>*/}
         <SafeAreaView style={{ flex: 2, padding: 10,paddingBottom: 20 }}>
-=======
-        <View style={{ padding: 10,paddingBottom: 20  }}>
-          <Text style={styles.expoView}>"Welcome from Accessory Collection"</Text>
-        </View>
-        <SafeAreaView style={{ flex: 2, padding: 5, marginTop: -40 }}>
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
           <FlatList
               data={data}
               keyExtractor={(_,i) => String(i)}
@@ -101,12 +88,7 @@ useEffect(() => {
                     />
                   </View>
 
-<<<<<<< HEAD
                   <View style={{padding: 10,width: 230}}>
-=======
-                  <View style={{padding: 10,}}>
-                   
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                    <Text style={styles.text}>Name : {item.name}</Text>
                    <Text style={[styles.text,styles.text2]}>About : {item.desc}</Text>
                    <Text style={styles.text}>Price : $ {item.price}</Text>
