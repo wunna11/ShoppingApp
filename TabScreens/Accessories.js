@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Text, FlatList ,Image,TouchableOpacity,SafeAreaView,ImageBackground } from 'react-native';
 import { firebase } from '../config'
-<<<<<<< HEAD
 import { BackHandler } from 'react-native';
-=======
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
   const Accessories = ({ route, navigation }) => {
 
@@ -52,7 +49,6 @@ import { BackHandler } from 'react-native';
   });
 };
 
-<<<<<<< HEAD
 function handleBackButtonClick() {
   navigation.goBack();
   return true;
@@ -64,8 +60,6 @@ useEffect(() => {
     BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
   };
 }, []);
-=======
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
     return (
     
@@ -94,18 +88,11 @@ useEffect(() => {
                     />
                   </View>
 
-<<<<<<< HEAD
                   <View style={{padding: 10}}>
                    
                    <Text style={styles.text}>Name : {item.name}</Text>
                       <Text style={styles.text}
                         >About : {item.desc}</Text>
-=======
-                  <View style={{padding: 10,}}>
-                   
-                   <Text style={styles.text}>Name : {item.name}</Text>
-                   <Text style={[styles.text,styles.text2]}>About : {item.desc}</Text>
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                    <Text style={styles.text}>Price : $ {item.price}</Text>
                </View>
                 </View>
@@ -156,14 +143,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: '600',
     letterSpacing: 1,
-<<<<<<< HEAD
     paddingBottom: 15,
     width: 175,
-=======
-    paddingBottom: 15
-  },
-  text2: {
-    width: 200,
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
   }
 })

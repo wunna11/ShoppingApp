@@ -12,12 +12,7 @@ import {
 import {  MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState, useEffect } from "react";
 import { firebase } from "../config";
-<<<<<<< HEAD
 import { BackHandler } from "react-native";
-=======
-import { Ionicons } from "@expo/vector-icons";
-import * as Animatable from 'react-native-animatable';
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
 export default function OrderDetail({ navigation }) {
   //Getting user id
@@ -50,20 +45,17 @@ export default function OrderDetail({ navigation }) {
   const [cartList, setCartList] = useState([]);
   const dataRef = firebase.firestore().collection("orders");
 
-  // read data
+  
   const read = (userId) => {
-    //const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+ 
     console.log("inside read function", userId);
-    //console.log("inside read function");
+   
     dataRef.where("userid", "==", userId)
       .onSnapshot((querySnapshot) => {
       const data = [];
-      //console.log("Data", querySnapshot.docs.data());
+   
       querySnapshot.forEach((doc) => {
-        //console.log("Data = ", doc.data());
-        //console.log("orderId" ,doc.id)
-        //data.push(doc.data());
-        //data.id = doc.id;
+       
         const { userid } = doc.data();
         const { address } = doc.data();
         const { cartList } = doc.data();
@@ -72,18 +64,9 @@ export default function OrderDetail({ navigation }) {
         const { username } = doc.data();
         const { status } = doc.data();
         const { note } = doc.data();
-<<<<<<< HEAD
-        //const { createdAt } =
-        //  //doc.data();
-        //  firebase.firestore.FieldValue.serverTimestamp();
-=======
-        const { createdAt } =
-          //doc.data();
-          firebase.firestore.FieldValue.serverTimestamp();
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
-        //id : doc.id,
+        
         setCartList(doc.data().cartList);
-        //console.log("arr obj=" + cartList);
+      
         data.push({
           id: doc.id,
           address,
@@ -94,26 +77,17 @@ export default function OrderDetail({ navigation }) {
           username,
           status,
           note,
-<<<<<<< HEAD
-          //createdAt,
-=======
-          createdAt,
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
-            //: timestamp,
-            //new Date(createdAt.seconds * 1000).toLocaleDateString("en-US"),
-          //createdAt,
+         
         });
       });
       setData(data);
     });
-    //console.log(" data Data = ", data);
-    //console.log(uid);
+   
   };
   useEffect(() => {
     // read();
   }, []);
 
-<<<<<<< HEAD
   function handleBackButtonClick() {
     navigation.goBack();
     return true;
@@ -127,12 +101,10 @@ export default function OrderDetail({ navigation }) {
     };
   }, []);
 
-=======
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
   return (
     <View style={styles.container}>
-        {/*<Text style={styles.adminText}>OrderDetail</Text>*/}
+       
         <View style={{ flex: 1, padding: 10 }}>
           <FlatList
             data={data}
@@ -198,17 +170,7 @@ export default function OrderDetail({ navigation }) {
                         </View>
 
 
-<<<<<<< HEAD
-                        {/*<View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
-                          <MaterialCommunityIcons name="clock" color={'#f7d081'} size={25} />
-                          <Text style={styles.textInfo}> {item.createdAt}</Text>
-                        </View>*/}
-=======
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
-                          <MaterialCommunityIcons name="clock" color={'#f7d081'} size={25} />
-                          <Text style={styles.textInfo}> {item.createdAt}</Text>
-                        </View>
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
+                        
                         <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#fff', textAlign: 'center' }}>Your Info</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
                           <MaterialCommunityIcons name="id-card" color={'#f7d081'} size={25} />

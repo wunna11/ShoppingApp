@@ -1,17 +1,8 @@
-<<<<<<< HEAD
 import React, { useEffect } from 'react'
-=======
-import React, { useEffect, useState, Component } from 'react'
-import { Image } from 'react-native';
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import 'react-native-gesture-handler';
 import 'react-native-reanimated';
-<<<<<<< HEAD
-=======
-import { TouchableOpacity } from 'react-native';
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 import DrawerHome from '../DrawerScreens/DrawerHome';
 import Products from '../DrawerScreens/Products';
 import MyCart from '../DrawerScreens/MyCart';
@@ -29,15 +20,8 @@ const Drawer = createDrawerNavigator();
 export default function Home(navigation) {
 
     const isFocused = useIsFocused();
-<<<<<<< HEAD
     
     function Logout({ navigation }) {
-=======
-
-
-    function Logout({ navigation }) {
-
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
         useEffect(() => {
             firebase.auth().signOut();
 
@@ -83,14 +67,7 @@ export default function Home(navigation) {
                     headerStyle: {
                         backgroundColor: '#000'
                     },
-<<<<<<< HEAD
                     
-=======
-                    headerRight: () => <Image
-                        style={{ width: 40, height: 40, borderRadius: 50, margin: 15, borderWidth: 1, borderColor: "#fff" }}
-                        source={require('../assets/logo.png')}
-                    />,
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                 }}
             />
             <Drawer.Screen

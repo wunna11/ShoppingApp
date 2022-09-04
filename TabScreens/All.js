@@ -6,19 +6,11 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
-<<<<<<< HEAD
-=======
-  ScrollView,
-  ImageBackground,
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 } from "react-native";
 import { firebase } from "../config";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { SearchBar } from "react-native-elements";
-<<<<<<< HEAD
 import { BackHandler } from "react-native";
-=======
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
 const All = ({ navigation }) => {
   
@@ -31,7 +23,6 @@ const All = ({ navigation }) => {
     read();
   }, []);
 
-<<<<<<< HEAD
   function handleBackButtonClick() {
     navigation.goBack();
     return true;
@@ -44,8 +35,6 @@ const All = ({ navigation }) => {
     };
   }, []);
 
-=======
->>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
   // Search item
   useEffect(() => {
     setFilterProduct(
