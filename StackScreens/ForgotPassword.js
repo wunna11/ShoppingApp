@@ -47,7 +47,11 @@ export default function ForgotPassword({ navigation }) {
                                     source={require('../assets/logo.png')}
                                 />
                             </View>
+<<<<<<< HEAD
+                       
+=======
                         {/*</Animatable.View>*/}
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                         <Animatable.View
                             animation="fadeInUp"
                             duration={1000}

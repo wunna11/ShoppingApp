@@ -17,6 +17,23 @@ export default function AdminTab({ navigation }) {
 
     const Tab = createBottomTabNavigator();
 
+<<<<<<< HEAD
+    const isFocused = useIsFocused();
+    function SignOut({ navigation }) {
+
+        useEffect(() => {
+            firebase.auth().signOut();
+
+            navigation.dispatch(
+                CommonActions.reset({
+                    index: 0,
+                    routes: [{ name: 'Login' }]
+                })
+            )
+        }, [isFocused])
+
+    }
+=======
 //
 //    const SignOut = () => {
 //        firebase.auth().signOut()
@@ -47,20 +64,29 @@ function SignOut({ navigation }) {
    
 
 
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
     return (
         <Tab.Navigator
             initialRouteName="AdminHScreen"
             screenOptions={{
                 headerShown: false,
+<<<<<<< HEAD
+                tabBarShowLabel: false,
+=======
                 //tabBarIconStyle: { display: 'none' },
                 //tabBarStyle: {
                 //  paddingBottom: 20
                 //},
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                 tabBarLabelStyle: {
                     fontSize: 12
                 },
                 tabBarIcon: ({ color, size }) => (
+<<<<<<< HEAD
+                    <MaterialCommunityIcons name="home" color={'#ffd700'} size={30} />
+=======
                     <MaterialCommunityIcons name="feather" color={'#ffd700'} size={30} />
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                 ),
 
             }}
@@ -73,7 +99,11 @@ function SignOut({ navigation }) {
                 name='Categories'
                 component={AdminTopTabScreen}
                 options={{
+<<<<<<< HEAD
+
+=======
                     //tabBarLabel: 'SignOut',
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                     tabBarIcon: ({ color, size }) => (
                         <MaterialIcons name="category" size={30} color={'#ffd700'} />
                     ),
@@ -102,7 +132,11 @@ function SignOut({ navigation }) {
                 name="Feedback"
                 component={Feedback}
                 options={{
+<<<<<<< HEAD
+
+=======
                     //tabBarLabel: 'SignOut',
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="chatbox-ellipses-outline" color={'#ffd700'} size={30} />
                     ),
@@ -112,7 +146,11 @@ function SignOut({ navigation }) {
                 name="Logout"
                 component={SignOut}
                 options={{
+<<<<<<< HEAD
+
+=======
                     //tabBarLabel: 'SignOut',
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="exit" color={'#ffd700'} size={30} />
                     ),
@@ -122,4 +160,9 @@ function SignOut({ navigation }) {
         </Tab.Navigator>
     );
 
+<<<<<<< HEAD
 }
+
+=======
+}
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8

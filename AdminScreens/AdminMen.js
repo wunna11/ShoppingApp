@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Text, FlatList, Image, TouchableOpacity, SafeAreaView, ImageBackground } from 'react-native';
 import { firebase } from '../config'
+<<<<<<< HEAD
+import { BackHandler } from 'react-native';
+=======
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
 const AdminMen = ({ route, navigation }) => {
 
@@ -48,6 +52,28 @@ const AdminMen = ({ route, navigation }) => {
             });
     };
 
+<<<<<<< HEAD
+    function handleBackButtonClick() {
+        navigation.goBack();
+        return true;
+      }
+    
+      useEffect(() => {
+        BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        return () => {
+          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+      }, []);
+
+    return (
+        
+        <View style={styles.container}>
+                <View style={{ flex: 1 }}>
+                    {/*<View style={{ padding: 10, paddingBottom: 20 }}>
+                        <Text style={styles.expoView}>"Welcome from Man Collection"</Text>
+                    </View>*/}
+                    <SafeAreaView style={{ flex: 2, padding: 10,paddingBottom: 20 }}>
+=======
     return (
         <View style={styles.container}>
                 <View style={{ flex: 1 }}>
@@ -55,6 +81,7 @@ const AdminMen = ({ route, navigation }) => {
                         <Text style={styles.expoView}>"Welcome from Man Collection"</Text>
                     </View>
                     <SafeAreaView style={{ flex: 2, padding: 5, marginTop: -40 }}>
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                             <FlatList
                                 data={data}
                                 keyExtractor={(_, i) => String(i)}
@@ -73,8 +100,12 @@ const AdminMen = ({ route, navigation }) => {
                                                     />
                                                 </View>
 
+<<<<<<< HEAD
+                                                <View style={{padding: 10,width: 230}}>
+=======
                                                 <View style={{ padding: 10, }}>
 
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                                                     <Text style={styles.text}>Name : {item.name}</Text>
                                                     <Text style={[styles.text, styles.text2]}>About : {item.desc}</Text>
                                                     <Text style={styles.text}>Price : $ {item.price}</Text>

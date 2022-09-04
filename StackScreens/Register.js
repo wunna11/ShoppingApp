@@ -1,13 +1,19 @@
 import {
     SafeAreaView,
+<<<<<<< HEAD
+=======
     ImageBackground,
     ActivityIndicator,
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
     Image,
     StyleSheet,
     Text,
     View,
     TextInput,
     TouchableOpacity,
+<<<<<<< HEAD
+} from "react-native";
+=======
     Button,
 } from "react-native";
 import {
@@ -18,6 +24,7 @@ import {
     updateDoc,
     deleteDoc,
 } from "firebase/firestore";
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 import { firebase } from "../config";
 import React, { useState } from "react";
 import * as Animatable from "react-native-animatable";
@@ -138,10 +145,14 @@ export default function Register({ navigation }) {
 
     return (
         <View style={styles.container}>
+<<<<<<< HEAD
+
+=======
             {/*<ImageBackground
             source={require("../assets/bg.jpg")}
             style={{ width: "100%", height: "100%" }}
           >*/}
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
             <SafeAreaView style={{ flex: 1, padding: 5 }}>
                 <KeyboardAwareScrollView>
                     <View
@@ -193,7 +204,11 @@ export default function Register({ navigation }) {
                             >
                                 Sign Up
                             </Text>
+<<<<<<< HEAD
+
+=======
                             {/*</Animatable.View>*/}
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                         </View>
 
                         <Animatable.View
@@ -293,7 +308,11 @@ export default function Register({ navigation }) {
                     </View>
                 </KeyboardAwareScrollView>
             </SafeAreaView>
+<<<<<<< HEAD
+
+=======
             {/*</ImageBackground>*/}
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
         </View>
     );
 }

@@ -12,8 +12,12 @@ import {
 import {  MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState, useEffect } from "react";
 import { firebase } from "../config";
+<<<<<<< HEAD
+import { BackHandler } from "react-native";
+=======
 import { Ionicons } from "@expo/vector-icons";
 import * as Animatable from 'react-native-animatable';
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
 export default function OrderDetail({ navigation }) {
   //Getting user id
@@ -68,9 +72,15 @@ export default function OrderDetail({ navigation }) {
         const { username } = doc.data();
         const { status } = doc.data();
         const { note } = doc.data();
+<<<<<<< HEAD
+        //const { createdAt } =
+        //  //doc.data();
+        //  firebase.firestore.FieldValue.serverTimestamp();
+=======
         const { createdAt } =
           //doc.data();
           firebase.firestore.FieldValue.serverTimestamp();
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
         //id : doc.id,
         setCartList(doc.data().cartList);
         //console.log("arr obj=" + cartList);
@@ -84,7 +94,11 @@ export default function OrderDetail({ navigation }) {
           username,
           status,
           note,
+<<<<<<< HEAD
+          //createdAt,
+=======
           createdAt,
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
             //: timestamp,
             //new Date(createdAt.seconds * 1000).toLocaleDateString("en-US"),
           //createdAt,
@@ -99,6 +113,22 @@ export default function OrderDetail({ navigation }) {
     // read();
   }, []);
 
+<<<<<<< HEAD
+  function handleBackButtonClick() {
+    navigation.goBack();
+    return true;
+  }
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+     
+    };
+  }, []);
+
+=======
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
   return (
     <View style={styles.container}>
@@ -168,10 +198,17 @@ export default function OrderDetail({ navigation }) {
                         </View>
 
 
+<<<<<<< HEAD
+                        {/*<View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
+                          <MaterialCommunityIcons name="clock" color={'#f7d081'} size={25} />
+                          <Text style={styles.textInfo}> {item.createdAt}</Text>
+                        </View>*/}
+=======
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
                           <MaterialCommunityIcons name="clock" color={'#f7d081'} size={25} />
                           <Text style={styles.textInfo}> {item.createdAt}</Text>
                         </View>
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                         <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#fff', textAlign: 'center' }}>Your Info</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
                           <MaterialCommunityIcons name="id-card" color={'#f7d081'} size={25} />

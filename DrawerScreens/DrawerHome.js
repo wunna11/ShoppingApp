@@ -6,6 +6,10 @@ import {
   Image,
   SafeAreaView,
   TouchableOpacity,
+<<<<<<< HEAD
+  Alert,
+=======
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
   Button,
   FlatList,
   Dimensions,
@@ -18,6 +22,20 @@ import { useIsFocused } from '@react-navigation/native';
 import { firebase } from "../config";
 import { SearchBar } from "react-native-elements";
 import * as Animatable from "react-native-animatable";
+<<<<<<< HEAD
+import UserTrendList from "./UserTrendList";
+
+const ImageHome = [
+  "https://i.pinimg.com/564x/e1/33/04/e1330445b52b2076d17e0428709fa7d7.jpg",
+  "https://pbs.twimg.com/media/FbfwzaFWYAIG8l3?format=jpg&name=large",
+  "https://assets.vogue.com/photos/61536b6d48a587a316a3131b/master/w_1920,c_limit/00009-Christian-Dior-Spring-22-RTW-Paris-credit-Alessandro-Lucioni-Gorunway.jpg",
+  "https://i.pinimg.com/564x/36/7a/11/367a1169d6d0376c3d260b921dff067f.jpg",
+  "https://i.pinimg.com/564x/39/56/e0/3956e0e9b18ff91a261712d83dc15ff7.jpg",
+  "https://k-odyssey.com/news/data/20220831/p1065602841003125_446_thum.jpg",
+  "https://i.pinimg.com/564x/a4/ee/55/a4ee5554b2a156a4ab494c689898a2b6.jpg",
+  "https://pbs.twimg.com/media/FbnfsWbacAA3aI2?format=jpg&name=small",
+  "https://i.pinimg.com/564x/a2/3b/c5/a23bc51721ceb6b2505ee110ec3c929b.jpg",
+=======
 
 const ImageHome = [
   "https://images.unsplash.com/photo-1609505848912-b7c3b8b4beda?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80",
@@ -28,6 +46,7 @@ const ImageHome = [
   "https://i.pinimg.com/564x/1f/15/82/1f1582927a458e5d8af5687c26609063.jpg",
   "https://i.pinimg.com/564x/b5/fa/0f/b5fa0ffc412561ba3461bce5a24757e1.jpg",
   "https://i.pinimg.com/564x/29/09/7a/29097a3760cadbae5976ad4caa9176ad.jpg",
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 ];
 
 const width = Dimensions.get("window").width;
@@ -47,6 +66,10 @@ function BackDrop({ scrollX }) {
   const [search, setSearch] = useState("");
   const [filterProduct, setFilterProduct] = useState([]);
   const isFocused = useIsFocused();
+<<<<<<< HEAD
+
+=======
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
   useEffect(() => {
     firebase
       .firestore()
@@ -58,6 +81,51 @@ function BackDrop({ scrollX }) {
       });
   }, [isFocused]);
 
+<<<<<<< HEAD
+  //useEffect(() => {
+  //  BackHandler.addEventListener("hardwareBackPress",()=>{
+  //    BackHandler.exitApp();
+  //  });
+  //}, []);
+
+//  function handleBackButtonClick() {
+//    navigation.goBack();
+//    return true;
+//  }
+//
+//  useEffect(() => {
+//    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+//    return () => {
+//      BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+//    };
+//  }, []);
+
+//useEffect(() => {
+//  BackHandler.addEventListener("hardwareBackPress", () => {
+//    BackHandler.exitApp();
+//  });
+//}, []);
+//const backAction = () => {
+//  Alert.alert("Hold on!", "Are you sure you want to exit?", [
+//    {
+//      text: "Cancel",
+//      onPress: () => null,
+//      style: "cancel"
+//    },
+//    { text: "YES", onPress: () => BackHandler.exitApp() }
+//  ]);
+//  return true;
+//};
+//
+//useEffect(() => {
+//  BackHandler.addEventListener("hardwareBackPress", backAction);
+//
+//  return () =>
+//    BackHandler.removeEventListener("hardwareBackPress", backAction);
+//}, []);
+
+  
+=======
   // Search item
   useEffect(() => {
     setFilterProduct(
@@ -104,6 +172,7 @@ function BackDrop({ scrollX }) {
       BackHandler.exitApp();
     });
   }, []);
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
   return (
     <View
       style={
@@ -162,6 +231,9 @@ function BackDrop({ scrollX }) {
           <Text style={styles.label1}>Welcome {user?.username}!</Text>
           </Animatable.View>
         <Text style={styles.label2}> Find your style with WTTH</Text>
+<<<<<<< HEAD
+       
+=======
         {/*<SearchBar
         placeholder="Search"
         onChangeText={(search) => setSearch(search)}
@@ -182,16 +254,132 @@ function BackDrop({ scrollX }) {
           ))}
         </Text>
                 ) : null}*/}
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
       </Animatable.View>
     </View>
   );
 }
 
 export default function DrawerHome({ navigation }) {
+<<<<<<< HEAD
+
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", () => {
+      BackHandler.exitApp();
+    });
+  }, []);
+  const backAction = () => {
+    Alert.alert("Hold on!", "Are you sure you want to exit?", [
+      {
+        text: "Cancel",
+        onPress: () => null,
+        style: "cancel"
+      },
+      { text: "YES", onPress: () => BackHandler.exitApp() }
+    ]);
+    return true;
+  };
+  
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", backAction);
+  
+    return () =>
+      BackHandler.removeEventListener("hardwareBackPress", backAction);
+  }, []);
+
+  const scrollX = React.useRef(new Animated.Value(0)).current;
+
+    const [data, setData] = useState([]);
+    const dataRef = firebase.firestore().collection("products");
+
+    const [search, setSearch] = useState("");
+    const [filterProduct, setFilterProduct] = useState([]);
+
+    // read data
+    const read = () => {
+
+        dataRef.orderBy('name', 'desc').limit(4).onSnapshot((querySnapshot) => {
+            const data = [];
+            querySnapshot.forEach((doc) => {
+                const { imgURL } = doc.data();
+                const { name } = doc.data();
+                const { desc } = doc.data();
+                const { price } = doc.data();
+                const { qty } = doc.data();
+                const { category_name } = doc.data();
+
+                data.push({
+                    id: doc.id,
+                    imgURL,
+                    name,
+                    desc,
+                    price,
+                    qty,
+                    category_name,
+                });
+            });
+            setData(data);
+        });
+    };
+
+
+    useEffect(() => {
+        read();
+    }, []);
+
+    // Search item
+    useEffect(() => {
+        setFilterProduct(
+            data.filter(
+                (res) =>
+                    res.name.toLowerCase().includes(search.toLowerCase()) ||
+                    res.desc.toLowerCase().includes(search.toLowerCase()) ||
+                    res.category_name.toLowerCase().includes(search.toLowerCase())
+            )
+        );
+    }, [search, data]);
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View>
+      <SearchBar
+                    placeholder="Search"
+                    onChangeText={(search) => setSearch(search)}
+                    value={search}
+                />
+
+                {search.length ? (
+                    <Text>
+                        {filterProduct.map((item, index) => (
+                            <View style={{
+                                flex: 1,
+                                paddingBottom: 30
+                            }}>
+                                <View key={index} style={{ flexDirection: 'column', paddingHorizontal: 10, flex: 1 }}>
+                                    <TouchableOpacity
+                                        onPress={() => navigation.navigate("ProductDetail", { item })}
+                                    >
+                                        <View>
+                                            <Image
+                                                style={styles.iimage1}
+                                                source={{ uri: item.imgURL }}
+                                            />
+                                        </View>
+                                        <Text style={{ color: "gold", fontSize: 20 }}>{item.name.substr(0, 10)}</Text>
+                                        <Text style={{ color: "gold", fontSize: 10 }}>{item.desc.substr(0, 20)}</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        ))}
+                    </Text>
+                ) : null}
+      </View>
+=======
   const scrollX = React.useRef(new Animated.Value(0)).current;
 
   return (
     <SafeAreaView style={styles.container}>
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
       <ScrollView>
         <BackDrop scrollX={scrollX} />
 
@@ -335,6 +523,20 @@ export default function DrawerHome({ navigation }) {
           </TouchableOpacity>
         </Animatable.View>
 
+<<<<<<< HEAD
+      <ScrollView nestedScrollEnabled={true} style={{ width: "100%" }} >
+    <Animatable.View
+          animation="fadeInUp"
+          duration={3000}
+          style={styles.row}>
+    <ScrollView horizontal={true} style={{ width: "100%" }}>
+    <UserTrendList/>
+    </ScrollView>
+    </Animatable.View>
+    </ScrollView>
+     
+       
+=======
         <Animatable.View
           animation="fadeInUp"
           duration={3000}
@@ -371,6 +573,7 @@ export default function DrawerHome({ navigation }) {
             />
           </TouchableOpacity>
         </Animatable.View>
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
       </ScrollView>
     </SafeAreaView>
   );
@@ -380,8 +583,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+<<<<<<< HEAD
+    //alignItems: "center",
+    //justifyContent: "center",
+=======
     alignItems: "center",
     justifyContent: "center",
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
   },
   posterImage: {
     width: "100%",
@@ -447,6 +655,51 @@ const styles = StyleSheet.create({
   },
   Bot1: {
     fontSize: 13,
+<<<<<<< HEAD
+    color: "#000",
+    padding: 5,
+    paddingBottom: 0,
+    textAlign: "center",
+  },
+});
+
+ {/*<Animatable.View
+          animation="fadeInUp"
+          duration={3000}
+          style={styles.row}
+        >
+          <TouchableOpacity onPress={() => navigation.navigate("Woman")}>
+            <Image
+              source={require("../assets/trend2.png")}
+              style={styles.Trend}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Men")}>
+            <Image
+              source={require("../assets/trend3.jpg")}
+              style={styles.Trend}
+            />
+          </TouchableOpacity>
+        </Animatable.View>*/}
+        {/*<Animatable.View
+          animation="fadeInUp"
+          duration={2000}
+          style={styles.row}
+        >
+          <TouchableOpacity onPress={() => navigation.navigate("Shoes")}>
+            <Image
+              source={require("../assets/trend1.jpg")}
+              style={styles.Trend}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Accessory")}>
+            <Image
+              source={require("../assets/prada.jpg")}
+              style={styles.Trend}
+            />
+          </TouchableOpacity>
+        </Animatable.View>*/}
+=======
     color: "black",
     padding: 5,
     paddingBottom: 0,
@@ -454,3 +707,4 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8

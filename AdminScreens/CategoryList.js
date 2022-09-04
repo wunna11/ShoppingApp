@@ -1,8 +1,16 @@
+<<<<<<< HEAD
+import { StyleSheet, Text, View, Button, FlatList } from 'react-native'
+import React, { useEffect, useState } from 'react';
+import { firebase } from '../config'
+
+const CategoryList = ({ navigation }) => {
+=======
 import { StyleSheet, Text, View,Button,FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react';
 import { firebase } from '../config'
 
 const CategoryList = ({navigation}) => {
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
     const [data, setData] = useState([]);
     const dataRef = firebase.firestore().collection('categories');
@@ -45,9 +53,14 @@ const CategoryList = ({navigation}) => {
                         <Text>{item.name}</Text>
                     </View>
                 )}
+<<<<<<< HEAD
+
+            />
+=======
             
             />
 
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
             <Button
                 title='Back'
                 onPress={() => navigation.navigate('CreateCategory')}
