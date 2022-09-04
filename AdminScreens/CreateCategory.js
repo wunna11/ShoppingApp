@@ -1,9 +1,17 @@
+<<<<<<< HEAD
 import { Alert, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+=======
+import { Alert, StyleSheet, Text, View,TouchableOpacity } from 'react-native'
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 import React, { useState } from 'react';
 import { firebase } from '../config'
 import { TextInput } from 'react-native-gesture-handler';
 
+<<<<<<< HEAD
 const CreateCategory = ({ navigation }) => {
+=======
+const CreateCategory = ({navigation}) => {
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
     const [data, setData] = useState([]);
     const dataRef = firebase.firestore().collection('categories')
@@ -63,7 +71,11 @@ const CreateCategory = ({ navigation }) => {
                 onPress={() => navigation.navigate('CategoryList')}
             />
 
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
 
         </View>

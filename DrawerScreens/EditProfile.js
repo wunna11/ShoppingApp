@@ -5,8 +5,11 @@ import { useIsFocused } from '@react-navigation/native';
 import { CommonActions } from '@react-navigation/native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+<<<<<<< HEAD
 import { BackHandler } from 'react-native';
 
+=======
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 const EditProfile = ({ route, navigation }) => {
 
     const [username, setUsername] = useState(route.params.user?.username)
@@ -73,6 +76,7 @@ const EditProfile = ({ route, navigation }) => {
         )
     }
 
+<<<<<<< HEAD
     function handleBackButtonClick() {
         navigation.goBack();
         return true;
@@ -89,10 +93,26 @@ const EditProfile = ({ route, navigation }) => {
         <View style={styles.container}>
             <SafeAreaView style={{ flex: 1, padding: 5 }}>
                 <KeyboardAwareScrollView>
+=======
+
+    return (
+        <View style={styles.container}>
+
+            <SafeAreaView style={{ flex: 1, padding: 5 }}>
+
+                <KeyboardAwareScrollView>
+
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                     <Image
                         style={styles.acc}
                         source={require('../assets/logo.png')}
                     />
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                     <View style={{ paddingTop: 10, paddingBottom: 10 }}>
 
                         <Text style={{ fontSize: 24, fontWeight: "bold", textAlign: "center", color: "#f7d081" }}> Edit Profile</Text>
@@ -101,6 +121,10 @@ const EditProfile = ({ route, navigation }) => {
                     <View style={{ width: "100%" }}>
                         <View style={{ flexDirection: 'row' }}>
                             <MaterialCommunityIcons name="account" color={'#f7d081'} size={30} style={{ paddingTop: 25 }} />
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                             <TextInput
                                 style={styles.textBoxes}
                                 onChangeText={(text) => setUsername(text)}
@@ -108,6 +132,11 @@ const EditProfile = ({ route, navigation }) => {
                                 placeholderTextColor="#fff"
                                 autoCapitalize="none"
                             />
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                         </View>
 
                         <View style={{ flexDirection: 'row' }}>
@@ -123,8 +152,16 @@ const EditProfile = ({ route, navigation }) => {
                                 autoCapitalize="none"
                             />
 
+<<<<<<< HEAD
                         </View>
 
+=======
+
+
+                        </View>
+
+
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                         <View style={{ flexDirection: 'row' }}>
 
                             <MaterialCommunityIcons name="home" color={'#f7d081'} size={30} style={{ paddingTop: 25 }} />
@@ -134,8 +171,16 @@ const EditProfile = ({ route, navigation }) => {
                                 onChangeText={(text) => setaddress(text)}
                                 value={address}
                                 placeholderTextColor="#fff"
+<<<<<<< HEAD
                             />
 
+=======
+
+
+                            />
+
+
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                         </View>
 
                         <View style={{ alignItems: 'center', justifyContent: "center", flexDirection: 'row', paddingTop: 10, marginBottom: 60 }}>
@@ -176,6 +221,11 @@ const EditProfile = ({ route, navigation }) => {
                                 autoCapitalize="none"
                                 secureTextEntry
                                 placeholder='Enter new Password'
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                             />
 
                             <TouchableOpacity
@@ -197,8 +247,17 @@ const EditProfile = ({ route, navigation }) => {
                             </TouchableOpacity>
                         </View>
                     </View>
+<<<<<<< HEAD
                 </KeyboardAwareScrollView>
             </SafeAreaView>
+=======
+
+
+                </KeyboardAwareScrollView>
+
+            </SafeAreaView>
+
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
         </View>
     );
 

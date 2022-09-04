@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Text, FlatList ,Image,TouchableOpacity,SafeAreaView ,ImageBackground} from 'react-native';
 import { firebase } from '../config'
+<<<<<<< HEAD
 import { BackHandler } from 'react-native';
+=======
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
   const AdminShoes = ({ route, navigation }) => {
 
@@ -47,6 +50,7 @@ const [imgURL, setImageURL] = useState("");
     });
     setData(data);
   });
+<<<<<<< HEAD
     };
     
     function handleBackButtonClick() {
@@ -60,14 +64,24 @@ const [imgURL, setImageURL] = useState("");
         BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
       };
     }, []);
+=======
+};
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
   return (
     <View style={styles.container}>
       <View style={{ flex: 1 }}>
+<<<<<<< HEAD
         {/*<View style={{ padding: 10,paddingBottom: 20  }}>
           <Text style={styles.expoView}>"Welcome from Shoe Collection"</Text>
         </View>*/}
         <SafeAreaView style={{ flex: 2, padding: 10,paddingBottom: 20 }}>
+=======
+        <View style={{ padding: 10,paddingBottom: 20  }}>
+          <Text style={styles.expoView}>"Welcome from Shoe Collection"</Text>
+        </View>
+        <SafeAreaView style={{ flex: 2, padding: 5, marginTop: -40 }}>
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
           <FlatList
               data={data}
               keyExtractor={(_,i) => String(i)}
@@ -86,7 +100,11 @@ const [imgURL, setImageURL] = useState("");
                     />
                   </View>
 
+<<<<<<< HEAD
                   <View style={{padding: 10,width: 230}}>
+=======
+                  <View style={{padding: 10,}}>
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                    
                       <Text style={styles.text}>Name : {item.name}</Text>
                       <Text style={[styles.text,styles.text2]}>About : {item.desc}</Text>

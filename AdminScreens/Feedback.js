@@ -10,7 +10,10 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { firebase } from "../config";
+<<<<<<< HEAD
 import { BackHandler } from "react-native";
+=======
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
 const Userfeedback = ({ route, navigation }) => {
 
@@ -37,7 +40,12 @@ const Userfeedback = ({ route, navigation }) => {
                         username,
                         userfeedback,
                         createdAt: new Date(createdAt.seconds * 1000).toLocaleDateString("en-US"),
+<<<<<<< HEAD
                       
+=======
+                        //updatedAt:new Date().toUTCString(),
+                        //createdAt: new Date().toUTCString(),
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
                     });
                 });
@@ -58,6 +66,7 @@ const Userfeedback = ({ route, navigation }) => {
             });
     }
 
+<<<<<<< HEAD
     function handleBackButtonClick() {
         navigation.goBack();
         return true;
@@ -69,6 +78,8 @@ const Userfeedback = ({ route, navigation }) => {
           BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
       }, []);
+=======
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
     return (
         <View>

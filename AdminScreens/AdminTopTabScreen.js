@@ -6,14 +6,18 @@ import AdminShoes from './AdminShoe';
 import AdminMen from './AdminMen';
 import AdminWomen from './AdminWomen';
 import AdminAccessories from './AdminAccessory';
+<<<<<<< HEAD
 import AdminTrendList from './AdminTrendList';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native';
+=======
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
 const Tab = createMaterialTopTabNavigator();
 
 const AdminTopTabScreen = () => {
+<<<<<<< HEAD
     return (
         <View style={{ flex: 1 }}>
             <SafeAreaView style={{ flex: 1, marginTop: "9%" }}>
@@ -65,6 +69,25 @@ const AdminTopTabScreen = () => {
         </View>
     )
 }
+=======
+  return (
+    <Tab.Navigator screenOptions={{
+      tabBarActiveTintColor: '#174fe8',
+      tabBarInactiveTintColor: '#848554',
+      tabBarLabelStyle: { fontSize: 12, fontWeight: '900', },
+      tabBarItemStyle: { width: 100 },
+      tabBarStyle: { backgroundColor: '#f7d081' },
+    }}>
+      <Tab.Screen name='Man' component={AdminMen} />
+      <Tab.Screen name='Woman' component={AdminWomen} />
+      <Tab.Screen name='Shoe' component={AdminShoes} />
+      <Tab.Screen name='Accessory' component={AdminAccessories} />
+
+    </Tab.Navigator>
+  )
+}
+
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 export default AdminTopTabScreen
 
 const styles = StyleSheet.create({})

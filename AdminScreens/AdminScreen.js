@@ -11,10 +11,15 @@ import {
   Alert
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+<<<<<<< HEAD
 import { set } from "react-native-reanimated";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { firebase } from "../config";
 import { doc } from "firebase/firestore";
+=======
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { firebase } from "../config";
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
 const AdminScreen = ({ route, navigation }) => {
 
@@ -22,7 +27,11 @@ const AdminScreen = ({ route, navigation }) => {
   const dataRef = firebase.firestore().collection("products");
   const [show, setshow] = useState(false);
   const [showBox, setShowBox] = useState(true);
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [price, setPrice] = useState("");
@@ -64,6 +73,23 @@ const AdminScreen = ({ route, navigation }) => {
       });
   };
 
+<<<<<<< HEAD
+=======
+  //// delete data
+  //const destroy = (data) => {
+  //  dataRef
+  //    .doc(data.id)
+  //    .delete()
+  //    .then(() => {
+  //      alert("Deleted Successfully!");
+  //      console.log(" Data Deleted");
+  //    })
+  //    .catch((error) => {
+  //      alert("error");
+  //    });
+  //};
+
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
   // delete data
   const showConfirmDialog = (data) => {
     return Alert.alert(
@@ -96,6 +122,7 @@ const AdminScreen = ({ route, navigation }) => {
       ]
     );
   };
+<<<<<<< HEAD
 
  
 
@@ -123,17 +150,37 @@ const AdminScreen = ({ route, navigation }) => {
       BackHandler.removeEventListener("hardwareBackPress", backAction);
   }, []);
 
+=======
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress",()=>{
+      BackHandler.exitApp();
+    });
+  }, []);
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
   return (
     <View>
       <View style={styles.container}>
         <View style={styles.adminView}>
+<<<<<<< HEAD
         <Text style={styles.title}>WTTH</Text>
           <Text style={styles.adminText}>All Products</Text>
+=======
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
           <Image
             style={styles.tinyLogo}
             source={require('../assets/logo.png')}
           />
 
+<<<<<<< HEAD
+=======
+          <Text style={styles.adminText}>Add All Products</Text>
+          <TouchableOpacity
+            style={{ backgroundColor: "gold", padding: 20, borderRadius: 40 }}
+            onPress={() => navigation.navigate("CreateProduct")}
+          >
+            <MaterialCommunityIcons name="plus" size={30} color={"black"} />
+          </TouchableOpacity>
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
         </View>
 
         <View style={{ flex: 2, padding: 10, paddingTop: 0 }}>
@@ -149,6 +196,12 @@ const AdminScreen = ({ route, navigation }) => {
               >
                 <View style={{ flexDirection: "row" }}>
                   <TouchableOpacity
+<<<<<<< HEAD
+=======
+                    //onPress={() =>
+                    //    navigation.navigate("UpdateProduct", { item })
+                    //}
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 
                     onPress={() => {
                       Alert.alert(
@@ -179,6 +232,7 @@ const AdminScreen = ({ route, navigation }) => {
                       color="gold"
                     />
                   </TouchableOpacity>
+<<<<<<< HEAD
                   <Text style={styles.padd}>
                     {item.category_name}
                   </Text>
@@ -187,6 +241,15 @@ const AdminScreen = ({ route, navigation }) => {
                   </TouchableOpacity>
 
                   <TouchableOpacity onPress={() => showConfirmDialog(item)} style={{ left: 35, }}>
+=======
+
+                  <Text style={styles.padd}>
+                    {item.category_name}
+                  </Text>
+
+
+                  <TouchableOpacity onPress={() => showConfirmDialog(item)} style={{ left: 60, }}>
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                     <Ionicons name="trash" color={"#ffd700"} size={30} />
                   </TouchableOpacity>
                 </View>
@@ -205,6 +268,7 @@ const AdminScreen = ({ route, navigation }) => {
                     <Text style={styles.text}>
                       Price: ${item.price}
                     </Text>
+<<<<<<< HEAD
                     <Text style={[styles.text, styles.decText]}
                     numberOfLines={2}
                     >
@@ -213,11 +277,21 @@ const AdminScreen = ({ route, navigation }) => {
                     </Text>
 
                   </View>
+=======
+                    <Text style={[styles.text, styles.decText]}>
+                      {/*Description:*/}
+                      {item.desc}
+                    </Text>
+
+                  </View>
+
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
                 </View>
               </View>
             )}
           />
         </View>
+<<<<<<< HEAD
         <View style={styles.button}>
                 <TouchableOpacity
             style={{ backgroundColor: "gold", padding: 20, borderRadius: 40 }}
@@ -226,6 +300,8 @@ const AdminScreen = ({ route, navigation }) => {
             <MaterialCommunityIcons name="plus" size={30} color={"black"} />
           </TouchableOpacity>
                   </View>
+=======
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
       </View>
     </View>
   );
@@ -234,6 +310,7 @@ const AdminScreen = ({ route, navigation }) => {
 export default AdminScreen;
 
 const styles = StyleSheet.create({
+<<<<<<< HEAD
     adminView: {
         padding: 10,
         marginTop:-25,
@@ -311,4 +388,67 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#fff",
       }
+=======
+  adminView: {
+    padding: 13,
+    flexDirection: "row",
+  },
+  adminText: {
+    fontSize: 20,
+    color: "white",
+    ontWeight: "500",
+    letterSpacing: 1,
+    paddingLeft: 12,
+    paddingTop: 30,
+    paddingRight: 12,
+  },
+  text: {
+    fontSize: 16,
+    color: "#fff",
+    paddingBottom: 5,
+    fontWeight: "500",
+    letterSpacing: 1,
+    width: 150,
+  },
+  iimage: {
+    width: 150,
+    height: 150,
+    borderRadius: 15,
+  },
+  padd: {
+    width: 100,
+    marginLeft: '30%',
+    color: 'gold',
+    fontWeight: "bold",
+    fontSize: 18,
+  },
+  Box: {
+    padding: 5,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: "#fff",
+    backgroundColor: "#000",
+    borderRadius: 15,
+  },
+  container: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "#000",
+    paddingTop: 18,
+    padding: 10
+  },
+  decText: {
+    fontSize: 12,
+    letterSpacing: 1.5,
+    color: 'gold',
+    fontWeight: 'bold',
+  },
+  tinyLogo: {
+    width: 70,
+    height: 70,
+    borderRadius: 40,
+    borderWidth: 1,
+    borderColor: "#fff",
+  }
+>>>>>>> cd3fd4401b451391b896efd9d80a80684a6605c8
 });
