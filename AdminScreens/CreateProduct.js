@@ -5,7 +5,7 @@ import { CommonActions } from '@react-navigation/native'
 import * as ImagePicker from "expo-image-picker";
 import SelectDropdown from 'react-native-select-dropdown';
 import { BackHandler } from 'react-native';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 const CreateProduct = ({ navigation }) => {
 
     const [product, setProduct] = useState([]);
@@ -140,85 +140,88 @@ const CreateProduct = ({ navigation }) => {
         }
     };
 
-    function handleBackButtonClick() {
-        navigation.goBack();
-        return true;
-    }
-
     useEffect(() => {
-        BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        return () => {
-            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
-        };
-    }, []);
+        navigation.addListener("focus", () => {
+            function handleBackButtonClick() {
+                navigation.goBack();
+                return true;
+            }
+
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+            return () => {
+                BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            };
+        })
+    }, [navigation]);
 
     return (
         <View style={styles.container}>
-
-            <View style={styles.imageContainer}>
-                {image && (
-                    <Image
-                        source={{ uri: image.uri }}
-                        style={{ width: 150, height: 150 }}
-                    />
-                )}
-            </View>
-            <TouchableOpacity
-                style={[styles.selectButton, styles.ImgBot]}
-                onPress={pickImage}
-            >
-                <Text> Pick an Image</Text>
-            </TouchableOpacity>
-            <TextInput
-                style={styles.input}
-                placeholder='Name'
-                onChangeText={(text) => setProductName(text)}
-                value={productName}
-                placeholderTextColor="#c4c4c2"
-            />
-
-            <TextInput
-                multiline={true}
-                numberOfLines={4}
-                style={styles.inputDesc}
-                placeholder='Description'
-                onChangeText={(text) => setDesc(text)}
-                value={desc}
-                placeholderTextColor="#c4c4c2"
-            />
-
-            <TextInput
-                style={styles.input}
-                placeholder='Price'
-                onChangeText={(text) => setPrice(text)}
-                value={parseFloat(price)}
-                keyboardType='numeric'
-                placeholderTextColor="#c4c4c2"
-            />
-
-            <View style={styles.select}>
-                <SelectDropdown
-                    data={data}
-                    onSelect={(selectedItem, index) => {
-                        setSelectedItem(selectedItem);
-                        console.log(selectedItem, index)
-                    }}
-                    buttonTextAfterSelection={(selectedItem, index) => {
-                        return selectedItem.name
-                    }}
-
-                    rowTextForSelection={(item, index) => {
-                        return item.name
-                    }}
-                />
-            </View>
-
-            <View style={{ justifyContent: "center", alignItems: 'center' }}>
-                <ActivityIndicator size="large" color="#fff700" animating={show} style={{ marginTop: -15, paddingBottom: 10, }}></ActivityIndicator>
-                <TouchableOpacity style={styles.btn} onPress={() => add()}>
-                    <Text> Create </Text>
+            <KeyboardAwareScrollView>
+                <View style={styles.imageContainer}>
+                    {image && (
+                        <Image
+                            source={{ uri: image.uri }}
+                            style={{ width: 150, height: 150 }}
+                        />
+                    )}
+                </View>
+                <TouchableOpacity
+                    style={[styles.selectButton, styles.ImgBot]}
+                    onPress={pickImage}
+                >
+                    <Text> Pick an Image</Text>
                 </TouchableOpacity>
-            </View>
+                <TextInput
+                    style={styles.input}
+                    placeholder='Name'
+                    onChangeText={(text) => setProductName(text)}
+                    value={productName}
+                    placeholderTextColor="#c4c4c2"
+                />
+
+                <TextInput
+                    multiline={true}
+                    numberOfLines={4}
+                    style={styles.inputDesc}
+                    placeholder='Description'
+                    onChangeText={(text) => setDesc(text)}
+                    value={desc}
+                    placeholderTextColor="#c4c4c2"
+                />
+
+                <TextInput
+                    style={styles.input}
+                    placeholder='Price'
+                    onChangeText={(text) => setPrice(text)}
+                    value={parseFloat(price)}
+                    keyboardType='numeric'
+                    placeholderTextColor="#c4c4c2"
+                />
+
+                <View style={styles.select}>
+                    <SelectDropdown
+                        data={data}
+                        onSelect={(selectedItem, index) => {
+                            setSelectedItem(selectedItem);
+                            console.log(selectedItem, index)
+                        }}
+                        buttonTextAfterSelection={(selectedItem, index) => {
+                            return selectedItem.name
+                        }}
+
+                        rowTextForSelection={(item, index) => {
+                            return item.name
+                        }}
+                    />
+                </View>
+
+                <View style={{ justifyContent: "center", alignItems: 'center' }}>
+                    <ActivityIndicator size="large" color="#fff700" animating={show} style={{ marginTop: -15, paddingBottom: 10, }}></ActivityIndicator>
+                    <TouchableOpacity style={styles.btn} onPress={() => add()}>
+                        <Text> Create </Text>
+                    </TouchableOpacity>
+                </View>
+            </KeyboardAwareScrollView>
         </View>
     )
 }

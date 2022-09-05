@@ -130,28 +130,27 @@ function BackDrop({ scrollX }) {
 export default function DrawerHome({ navigation }) {
 
   useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", () => {
-      BackHandler.exitApp();
+    navigation.addListener("focus", () => {
+      const backAction = () => {
+        Alert.alert("Hold on!", "Are you sure you want to exit?", [
+          {
+            text: "Cancel",
+            onPress: () => null,
+            style: "cancel"
+          },
+          { text: "YES", onPress: () => BackHandler.exitApp() }
+        ]);
+        return true;
+      };
+      
+    
+      BackHandler.addEventListener("hardwareBackPress", backAction);
+      
+      return () =>
+        BackHandler.removeEventListener("hardwareBackPress", backAction);
     });
-  }, []);
-  const backAction = () => {
-    Alert.alert("Hold on!", "Are you sure you want to exit?", [
-      {
-        text: "Cancel",
-        onPress: () => null,
-        style: "cancel"
-      },
-      { text: "YES", onPress: () => BackHandler.exitApp() }
-    ]);
-    return true;
-  };
   
-  useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", backAction);
-  
-    return () =>
-      BackHandler.removeEventListener("hardwareBackPress", backAction);
-  }, []);
+  }, [navigation]);
 
   const scrollX = React.useRef(new Animated.Value(0)).current;
 
@@ -217,11 +216,8 @@ export default function DrawerHome({ navigation }) {
                 {search.length ? (
                     <Text>
                         {filterProduct.map((item, index) => (
-                            <View style={{
-                                flex: 1,
-                                paddingBottom: 30
-                            }}>
-                                <View key={index} style={{ flexDirection: 'column', paddingHorizontal: 10, flex: 1 }}>
+                  
+                                <View key={index} style={{flexDirection: 'column', paddingHorizontal: 10, paddingVertical: 10 }}>
                                     <TouchableOpacity
                                         onPress={() => navigation.navigate("ProductDetail", { item })}
                                     >
@@ -231,11 +227,10 @@ export default function DrawerHome({ navigation }) {
                                                 source={{ uri: item.imgURL }}
                                             />
                                         </View>
-                                        <Text style={{ color: "gold", fontSize: 20 }}>{item.name.substr(0, 10)}</Text>
-                                        <Text style={{ color: "gold", fontSize: 10 }}>{item.desc.substr(0, 20)}</Text>
+                                        <Text style={{ color: "#000", fontSize: 20 }}>{item.name.substr(0, 10)}</Text>
+                                        <Text style={{ color: "#000", fontSize: 10 }}>{item.desc.substr(0, 20)}</Text>
                                     </TouchableOpacity>
                                 </View>
-                            </View>
                         ))}
                     </Text>
                 ) : null}
@@ -404,6 +399,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    width: "100%",
+    height: "100%",
     
   },
   posterImage: {
@@ -475,6 +472,16 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     textAlign: "center",
   },
+  iimage: {
+    width: 150,
+    height: 150,
+    borderRadius: 20,
+  },
+  iimage1: {
+    width: 80,
+    height: 80,
+    borderRadius: 10,
+},
 });
 
 

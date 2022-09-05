@@ -49,18 +49,19 @@ const MenClothing = ({ route, navigation }) => {
             });
     };
 
-    function handleBackButtonClick() {
-        navigation.goBack();
-        return true;
-      }
-    
-      useEffect(() => {
-        BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
-        };
-      }, []);
-
+    useEffect(() => {
+        navigation.addListener("focus", () => {
+            function handleBackButtonClick() {
+                navigation.goBack();
+                return true;
+              }
+             
+                BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+                return () => {
+                  BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+                };  
+        })
+      }, [navigation]);
     return (
         <View style={styles.container}>
                 <View style={{ flex: 1 }}>
@@ -88,7 +89,7 @@ const MenClothing = ({ route, navigation }) => {
 
                                                 <View style={{padding: 10,width: 230}}>
                                                     <Text style={styles.text}>Name : {item.name}</Text>
-                                                    <Text style={styles.text}>About : {item.desc}</Text>
+                                                    <Text numberOfLines={2} style={styles.text}>Description : {item.desc}</Text>
                                                     <Text style={styles.text}>Price : $ {item.price}</Text>
                                                 </View>
                                             </View>

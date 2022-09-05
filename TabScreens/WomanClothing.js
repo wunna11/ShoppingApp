@@ -6,15 +6,7 @@ import { BackHandler } from 'react-native';
   const WomanClothing = ({ route, navigation }) => {
 
   const [data, setData] = useState([]);
-  const dataRef = firebase.firestore().collection("products")
-
-  const [category, setCategory] = useState('');
-  const [desc, setDesc] = useState('');
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
-  const [qty, setQty] = useState('');
-  const [imgURL, setImageURL] = useState("");
-
+    const dataRef = firebase.firestore().collection("products");
 
   useEffect(() => {
       read();
@@ -49,17 +41,19 @@ import { BackHandler } from 'react-native';
   });
 };
 
-function handleBackButtonClick() {
-  navigation.goBack();
-  return true;
-}
-
 useEffect(() => {
-  BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-  return () => {
-    BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
-  };
-}, []);
+  navigation.addListener("focus", () => {
+      function handleBackButtonClick() {
+          navigation.goBack();
+          return true;
+        }
+       
+          BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+          return () => {
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+          };  
+  })
+}, [navigation]);
 
   return (
     <View style={styles.container}>
@@ -88,7 +82,7 @@ useEffect(() => {
 
                   <View style={{padding: 10}}>
                       <Text style={styles.text}>Name : {item.name}</Text>
-                      <Text style={styles.text}>About : {item.desc}</Text>
+                      <Text numberOfLines={2} style={styles.text}>Description : {item.desc}</Text>
                       <Text style={styles.text}>Price : $ {item.price}</Text>
                   </View>
                 </View>

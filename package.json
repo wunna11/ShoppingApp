@@ -44,6 +44,7 @@
     "react-native-select-dropdown": "^2.0.4",
     "react-native-svg-transformer": "^1.0.0",
     "react-native-video": "^5.2.0",
+    "react-native-view-more-text": "^2.1.0",
     "react-navigation": "^4.4.4",
     "reanimated": "^0.0.1-alpha"
   },

@@ -15,7 +15,7 @@ import * as ImagePicker from "expo-image-picker";
 import SelectDropdown from 'react-native-select-dropdown'
 import { CommonActions } from '@react-navigation/native'
 import { BackHandler } from "react-native";
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 const UpdateProduct = ({ route, navigation }) => {
 
     const [product, setProduct] = useState([]);
@@ -88,10 +88,12 @@ const UpdateProduct = ({ route, navigation }) => {
 
         if (!selectedItem) {
             setError((prev) => {
+                setshow(false)
                 return {
                     ...prev,
-                    selectedItem: 'Please select category'
+                    selectedItem: 'Please choose option',
                 }
+              
             })
         }
         else {
@@ -184,20 +186,23 @@ const UpdateProduct = ({ route, navigation }) => {
         }
     };
 
-    function handleBackButtonClick() {
-        navigation.goBack();
-        return true;
-    }
-
     useEffect(() => {
-        BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        return () => {
-            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
-        };
-    }, []);
+        navigation.addListener("focus", () => {
+            function handleBackButtonClick() {
+                navigation.goBack();
+                return true;
+              }
+             
+                BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+                return () => {
+                  BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+                };  
+        })
+      }, [navigation]);
 
     return (
         <View style={styles.container}>
+            <KeyboardAwareScrollView>
             <View style={styles.imageContainer}>
 
                 <Image
@@ -260,16 +265,20 @@ const UpdateProduct = ({ route, navigation }) => {
                     rowTextForSelection={(item, index) => {
                         return item.name
                     }}
-                />
-                <Text style={{ color: 'red', fontSize: 20, fontWeight: '300' }}>{error.selectedItem}</Text>
+                    />
+                     {!selectedItem  &&
+                                  <Text style={{ color: 'red', fontSize: 18, fontWeight: '300' }}>{error.selectedItem}</Text>
+                                }
+                
             </View>
             <View style={{ justifyContent: "center", alignItems: "center", }}>
-                <ActivityIndicator size="large" color="#fff700" animating={show} style={{ marginTop: -15, paddingBottom: 10, }}>
+                <ActivityIndicator size="large" color="#fff700" animating={show} style={{ paddingBottom: 10, }}>
                 </ActivityIndicator>
                 <TouchableOpacity style={styles.btn} onPress={() => update()}>
                     <Text>Update </Text>
                 </TouchableOpacity>
-            </View>
+                </View>
+                </KeyboardAwareScrollView>
         </View>
     );
 };

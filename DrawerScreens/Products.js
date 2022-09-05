@@ -35,7 +35,7 @@ export default function Products({ navigation }) {
                 name="All"
                 component={All}
                 options={{
-
+                    headerShown:false,
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="home" color={'#FFE89C'} size={30} />
                     ),
@@ -45,7 +45,7 @@ export default function Products({ navigation }) {
                 name="Man"
                 component={MenClothing}
                 options={{
-
+                    headerShown:false,
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="man" color={'#FFE89C'} size={30} />
                     ),
@@ -55,6 +55,7 @@ export default function Products({ navigation }) {
                 name="Woman"
                 component={WomanClothing}
                 options={{
+                    headerShown:false,
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="woman" color={'#FFE89C'} size={30} />
                     ),
@@ -65,7 +66,7 @@ export default function Products({ navigation }) {
                 name="Shoe"
                 component={Shoes}
                 options={{
-
+                    headerShown:false,
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="shoe-heel" color={'#FFE89C'} size={30} />
                     ),
@@ -75,7 +76,7 @@ export default function Products({ navigation }) {
                 name="Accessory"
                 component={Accessories}
                 options={{
-
+                    headerShown:false,
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="necklace" color={'#FFE89C'} size={30} />
                     ),
