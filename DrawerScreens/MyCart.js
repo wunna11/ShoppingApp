@@ -16,6 +16,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { CommonActions } from "@react-navigation/native";
 import { useIsFocused } from '@react-navigation/native';
 import { BackHandler } from "react-native";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 const MyCart = ({ route, navigation }) => {
@@ -111,16 +112,16 @@ const MyCart = ({ route, navigation }) => {
     useEffect(() => {
         navigation.addListener("focus", () => {
             function handleBackButtonClick() {
-                navigation.goBack();
+                navigation.navigate('Products');
                 return true;
-              }
-             
-                BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-                return () => {
-                  BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
-                };  
+            }
+
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+            return () => {
+                BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            };
         })
-      }, [navigation]);
+    }, [navigation]);
 
 
     // Add pending Order to firebase database
@@ -309,7 +310,20 @@ const MyCart = ({ route, navigation }) => {
                 )
                     : (
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={styles.noItem}>There are no item in your cart</Text>
+                            <Text style={styles.noItem}>There is no item in your cart!</Text>
+                            <TouchableOpacity onPress={() => navigation.navigate('Products')}>
+                                <View style={{ flexDirection: 'row', paddingTop: 10 }}>
+                                    <Text style={{ color: "#f7d081", fontSize: 18, marginTop: 14 }}>Let's Start Shopping </Text>
+                                    <MaterialCommunityIcons
+                                        name='shopping'
+                                        style={{
+                                            fontSize: 30,
+                                            color: '#f7d081',
+                                            margin: 10,
+                                        }}
+                                    />
+                                </View>
+                            </TouchableOpacity>
                         </View>
                     )
             }
