@@ -7,7 +7,6 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Alert,
-
   Dimensions,
   Animated,
 } from "react-native";
@@ -19,6 +18,7 @@ import { firebase } from "../config";
 import { SearchBar } from "react-native-elements";
 import * as Animatable from "react-native-animatable";
 import UserTrendList from "./UserTrendList";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const ImageHome = [
   "https://i.pinimg.com/564x/e1/33/04/e1330445b52b2076d17e0428709fa7d7.jpg",
@@ -62,7 +62,7 @@ function BackDrop({ scrollX }) {
 
 
 
-  
+
   return (
     <View
       style={
@@ -74,7 +74,7 @@ function BackDrop({ scrollX }) {
             top: 0,
           },
         ],
-        StyleSheet.absoluteFillObject)
+          StyleSheet.absoluteFillObject)
       }
     >
       {ImageHome.map((imagen, index) => {
@@ -113,15 +113,15 @@ function BackDrop({ scrollX }) {
       />
 
       <Animatable.View animation="fadeInUp" duration={2000}>
-      <Animatable.View
-                            animation="pulse"
-                            direction='alternate'
-                            iterationCount='infinite'
-                        >
+        <Animatable.View
+          animation="pulse"
+          direction='alternate'
+          iterationCount='infinite'
+        >
           <Text style={styles.label1}>Welcome {user?.username}!</Text>
-          </Animatable.View>
+        </Animatable.View>
         <Text style={styles.label2}> Find your style with WTTH</Text>
-       
+
       </Animatable.View>
     </View>
   );
@@ -142,98 +142,110 @@ export default function DrawerHome({ navigation }) {
         ]);
         return true;
       };
-      
-    
+
+
       BackHandler.addEventListener("hardwareBackPress", backAction);
-      
+
       return () =>
         BackHandler.removeEventListener("hardwareBackPress", backAction);
     });
-  
+
   }, [navigation]);
 
   const scrollX = React.useRef(new Animated.Value(0)).current;
 
-    const [data, setData] = useState([]);
-    const dataRef = firebase.firestore().collection("products");
+  const [data, setData] = useState([]);
+  const dataRef = firebase.firestore().collection("products");
+  const [search, setSearch] = useState("");
+  const [filterProduct, setFilterProduct] = useState([]);
+  useEffect(() => {
+    read();
+  }, []);
 
-    const [search, setSearch] = useState("");
-    const [filterProduct, setFilterProduct] = useState([]);
+  // Search item
+  useEffect(() => {
+    setFilterProduct(
+      data.filter(
+        (res) =>
+          res.name.toLowerCase().includes(search.toLowerCase()) ||
+          res.desc.toLowerCase().includes(search.toLowerCase()) ||
+          res.category_name.toLowerCase().includes(search.toLowerCase())
+      )
+    );
+  }, [search, data]);
 
-    // read data
-    const read = () => {
 
-        dataRef.orderBy('name', 'desc').limit(4).onSnapshot((querySnapshot) => {
-            const data = [];
-            querySnapshot.forEach((doc) => {
-                const { imgURL } = doc.data();
-                const { name } = doc.data();
-                const { desc } = doc.data();
-                const { price } = doc.data();
-                const { qty } = doc.data();
-                const { category_name } = doc.data();
+  // read data
+  const read = () => {
 
-                data.push({
-                    id: doc.id,
-                    imgURL,
-                    name,
-                    desc,
-                    price,
-                    qty,
-                    category_name,
-                });
-            });
-            setData(data);
+    dataRef.orderBy('name', 'desc').onSnapshot((querySnapshot) => {
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        const { imgURL } = doc.data();
+        const { name } = doc.data();
+        const { desc } = doc.data();
+        const { price } = doc.data();
+        const { qty } = doc.data();
+        const { category_name } = doc.data();
+
+        data.push({
+          id: doc.id,
+          imgURL,
+          name,
+          desc,
+          price,
+          qty,
+          category_name,
         });
-    };
+      });
+      setData(data);
+    });
+  };
 
 
-    useEffect(() => {
-        read();
-    }, []);
 
-    // Search item
-    useEffect(() => {
-        setFilterProduct(
-            data.filter(
-                (res) =>
-                    res.name.toLowerCase().includes(search.toLowerCase()) ||
-                    res.desc.toLowerCase().includes(search.toLowerCase()) ||
-                    res.category_name.toLowerCase().includes(search.toLowerCase())
-            )
-        );
-    }, [search, data]);
+
+
 
   return (
     <SafeAreaView style={styles.container}>
       <View>
-      <SearchBar
-                    placeholder="Search"
-                    onChangeText={(search) => setSearch(search)}
-                    value={search}
-                />
 
-                {search.length ? (
-                    <Text>
-                        {filterProduct.map((item, index) => (
-                  
-                                <View key={index} style={{flexDirection: 'column', paddingHorizontal: 10, paddingVertical: 10 }}>
-                                    <TouchableOpacity
-                                        onPress={() => navigation.navigate("ProductDetail", { item })}
-                                    >
-                                        <View>
-                                            <Image
-                                                style={styles.iimage1}
-                                                source={{ uri: item.imgURL }}
-                                            />
-                                        </View>
-                                        <Text style={{ color: "#000", fontSize: 20 }}>{item.name.substr(0, 10)}</Text>
-                                        <Text style={{ color: "#000", fontSize: 10 }}>{item.desc.substr(0, 20)}</Text>
-                                    </TouchableOpacity>
-                                </View>
-                        ))}
-                    </Text>
-                ) : null}
+        <SearchBar
+          placeholder="Search"
+          onChangeText={(search) => setSearch(search)}
+          value={search}
+        />
+
+        {search.length ? (
+
+          <KeyboardAwareScrollView>
+            <Text>
+
+              {filterProduct.map((item, index) => (
+
+                <View key={index} style={{ flexDirection: 'column', paddingHorizontal: 10, paddingVertical: 10 }}>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("ProductDetail", { item })}
+                  >
+
+                    <View>
+                      <Image
+                        style={styles.iimage1}
+                        source={{ uri: item.imgURL }}
+                      />
+                    </View>
+
+                    <Text style={{ color: "#000", fontSize: 18 }}>{item.name.substr(0, 10)}</Text>
+
+
+                  </TouchableOpacity>
+                </View>
+
+              ))}
+            </Text>
+          </KeyboardAwareScrollView>
+        ) : null}
       </View>
       <ScrollView>
         <BackDrop scrollX={scrollX} />
@@ -378,18 +390,18 @@ export default function DrawerHome({ navigation }) {
           </TouchableOpacity>
         </Animatable.View>
 
-      <ScrollView nestedScrollEnabled={true} style={{ width: "100%" }} >
-    <Animatable.View
-          animation="fadeInUp"
-          duration={3000}
-          style={styles.row}>
-    <ScrollView horizontal={true} style={{ width: "100%" }}>
-    <UserTrendList/>
-    </ScrollView>
-    </Animatable.View>
-    </ScrollView>
-     
-       
+        <ScrollView nestedScrollEnabled={true} style={{ width: "100%" }} >
+          <Animatable.View
+            animation="fadeInUp"
+            duration={3000}
+            style={styles.row}>
+            <ScrollView horizontal={true} style={{ width: "100%" }}>
+              <UserTrendList />
+            </ScrollView>
+          </Animatable.View>
+        </ScrollView>
+
+
       </ScrollView>
     </SafeAreaView>
   );
@@ -401,7 +413,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     width: "100%",
     height: "100%",
-    
+
   },
   posterImage: {
     width: "100%",
@@ -481,7 +493,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 10,
-},
+  },
 });
 
 

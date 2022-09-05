@@ -32,22 +32,24 @@ export default function ForgotPassword({ navigation }) {
                 <SafeAreaView style={{ flex: 1, padding: 5 }}>
 
                     <KeyboardAwareScrollView>
-                      
-                            <View style={{ flex: 1, marginLeft: 200, }}>
 
-                                <Text style={{ fontSize: 40, paddingLeft: 30, marginTop: 60, fontWeight: "900", color: "#000" }}>WTTH</Text>
-                                <Image
-                                    style={{
-                                        height: 80,
-                                        width: 80,
-                                        marginLeft: 45,
-                                        marginTop: 15,
-                                        borderRadius: 50
-                                    }}
-                                    source={require('../assets/logo.png')}
-                                />
-                            </View>
-                       
+                        <View style={{ flex: 1, marginLeft: 200, }}>
+
+                            <Text style={{ fontSize: 40, paddingLeft: 30, marginTop: 60, fontWeight: "900", color: "#000" }}>WTTH</Text>
+                            <Image
+                                style={{
+                                    height: 80,
+                                    width: 80,
+                                    marginLeft: 45,
+                                    marginTop: 15,
+                                    borderRadius: 50,
+                                    borderWidth: 1,
+                                    borderColor: "#000"
+                                }}
+                                source={require('../assets/logo.png')}
+                            />
+                        </View>
+
                         <Animatable.View
                             animation="fadeInUp"
                             duration={1000}
@@ -55,7 +57,7 @@ export default function ForgotPassword({ navigation }) {
                         >
                             <View style={{ flex: 1, padding: 20, marginTop: 100 }}>
 
-                                <Text style={{ fontSize: 20, fontWeight: 'bold', color: "#fff",  }}>Forgot Password?</Text>
+                                <Text style={{ fontSize: 20, fontWeight: 'bold', color: "#fff", }}>Forgot Password?</Text>
 
                                 <TextInput style={styles.textBoxes}
                                     value={email}
