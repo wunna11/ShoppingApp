@@ -238,7 +238,7 @@ const CreateProduct = ({ navigation }) => {
                 />
                 {
                     !productName && 
-                    <Text style={{ color: 'red', fontSize: 18, fontWeight: '300', marginLeft: 50 }}>{error.productName}</Text>
+                    <Text style={{ color: 'red', fontSize: 18, fontWeight: '300', marginLeft: 60 }}>{error.productName}</Text>
                 }
 
                 <TextInput
@@ -252,7 +252,7 @@ const CreateProduct = ({ navigation }) => {
                 />
                 {
                     !desc && 
-                    <Text style={{ color: 'red', fontSize: 18, fontWeight: '300', marginLeft: 50 }}>{error.desc}</Text>
+                    <Text style={{ color: 'red', fontSize: 18, fontWeight: '300', marginLeft: 60 }}>{error.desc}</Text>
                 }
 
                 <TextInput
@@ -265,7 +265,7 @@ const CreateProduct = ({ navigation }) => {
                 />
                 {
                     !price && 
-                    <Text style={{ color: 'red', fontSize: 18, fontWeight: '300', marginLeft: 50 }}>{error.price}</Text>
+                    <Text style={{ color: 'red', fontSize: 18, fontWeight: '300', marginLeft: 60 }}>{error.price}</Text>
                 }
 
                 <View style={styles.select}>
@@ -312,27 +312,24 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'black',
         marginHorizontal: 89,
-        //marginLeft: 90,
-        //marginRight: 90,
-        marginBottom: 30,
-        marginTop: 20
+        marginBottom: 20,
     },
 
     input: {
-        marginLeft: 50,
-        width: '65%',
+        marginLeft: 60,
+        width: '70%',
         fontSize: 18,
-        padding: 10,
+        paddingLeft: 10,
         borderColor: '#ffd700',
         borderBottomWidth: 2,
         color: '#fff',
         borderRadius: 10,
-        paddingTop: 10,
-        marginBottom: 10,
+        paddingTop: 5,
+        marginBottom: 5,
     },
     inputDesc: {
-        marginLeft: 50,
-        width: '65%',
+        marginLeft: 60,
+        width: '70%',
         fontSize: 18,
         paddingLeft: 10,
         borderColor: '#ffd700',
@@ -340,16 +337,15 @@ const styles = StyleSheet.create({
         color: '#fff',
         borderRadius: 10,
         //paddingTop: 10,
-        marginBottom: 10,
+        //marginBottom: 10,
     },
 
     btn: {
-        width: "100%",
         backgroundColor: "#ffd700",
         width: "30%",
         padding: 10,
-        marginLeft: 40,
-        marginRight: 30,
+        //marginBottom: 20,
+        //marginRight: 30,
         borderRadius: 5,
         color: "#000",
         justifyContent: "center",
@@ -358,7 +354,6 @@ const styles = StyleSheet.create({
     },
 
     imageContainer: {
-        marginTop: 10,
         marginLeft: "30%",
         borderWidth: 1,
         borderColor: "#000",

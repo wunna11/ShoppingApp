@@ -32,6 +32,7 @@ export default function ForgotPassword({ navigation }) {
                 <SafeAreaView style={{ flex: 1, padding: 5 }}>
 
                     <KeyboardAwareScrollView>
+
                       
                             <View style={{ flex: 1, marginLeft: 200, }}>
 
@@ -50,6 +51,7 @@ export default function ForgotPassword({ navigation }) {
                                 />
                             </View>
                        
+
                         <Animatable.View
                             animation="fadeInUp"
                             duration={1000}
@@ -57,7 +59,7 @@ export default function ForgotPassword({ navigation }) {
                         >
                             <View style={{ flex: 1, padding: 20, marginTop: 100 }}>
 
-                                <Text style={{ fontSize: 20, fontWeight: 'bold', color: "#fff",  }}>Forgot Password?</Text>
+                                <Text style={{ fontSize: 20, fontWeight: 'bold', color: "#fff", }}>Forgot Password?</Text>
 
                                 <TextInput style={styles.textBoxes}
                                     value={email}

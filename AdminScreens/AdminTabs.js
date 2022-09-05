@@ -41,6 +41,10 @@ export default function AdminTab({ navigation }) {
                 tabBarLabelStyle: {
                     fontSize: 12
                 },
+                "tabBarActiveTintColor": "#fff",
+                "tabBarInactiveTintColor": "#fff",
+                "tabBarActiveBackgroundColor": "#757271",
+                "tabBarInactiveBackgroundColor": "#000",
                 tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons name="home" color={'#ffd700'} size={30} />
                 ),

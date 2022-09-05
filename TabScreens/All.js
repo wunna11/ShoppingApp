@@ -11,9 +11,10 @@ import { firebase } from "../config";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { SearchBar } from "react-native-elements";
 import { BackHandler } from "react-native";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const All = ({ navigation }) => {
-  
+
   const [data, setData] = useState([]);
   const dataRef = firebase.firestore().collection("products");
   const [search, setSearch] = useState("");
@@ -25,29 +26,29 @@ const All = ({ navigation }) => {
 
   useEffect(() => {
     navigation.addListener("focus", () => {
-        function handleBackButtonClick() {
-            navigation.goBack();
-            return true;
-          }
-         
-            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-            return () => {
-              BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
-            };  
+      function handleBackButtonClick() {
+        navigation.goBack();
+        return true;
+      }
+
+      BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+      return () => {
+        BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+      };
     })
   }, [navigation]);
 
   // Search item
   useEffect(() => {
     setFilterProduct(
-        data.filter(
-            (res) =>
-                res.name.toLowerCase().includes(search.toLowerCase()) ||
-                res.desc.toLowerCase().includes(search.toLowerCase()) ||
-                res.category_name.toLowerCase().includes(search.toLowerCase())
-        )
+      data.filter(
+        (res) =>
+          res.name.toLowerCase().includes(search.toLowerCase()) ||
+          res.desc.toLowerCase().includes(search.toLowerCase()) ||
+          res.category_name.toLowerCase().includes(search.toLowerCase())
+      )
     );
-}, [search, data]);
+  }, [search, data]);
 
 
   // read data
@@ -84,61 +85,64 @@ const All = ({ navigation }) => {
         value={search}
       />
 
-{search.length ? (
-                    <Text>
-                        {filterProduct.map((item,index) => (
-                            <View key={index} style={{flexDirection: 'column', paddingHorizontal: 10, paddingVertical: 10}}>
-                                <TouchableOpacity
-                                    onPress={() => navigation.navigate("ProductDetail", { item })}
-                                >
-                                    <View>
-                                        <Image
-                                            style={styles.iimage1}
-                                            source={{ uri: item.imgURL }}
-                                        />
-                                    </View>
-                                    <Text style={{ color: "#fff", fontSize: 20 }}>{item.name.substr(0, 10)}</Text>
-                                    <Text style={{ color: "#fff", fontSize: 10 }}>{item.desc.substr(0, 20)}</Text>
-                                </TouchableOpacity>
-                            </View>
-                        ))}
-                    </Text>
-                ) : null}
+      {search.length ? (
+        <KeyboardAwareScrollView>
+          <Text>
+
+            {filterProduct.map((item, index) => (
+              <View key={index} style={{ flexDirection: 'column', paddingHorizontal: 10, paddingVertical: 10 }}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("ProductDetail", { item })}
+                >
+                  <View>
+                    <Image
+                      style={styles.iimage1}
+                      source={{ uri: item.imgURL }}
+                    />
+                  </View>
+                  <Text style={{ color: "#fff", fontSize: 18 }}>{item.name.substr(0, 10)}</Text>
+
+                </TouchableOpacity>
+              </View>
+            ))}
+          </Text>
+        </KeyboardAwareScrollView>
+      ) : null}
       <View style={{ flex: 1 }}>
-        <View style={{marginBottom:20}}>
+        <View style={{ marginBottom: 20 }}>
           <Text style={styles.expoView}>"Shop to be Smart with WTTH"</Text>
         </View>
         <SafeAreaView style={{ flex: 2, padding: 5, marginTop: -40 }}>
           <FlatList
-              data={data}
-              keyExtractor={(_,i) => String(i)}
-              numColumns={2}
-              showsVerticalScrollIndicator={false}
+            data={data}
+            keyExtractor={(_, i) => String(i)}
+            numColumns={2}
+            showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <TouchableOpacity
-              onPress={() => navigation.navigate("ProductDetail", { item })}
+                onPress={() => navigation.navigate("ProductDetail", { item })}
               >
                 <View style={{ padding: 15, paddingTop: 0, }}>
-                <View style={{ paddingTop: 5, flexDirection: "column",}}>
-                  <View>
-                    <Image
-                      style={styles.iimage}
-                      source={{ uri: item.imgURL }}
-                    />
-                  </View>
+                  <View style={{ paddingTop: 5, flexDirection: "column", }}>
+                    <View>
+                      <Image
+                        style={styles.iimage}
+                        source={{ uri: item.imgURL }}
+                      />
+                    </View>
 
-                    <View style={{width: 150,}}>
+                    <View style={{ width: 150, }}>
                       <Text style={styles.expoText}>{item.category_name}</Text>
                       <Text style={styles.text}>Name : {item.name}</Text>
                       <Text style={styles.text}>Price : $ {item.price}</Text>
+                    </View>
                   </View>
                 </View>
-              </View>
               </TouchableOpacity>
             )}
-            />
+          />
         </SafeAreaView>
-        </View>
+      </View>
     </View>
   );
 };
@@ -161,7 +165,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 10,
-},
+  },
   expoView: {
     textAlign: 'center',
     fontSize: 22,
