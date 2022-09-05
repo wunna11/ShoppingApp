@@ -15,6 +15,7 @@ const CreateProduct = ({ navigation }) => {
     const [desc, setDesc] = useState('');
     const [price, setPrice] = useState('');
     const [category, setCategory] = useState('');
+    const [error, setError] = useState({});
 
     //category
     const [data, setData] = useState([]);
@@ -74,69 +75,121 @@ const CreateProduct = ({ navigation }) => {
             setshow(false)
         }, 4000)
 
-        if (
-            (image !== null) ||
-            (productName && productName.length > 0) ||
-            (desc && desc.length > 0) ||
-            (price && price.length > 0) ||
-            (category && category.length > 0)
-        ) {
-            setUploading(true);
-            const response = await fetch(image.uri);
-            const blob = await response.blob();
-            const filename = image.uri.substring(image.uri.lastIndexOf("/") + 1);
-            var ref = firebase.storage().ref("products_images/").child(filename).put(blob);
-            try {
-                await ref;   // const setImageURL = await firebase.storage().ref(`Shoes/${filename}`).getDownloadURL();//        console.log("print ref :", setImageURL);
-            } catch (e) {
-                console.log(e);
+        if (!image) {
+            setError((prev) => {
+                setshow(false)
+                return {
+                    ...prev,
+                    image: 'Please select image',
+                }
+            })
+        }
+
+        if (!productName) {
+            setError((prev) => {
+                setshow(false)
+                return {
+                    ...prev,
+                    productName: 'Please Enter Name',
+                }
+            })
+        }
+
+        if (!desc) {
+            setError((prev) => {
+                setshow(false)
+                return {
+                    ...prev,
+                    desc: 'Please Enter Description',
+                }
+            })
+        }
+
+        if (!price) {
+            setError((prev) => {
+                setshow(false)
+                return {
+                    ...prev,
+                    price: 'Please Enter Price',
+                }
+            })
+        }
+
+        if (!selectedItem) {
+            setError((prev) => {
+                setshow(false)
+                return {
+                    ...prev,
+                    selectedItem: 'Please choose option',
+                }
+              
+            })
+        } else {
+            if (
+                (image !== null) ||
+                (productName && productName.length > 0) ||
+                (desc && desc.length > 0) ||
+                (price && price.length > 0) ||
+                (category && category.length > 0)
+            ) {
+                setUploading(true);
+                const response = await fetch(image.uri);
+                const blob = await response.blob();
+                const filename = image.uri.substring(image.uri.lastIndexOf("/") + 1);
+                var ref = firebase.storage().ref("products_images/").child(filename).put(blob);
+                try {
+                    await ref;   // const setImageURL = await firebase.storage().ref(`Shoes/${filename}`).getDownloadURL();//        console.log("print ref :", setImageURL);
+                } catch (e) {
+                    console.log(e);
+                }
+                const setImageURL = await firebase.storage().ref(`products_images/${filename}`).getDownloadURL();
+                console.log("print ref :", setImageURL);
+    
+                setUploading(false);
+                //Alert.alert("Photo uploaded..!!");  //optional
+                const FireImage = { fireuri: filename }; //optional
+                console.log(FireImage);   //optional
+    
+                setImage(null);
+    
+                const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+    
+                console.log("Database Image ", imgURL);
+    
+                const data = {
+                    imgURL: setImageURL,
+                    name: productName,
+                    desc: desc,
+                    price: parseFloat(price),
+                    category_id: selectedItem.id,
+                    category_name: selectedItem.name,
+                    createdAt: timestamp,
+                };
+                dataRef
+                    .add(data)
+                    .then(() => {
+                        //imgURL(""),
+                        setProductName("");
+                        setDesc("");
+                        setPrice("");
+                        //setCategory("");
+                    })
+                    .then(async () => {
+    
+                        Alert.alert("Successfully added!");
+    
+                        navigation.dispatch(
+                            CommonActions.reset({
+                                index: 0,
+                                routes: [{ name: "Admin" }],
+                            })
+                        );
+                    })
+                    .catch((error) => {
+                        alert(error);
+                    });
             }
-            const setImageURL = await firebase.storage().ref(`products_images/${filename}`).getDownloadURL();
-            console.log("print ref :", setImageURL);
 
-            setUploading(false);
-            //Alert.alert("Photo uploaded..!!");  //optional
-            const FireImage = { fireuri: filename }; //optional
-            console.log(FireImage);   //optional
-
-            setImage(null);
-
-            const timestamp = firebase.firestore.FieldValue.serverTimestamp();
-
-            console.log("Database Image ", imgURL);
-
-            const data = {
-                imgURL: setImageURL,
-                name: productName,
-                desc: desc,
-                price: parseFloat(price),
-                category_id: selectedItem.id,
-                category_name: selectedItem.name,
-                createdAt: timestamp,
-            };
-            dataRef
-                .add(data)
-                .then(() => {
-                    //imgURL(""),
-                    setProductName("");
-                    setDesc("");
-                    setPrice("");
-                    //setCategory("");
-                })
-                .then(async () => {
-
-                    Alert.alert("Successfully added!");
-
-                    navigation.dispatch(
-                        CommonActions.reset({
-                            index: 0,
-                            routes: [{ name: "Admin" }],
-                        })
-                    );
-                })
-                .catch((error) => {
-                    alert(error);
-                });
         }
     };
 
@@ -169,8 +222,13 @@ const CreateProduct = ({ navigation }) => {
                     style={[styles.selectButton, styles.ImgBot]}
                     onPress={pickImage}
                 >
-                    <Text> Pick an Image</Text>
+                    <Text> Pick an Image</Text>                    
                 </TouchableOpacity>
+                {!image && 
+                        <Text style={{ color: 'red', fontSize: 18, fontWeight: '300', marginLeft: '30%' }}>{error.image}</Text>
+                }
+
+
                 <TextInput
                     style={styles.input}
                     placeholder='Name'
@@ -178,6 +236,10 @@ const CreateProduct = ({ navigation }) => {
                     value={productName}
                     placeholderTextColor="#c4c4c2"
                 />
+                {
+                    !productName && 
+                    <Text style={{ color: 'red', fontSize: 18, fontWeight: '300', marginLeft: 50 }}>{error.productName}</Text>
+                }
 
                 <TextInput
                     multiline={true}
@@ -188,6 +250,10 @@ const CreateProduct = ({ navigation }) => {
                     value={desc}
                     placeholderTextColor="#c4c4c2"
                 />
+                {
+                    !desc && 
+                    <Text style={{ color: 'red', fontSize: 18, fontWeight: '300', marginLeft: 50 }}>{error.desc}</Text>
+                }
 
                 <TextInput
                     style={styles.input}
@@ -197,6 +263,10 @@ const CreateProduct = ({ navigation }) => {
                     keyboardType='numeric'
                     placeholderTextColor="#c4c4c2"
                 />
+                {
+                    !price && 
+                    <Text style={{ color: 'red', fontSize: 18, fontWeight: '300', marginLeft: 50 }}>{error.price}</Text>
+                }
 
                 <View style={styles.select}>
                     <SelectDropdown
@@ -212,7 +282,11 @@ const CreateProduct = ({ navigation }) => {
                         rowTextForSelection={(item, index) => {
                             return item.name
                         }}
+                        
                     />
+                   {!selectedItem  &&
+                                  <Text style={{ color: 'red', fontSize: 18, fontWeight: '300' }}>{error.selectedItem}</Text>
+                                }
                 </View>
 
                 <View style={{ justifyContent: "center", alignItems: 'center' }}>

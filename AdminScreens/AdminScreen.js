@@ -252,7 +252,6 @@ export default AdminScreen;
 const styles = StyleSheet.create({
     adminView: {
         padding: 10,
-        marginTop: -25,
         flexDirection: "row",
         justifyContent: 'space-between',
         alignItems: 'space-between',

@@ -57,7 +57,7 @@ export default function Home(navigation) {
             <Drawer.Screen
                 name="DrawerHome"
                 component={DrawerHome}
-                options={{
+                options={({ navigation }) => ({
                     //headerShown: false,
                     title: 'Home',
                     drawerIcon: ({ color, size }) => (
@@ -67,8 +67,19 @@ export default function Home(navigation) {
                     headerStyle: {
                         backgroundColor: '#000'
                     },
+                    headerRight: () => (
+                        <MaterialCommunityIcons
+                            name="cart"
+                            style={{
+                                fontSize: 30,
+                                color: '#f7d081',
+                                margin: 10,
+                            }}
+                            onPress={() => navigation.navigate('MyCart')}
+                        />
+                    ),
                     
-                }}
+                })}
             />
             <Drawer.Screen
                 name="Products"
