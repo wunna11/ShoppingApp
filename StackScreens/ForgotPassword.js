@@ -42,7 +42,9 @@ export default function ForgotPassword({ navigation }) {
                                         width: 80,
                                         marginLeft: 45,
                                         marginTop: 15,
-                                        borderRadius: 50
+                                        borderRadius: 50,
+                                        borderWidth: 1,
+                                        borderColor: "#000"
                                     }}
                                     source={require('../assets/logo.png')}
                                 />
