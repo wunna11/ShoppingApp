@@ -1,9 +1,11 @@
-import { ImageBackground, StyleSheet, Text, View, Image, TouchableOpacity, Alert } from "react-native";
+import { ScrollView, StyleSheet, Text, View, Image, TouchableOpacity, Alert } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { firebase } from "../config";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { BackHandler } from "react-native";
+import ViewMoreText from 'react-native-view-more-text';
+import { ScrollViewBase } from "react-native";
 
 const ProductDetail = ({ route, navigation }) => {
     const dataRef = firebase.firestore().collection("products");
@@ -81,23 +83,46 @@ const ProductDetail = ({ route, navigation }) => {
         }
     }
 
-    function handleBackButtonClick() {
-        navigation.goBack();
-        return true;
-    }
-
     useEffect(() => {
-        BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        return () => {
-            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
-        };
-    }, []);
+        navigation.addListener("focus", () => {
+            function handleBackButtonClick() {
+                navigation.goBack();
+                return true;
+              }
+             
+                BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+                return () => {
+                  BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+                };  
+        })
+    }, [navigation]);
+    // Show more or less Text
+  const renderViewMore = (onPress) => {
+    return (
+      <TouchableOpacity onPress={onPress} style={{ paddingTop: 10 }}>
+        <Text style={styles.text1}>View More</Text>
+      </TouchableOpacity>
+    )
+  }
+
+  const renderViewLess = (onPress) => {
+    return (
+      <TouchableOpacity onPress={onPress} style={{ paddingTop: 10 }}>
+        <Text style={styles.text1}>View Less</Text>
+      </TouchableOpacity>
+    )
+  }
 
     return (
+
         <View style={styles.container}>
+           
+           
             <Image style={styles.iimage} source={{ uri: imgURL }} />
+            <ScrollView>
+                <View>
             <View>
-                <Text style={styles.text}>ID : {id}</Text>
+               
                 <Text style={styles.text}>Name : {name}</Text>
                 <Text style={styles.text}>Price : $ {price}</Text>
                 <View style={{ flexDirection: 'row', }}>
@@ -112,17 +137,33 @@ const ProductDetail = ({ route, navigation }) => {
                             onPress={increase} />
                     </View>
                 </View>
-                <Text style={styles.text}>Description : {desc.substr(0, 10)}...</Text>
-                <View style={{ marginTop: 80 }}>
+            <View style={{padding:10}}>
+                      <ViewMoreText
+                        numberOfLines={2}
+                        renderViewMore={renderViewMore}
+                        renderViewLess={renderViewLess}
+                    >
+                    
+                            <Text style={styles.text}>Description : {desc}</Text>
+                          
+                      </ViewMoreText>
+                  
+                      </View> 
+                </View>
+                
+                <View style={{ marginTop: 30 }}>
                     <TouchableOpacity
                         style={styles.button}
                         onPress={addToCart}
                     >
                         <Text style={{ fontSize: 16, color: '#444', fontWeight: 'bold' }}>Add To Cart</Text>
-                    </TouchableOpacity>
+                </TouchableOpacity>
+                
                 </View>
+                </View>
+                </ScrollView>
             </View>
-        </View>
+      
     );
 };
 
@@ -175,4 +216,12 @@ const styles = StyleSheet.create({
         letterSpacing: 1,
         padding: 10
     },
+    text1: {
+        fontSize: 13,
+        color: "#fff",
+        paddingBottom: 10,
+        fontWeight: "500",
+        letterSpacing: 1,
+        width: 150,
+      },
 });

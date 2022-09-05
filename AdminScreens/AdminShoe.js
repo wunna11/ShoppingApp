@@ -1,80 +1,90 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View, Text, FlatList ,Image,TouchableOpacity,SafeAreaView ,ImageBackground} from 'react-native';
+import { StyleSheet, View, Text, FlatList, Image, TouchableOpacity, SafeAreaView, ImageBackground } from 'react-native';
 import { firebase } from '../config'
 import { BackHandler } from 'react-native';
-
-  const AdminShoes = ({ route, navigation }) => {
+import ViewMoreText from 'react-native-view-more-text';
+const AdminShoes = ({ route, navigation }) => {
 
   const [data, setData] = useState([]);
   const dataRef = firebase.firestore().collection("products")
 
-  const [category, setCategory] = useState('');
-  const [desc, setDesc] = useState('');
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
-const [qty, setQty] = useState('');
-const [imgURL, setImageURL] = useState("");
-
-
   useEffect(() => {
-      read();
+    read();
   }, [])
 
- // read data
- const read = () => {
-   dataRef
-     .where('category_name', '==', 'Shoe')
-    // .orderBy("createdAt", "desc")
-     .onSnapshot((querySnapshot) => {
-    const data = [];
-    querySnapshot.forEach((doc) => {
-      const { imgURL } = doc.data();
-      const { name } = doc.data();
-      const { desc } = doc.data();
-      const { price } = doc.data();
-      const { qty } = doc.data();
-      const { category_name } = doc.data();
+  // read data
+  const read = () => {
+    dataRef
+      .where('category_name', '==', 'Shoe')
+      // .orderBy("createdAt", "desc")
+      .onSnapshot((querySnapshot) => {
+        const data = [];
+        querySnapshot.forEach((doc) => {
+          const { imgURL } = doc.data();
+          const { name } = doc.data();
+          const { desc } = doc.data();
+          const { price } = doc.data();
+          const { qty } = doc.data();
+          const { category_name } = doc.data();
 
-      data.push({
-        id: doc.id,
-        imgURL,
-        name,
-        desc,
-        price,
-        qty,
-        category_name,
+          data.push({
+            id: doc.id,
+            imgURL,
+            name,
+            desc,
+            price,
+            qty,
+            category_name,
+          });
+        });
+        setData(data);
       });
-    });
-    setData(data);
-  });
-    };
-    
-    function handleBackButtonClick() {
-      navigation.goBack();
-      return true;
-    }
-  
-    useEffect(() => {
+  };
+
+  useEffect(() => {
+    navigation.addListener("focus", () => {
+      function handleBackButtonClick() {
+        navigation.goBack();
+        return true;
+      }
+
       BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
       return () => {
         BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
       };
-    }, []);
+    })
+  }, [navigation]);
+  // Show more or less Text
+  const renderViewMore = (onPress) => {
+    return (
+      <TouchableOpacity onPress={onPress} style={{ paddingTop: 10 }}>
+        <Text style={styles.text1}>View More</Text>
+      </TouchableOpacity>
+    )
+  }
+
+  const renderViewLess = (onPress) => {
+    return (
+      <TouchableOpacity onPress={onPress} style={{ paddingTop: 10 }}>
+        <Text style={styles.text1}>View Less</Text>
+      </TouchableOpacity>
+    )
+  }
 
   return (
     <View style={styles.container}>
       <View style={{ flex: 1 }}>
-       
-        <SafeAreaView style={{ flex: 2, padding: 10,paddingBottom: 20 }}>
+
+        <SafeAreaView style={{ flex: 2, padding: 10, paddingBottom: 20 }}>
           <FlatList
-              data={data}
-              keyExtractor={(_,i) => String(i)}
-              numColumns={1}
-              showsVerticalScrollIndicator={false}
+            data={data}
+            keyExtractor={(_, i) => String(i)}
+            numColumns={1}
+            showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
-             
-                <View style={{ padding: 10, paddingTop: 10, }}>
-                <View style={{ flexDirection: "row",}}>
+
+              <View style={{ padding: 10, paddingTop: 10, }}>
+                <View style={{ flexDirection: "row", }}>
                   <View>
                     <Image
                       style={styles.iimage}
@@ -82,19 +92,29 @@ const [imgURL, setImageURL] = useState("");
                     />
                   </View>
 
-                  <View style={{padding: 10,}}>
-                   
-                      <Text style={styles.text}>Name : {item.name}</Text>
-                      <Text style={[styles.text,styles.text2]}>About : {item.desc}</Text>
-                      <Text style={styles.text}>Price : $ {item.price}</Text>
+                  <View style={{ padding: 10, }}>
+
+                    <Text style={styles.text}>Name : {item.name}</Text>
+                    <Text style={styles.text}>Price : $ {item.price}</Text>
+                    <View style={{ width: 140 }}>
+                      <ViewMoreText
+                        numberOfLines={2}
+                        renderViewMore={renderViewMore}
+                        renderViewLess={renderViewLess}
+
+                      >
+                        <Text style={styles.text}>{item.desc}</Text>
+                      </ViewMoreText>
+                    </View>
+
                   </View>
                 </View>
               </View>
-         
+
             )}
-            />
+          />
         </SafeAreaView>
-        </View>
+      </View>
     </View>
   )
 }
@@ -140,5 +160,13 @@ const styles = StyleSheet.create({
   },
   text2: {
     width: 200,
-  }
+  },
+  text1: {
+    fontSize: 13,
+    color: "#fff",
+    paddingBottom: 10,
+    fontWeight: "500",
+    letterSpacing: 1,
+    width: 150,
+  },
 })

@@ -84,17 +84,19 @@ const UserOrder = ({ route, navigation }) => {
 
     }
 
-    function handleBackButtonClick() {
-        navigation.goBack();
-        return true;
-    }
-
     useEffect(() => {
-        BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        return () => {
-            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
-        };
-    }, []);
+        navigation.addListener("focus", () => {
+            function handleBackButtonClick() {
+                navigation.goBack();
+                return true;
+              }
+             
+                BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+                return () => {
+                  BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+                };  
+        })
+      }, [navigation]);
 
     return (
         <View style={styles.container}>

@@ -58,17 +58,19 @@ const Userfeedback = ({ route, navigation }) => {
             });
     }
 
-    function handleBackButtonClick() {
-        navigation.goBack();
-        return true;
-      }
-    
-      useEffect(() => {
-        BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
-        };
-      }, []);
+    useEffect(() => {
+        navigation.addListener("focus", () => {
+            function handleBackButtonClick() {
+                navigation.goBack();
+                return true;
+              }
+             
+                BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+                return () => {
+                  BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+                };  
+        })
+      }, [navigation]);
 
     return (
         <View>

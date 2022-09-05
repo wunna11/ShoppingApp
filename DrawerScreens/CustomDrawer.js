@@ -22,7 +22,7 @@ const CustomDrawer = (props) => {
                 <Image
                     source={require('../assets/logo.png')}
                     style={{
-                        height: 80, width: 80, marginLeft: 80, marginTop: 40, marginBottom: 10, borderRadius: 40, borderWidth: 1,
+                        height: 80, width: 80, marginLeft: 90, marginTop: 40, marginBottom: 10, borderRadius: 40, borderWidth: 1,
                         borderColor: "white",
                     }}
                 />
