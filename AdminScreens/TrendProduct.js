@@ -128,12 +128,12 @@ const styles = StyleSheet.create({
     },
     textcount: {
         fontSize: 16,
-        color: '#FFE89C',
+        color: '#f7d081',
         fontWeight: "400",
         letterSpacing: 1,
         padding: 10,
         borderWidth: 1,
-        borderColor: '#FFE89C'
+        borderColor: '#f7d081'
     },
     text: {
         fontSize: 16,

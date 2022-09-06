@@ -82,9 +82,7 @@ const AdminMen = ({ route, navigation }) => {
 
         <View style={styles.container}>
             <View style={{ flex: 1 }}>
-                {/*<View style={{ padding: 10, paddingBottom: 20 }}>
-                        <Text style={styles.expoView}>"Welcome from Man Collection"</Text>
-                    </View>*/}
+                
                 <SafeAreaView style={{ flex: 2, padding: 10, paddingBottom: 20 }}>
                     <FlatList
                         data={data}
@@ -92,9 +90,7 @@ const AdminMen = ({ route, navigation }) => {
                         numColumns={1}
                         showsVerticalScrollIndicator={false}
                         renderItem={({ item }) => (
-                            //<TouchableOpacity
-                            //    onPress={() => navigation.navigate("UpdateProduct", { item })}
-                            //>
+                           
                             <View style={{ padding: 10, paddingTop: 10, }}>
                                 <View style={{ flexDirection: "row", }}>
                                     <View>
@@ -114,7 +110,7 @@ const AdminMen = ({ route, navigation }) => {
                                                 renderViewLess={renderViewLess}
 
                                             >
-                                                <Text style={styles.text}>Description : {item.desc}</Text>
+                                                <Text style={[styles.text, styles.decText]}>Description : {item.desc}</Text>
                                             </ViewMoreText>
                                         </View>
 
@@ -122,7 +118,7 @@ const AdminMen = ({ route, navigation }) => {
                                     </View>
                                 </View>
                             </View>
-                            //</TouchableOpacity>
+                           
                         )}
                     />
                 </SafeAreaView>
@@ -150,7 +146,7 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 10,
         fontSize: 16,
-        color: "#FFE89C",
+        color: "#f7d081",
         fontWeight: "900",
         letterSpacing: 1,
         lineHeight: 18,
@@ -158,10 +154,16 @@ const styles = StyleSheet.create({
     expoView: {
         textAlign: 'center',
         fontSize: 20,
-        color: '#FFE89C',
+        color: '#f7d081',
         fontWeight: '500',
         letterSpacing: 1,
         marginBottom: 30,
+    },
+    decText: {
+        fontSize: 12,
+        letterSpacing: 1.5,
+        color: '#f7d081',
+        fontWeight: 'bold',
     },
     text: {
         fontSize: 14,

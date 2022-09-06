@@ -1,16 +1,37 @@
-import { SafeAreaView, StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ImageBackground } from 'react-native';
+import { Alert, SafeAreaView, StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import { firebase } from '../config'
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import * as Animatable from 'react-native-animatable';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
+import { BackHandler } from "react-native";
 export default function Login({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    useEffect(() => {
+        navigation.addListener("focus", () => {
+            const backAction = () => {
+                Alert.alert("Hold on!", "Are you sure you want to exit?", [
+                    {
+                        text: "Cancel",
+                        onPress: () => null,
+                        style: "cancel"
+                    },
+                    { text: "YES", onPress: () => BackHandler.exitApp() }
+                ]);
+                return true;
+            };
 
+
+            BackHandler.addEventListener("hardwareBackPress", backAction);
+
+            return () =>
+                BackHandler.removeEventListener("hardwareBackPress", backAction);
+        });
+
+    }, [navigation]);
     function register() {
         navigation.navigate('Register')
     }
@@ -54,7 +75,7 @@ export default function Login({ navigation }) {
                         .doc(uid)
                         .get()
                         .then(firestoreDocument => {
-                         
+
 
                             if (!firestoreDocument.exists) {
                                 setPasswordError("User does not exist anymore");
@@ -62,7 +83,7 @@ export default function Login({ navigation }) {
                             }
 
                             else {
-   //Split UserView
+                                //Split UserView
                                 const userrole = firestoreDocument.data()?.role
                                 if (userrole == "Admin") {
                                     navigation.navigate("AdminHome")
@@ -71,7 +92,7 @@ export default function Login({ navigation }) {
                             }
                         })
 
-                    
+
                 })
                 .catch(error => {
                     console.log(error)
@@ -105,13 +126,13 @@ export default function Login({ navigation }) {
                                 <Text style={{ fontSize: 40, paddingLeft: 30, marginTop: 90, fontWeight: "900", color: "#000" }}>WTTH</Text>
                                 <Image
                                     style={{
-                                        height: 100,
-                                        width: 100,
+                                        height: 80,
+                                        width: 80,
                                         marginLeft: 45,
                                         marginTop: 25,
                                         borderRadius: 50,
                                         borderWidth: 1,
-                                        borderColor: "#000"
+                                        borderColor: "#fff"
                                     }}
                                     source={require('../assets/logo.png')}
                                 />
@@ -194,11 +215,11 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     acc: {
-        width: '100%', height: 200,
+        width: '100%',
+        height: 200,
         height: 80,
         width: 80,
         alignSelf: "center",
-        //marginTop: 150,
         borderRadius: 50
     },
     button: {

@@ -103,7 +103,7 @@ const AdminShoes = ({ route, navigation }) => {
                         renderViewLess={renderViewLess}
 
                       >
-                        <Text style={styles.text}>{item.desc}</Text>
+                        <Text  style={[styles.text, styles.decText]}>{item.desc}</Text>
                       </ViewMoreText>
                     </View>
 
@@ -133,12 +133,18 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 20
   },
+  decText: {
+    fontSize: 12,
+    letterSpacing: 1.5,
+    color: '#f7d081',
+    fontWeight: 'bold',
+},
   expoText: {
     textAlign: 'center',
     paddingTop: 10,
     paddingBottom: 10,
     fontSize: 16,
-    color: "#FFE89C",
+    color: "#f7d081",
     fontWeight: "900",
     letterSpacing: 1,
     lineHeight: 18,
@@ -146,7 +152,7 @@ const styles = StyleSheet.create({
   expoView: {
     textAlign: 'center',
     fontSize: 20,
-    color: '#FFE89C',
+    color: '#f7d081',
     fontWeight: '500',
     letterSpacing: 1,
     marginBottom: 30,

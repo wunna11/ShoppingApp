@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView, ImageBackground, StyleSheet, View, Text, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
 import { firebase } from '../config';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import * as Animatable from 'react-native-animatable';
+import { BackHandler } from "react-native";
 export default function ForgotPassword({ navigation }) {
     const [email, setEmail] = useState('')
 
@@ -21,7 +22,19 @@ export default function ForgotPassword({ navigation }) {
         navigation.goBack();
     }
 
+    useEffect(() => {
+        navigation.addListener("focus", () => {
+            function handleBackButtonClick() {
+                navigation.navigate('Login');
+                return true;
+            }
 
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+            return () => {
+                BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            };
+        })
+    }, [navigation]);
     return (
         <View style={styles.container}>
             <ImageBackground
@@ -36,6 +49,22 @@ export default function ForgotPassword({ navigation }) {
                       
                             <View style={{ flex: 1, marginLeft: 200, }}>
 
+<<<<<<< HEAD
+                            <Text style={{ fontSize: 40, paddingLeft: 30, marginTop: 60, fontWeight: "900", color: "#000" }}>WTTH</Text>
+                            <Image
+                                style={{
+                                    height: 80,
+                                    width: 80,
+                                    marginLeft: 45,
+                                    marginTop: 15,
+                                    borderRadius: 50,
+                                    borderWidth: 1,
+                                    borderColor: "#fff"
+                                }}
+                                source={require('../assets/logo.png')}
+                            />
+                        </View>
+=======
                                 <Text style={{ fontSize: 40, paddingLeft: 30, marginTop: 60, fontWeight: "900", color: "#000" }}>WTTH</Text>
                                 <Image
                                     style={{
@@ -51,6 +80,7 @@ export default function ForgotPassword({ navigation }) {
                                 />
                             </View>
                        
+>>>>>>> 5b21631466a905c0b40987b3d39b834d81a3d109
 
                         <Animatable.View
                             animation="fadeInUp"
