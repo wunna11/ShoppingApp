@@ -89,11 +89,6 @@ const Confirm = ({ route, navigation }) => {
                 <Text style={styles.textInfo}>$ {total}</Text>
             </View>
 
-
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
-                <MaterialCommunityIcons name="clock" color={'#f7d081'} size={25} />
-                <Text style={styles.textInfo}> {createdAt}</Text>
-            </View>
             <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#fff', textAlign: 'center' }}>Customer's Info</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
                 <MaterialCommunityIcons name="id-card" color={'#f7d081'} size={25} />
