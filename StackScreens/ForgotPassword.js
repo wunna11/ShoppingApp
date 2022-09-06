@@ -49,7 +49,6 @@ export default function ForgotPassword({ navigation }) {
                       
                             <View style={{ flex: 1, marginLeft: 200, }}>
 
-<<<<<<< HEAD
                             <Text style={{ fontSize: 40, paddingLeft: 30, marginTop: 60, fontWeight: "900", color: "#000" }}>WTTH</Text>
                             <Image
                                 style={{
@@ -64,23 +63,6 @@ export default function ForgotPassword({ navigation }) {
                                 source={require('../assets/logo.png')}
                             />
                         </View>
-=======
-                                <Text style={{ fontSize: 40, paddingLeft: 30, marginTop: 60, fontWeight: "900", color: "#000" }}>WTTH</Text>
-                                <Image
-                                    style={{
-                                        height: 80,
-                                        width: 80,
-                                        marginLeft: 45,
-                                        marginTop: 15,
-                                        borderRadius: 50,
-                                        borderWidth: 1,
-                                        borderColor: "#000"
-                                    }}
-                                    source={require('../assets/logo.png')}
-                                />
-                            </View>
-                       
->>>>>>> 5b21631466a905c0b40987b3d39b834d81a3d109
 
                         <Animatable.View
                             animation="fadeInUp"
