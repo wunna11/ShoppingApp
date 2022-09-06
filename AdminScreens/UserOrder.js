@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     button: {
-        backgroundColor: '#ffd700',
+        backgroundColor: '#f7d081',
         marginLeft: 10,
         marginTop: 10,
         borderRadius: 5,

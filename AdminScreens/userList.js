@@ -99,19 +99,19 @@ const UserList = ({ route, navigation }) => {
                                         </Text>
                                     </View>
                                     <View style={{ flexDirection: 'row', padding: 5 }}>
-                                        <MaterialCommunityIcons name="email" color={'#ffd700'} size={25} />
+                                        <MaterialCommunityIcons name="email" color={'#f7d081'} size={25} />
                                         <Text style={styles.text}>
                                             {item.email}
                                         </Text>
                                     </View>
                                     <View style={{ flexDirection: 'row', padding: 5 }}>
-                                        <MaterialCommunityIcons name="phone" color={'#ffd700'} size={25} />
+                                        <MaterialCommunityIcons name="phone" color={'#f7d081'} size={25} />
                                         <Text style={styles.text}>
                                             {item.phone}
                                         </Text>
                                     </View>
                                     <View style={{ flexDirection: 'row', padding: 5 }}>
-                                        <MaterialCommunityIcons name='map-check-outline' color={'#ffd700'} size={25} />
+                                        <MaterialCommunityIcons name='map-check-outline' color={'#f7d081'} size={25} />
                                         <Text style={styles.text}>
                                             {item.address}
                                         </Text>
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     },
     textID: {
         fontSize: 18,
-        color: "#ffd700",
+        color: "#f7d081",
         fontWeight: "bold",
         letterSpacing: 1,
         padding: 5,

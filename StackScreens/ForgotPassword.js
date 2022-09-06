@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView, ImageBackground, StyleSheet, View, Text, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
 import { firebase } from '../config';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import * as Animatable from 'react-native-animatable';
+import { BackHandler } from "react-native";
 export default function ForgotPassword({ navigation }) {
     const [email, setEmail] = useState('')
 
@@ -21,7 +22,19 @@ export default function ForgotPassword({ navigation }) {
         navigation.goBack();
     }
 
+    useEffect(() => {
+        navigation.addListener("focus", () => {
+            function handleBackButtonClick() {
+                navigation.navigate('Login');
+                return true;
+            }
 
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+            return () => {
+                BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            };
+        })
+    }, [navigation]);
     return (
         <View style={styles.container}>
             <ImageBackground
@@ -44,7 +57,7 @@ export default function ForgotPassword({ navigation }) {
                                     marginTop: 15,
                                     borderRadius: 50,
                                     borderWidth: 1,
-                                    borderColor: "#000"
+                                    borderColor: "#fff"
                                 }}
                                 source={require('../assets/logo.png')}
                             />

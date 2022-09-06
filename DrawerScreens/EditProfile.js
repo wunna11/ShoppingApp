@@ -78,14 +78,14 @@ const EditProfile = ({ route, navigation }) => {
             function handleBackButtonClick() {
                 navigation.goBack();
                 return true;
-              }
-             
-                BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-                return () => {
-                  BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
-                };  
+            }
+
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+            return () => {
+                BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            };
         })
-      }, [navigation]);
+    }, [navigation]);
 
     return (
         <View style={styles.container}>

@@ -304,7 +304,7 @@ const styles = StyleSheet.create({
         width: '65%',
         fontSize: 18,
         padding: 10,
-        borderColor: '#ffd700',
+        borderColor: '#f7d081',
         borderBottomWidth: 2,
         color: '#fff',
         borderRadius: 10,
@@ -317,7 +317,7 @@ const styles = StyleSheet.create({
         width: '65%',
         fontSize: 18,
         paddingLeft: 10,
-        borderColor: '#ffd700',
+        borderColor: '#f7d081',
         borderBottomWidth: 2,
         color: '#fff',
         borderRadius: 10,
@@ -327,7 +327,7 @@ const styles = StyleSheet.create({
 
     btn: {
         width: "100%",
-        backgroundColor: "#ffd700",
+        backgroundColor: "#f7d081",
         width: "30%",
         padding: 10,
         marginLeft: 40,
@@ -350,7 +350,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
     },
     selectButton: {
-        backgroundColor: "gold",
+        backgroundColor: "#f7d081",
         marginTop: 20,
         marginLeft: "29%",
         padding: 10,

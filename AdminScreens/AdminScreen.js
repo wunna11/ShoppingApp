@@ -149,7 +149,7 @@ const AdminScreen = ({ route, navigation }) => {
                 </View>
 
                 <View style={{ flex: 2, padding: 10, paddingTop: 0 }}>
-                    <ActivityIndicator size="small" color="gold" animating={show}></ActivityIndicator>
+                    <ActivityIndicator size="small" color="#f7d081" animating={show}></ActivityIndicator>
                     <FlatList
                         data={data}
                         keyExtractor={(_, i) => String(i)}
@@ -188,18 +188,18 @@ const AdminScreen = ({ route, navigation }) => {
                                         <MaterialCommunityIcons
                                             name="lead-pencil"
                                             size={25}
-                                            color="gold"
+                                            color="#f7d081"
                                         />
                                     </TouchableOpacity>
                                     <Text style={styles.padd}>
                                         {item.category_name}
                                     </Text>
                                     <TouchableOpacity onPress={() => navigation.navigate("TrendProduct", { item })} style={{ left: 10, }}>
-                                        <Text style={{ color: "#000", padding: 5, backgroundColor: "gold", fontWeight: '700', borderRadius: 8 }}> Set Trending </Text>
+                                        <Text style={{ color: "#000", padding: 5, backgroundColor: "#f7d081", fontWeight: '700', borderRadius: 8 }}> Set Trending </Text>
                                     </TouchableOpacity>
 
                                     <TouchableOpacity onPress={() => showConfirmDialog(item)} style={{ left: 27, }}>
-                                        <Ionicons name="trash" color={"#ffd700"} size={30} />
+                                        <Ionicons name="trash" color={"#f7d081"} size={30} />
                                     </TouchableOpacity>
                                 </View>
                                 <View style={{ padding: 10, flexDirection: "row" }}>
@@ -222,7 +222,7 @@ const AdminScreen = ({ route, navigation }) => {
                                                 numberOfLines={2}
                                                 renderViewMore={renderViewMore}
                                                 renderViewLess={renderViewLess}
-
+                                                
                                             >
                                                 <Text style={[styles.text, styles.decText]}>{item.desc}</Text>
                                             </ViewMoreText>
@@ -236,7 +236,7 @@ const AdminScreen = ({ route, navigation }) => {
                 </View>
                 <View style={styles.button}>
                     <TouchableOpacity
-                        style={{ backgroundColor: "gold", padding: 20, borderRadius: 40 }}
+                        style={{ backgroundColor: "#f7d081", padding: 20, borderRadius: 40 }}
                         onPress={() => navigation.navigate("CreateProduct")}
                     >
                         <MaterialCommunityIcons name="plus" size={30} color={"black"} />
@@ -272,7 +272,7 @@ const styles = StyleSheet.create({
         letterSpacing: 1,
     },
     title: {
-        color: "gold",
+        color: "#f7d081",
         marginBottom: 12,
         fontSize: 23,
         marginLeft: "2%",
@@ -294,7 +294,7 @@ const styles = StyleSheet.create({
     padd: {
         width: 100,
         marginLeft: '10%',
-        color: 'gold',
+        color: '#f7d081',
         fontWeight: "bold",
         fontSize: 18,
     },
@@ -316,7 +316,7 @@ const styles = StyleSheet.create({
     decText: {
         fontSize: 12,
         letterSpacing: 1.5,
-        color: 'gold',
+        color: '#f7d081',
         fontWeight: 'bold',
     },
     tinyLogo: {

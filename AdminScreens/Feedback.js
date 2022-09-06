@@ -88,28 +88,28 @@ const Userfeedback = ({ route, navigation }) => {
                                         <View style={styles.Box}>
                                             <View style={{ flexDirection: 'row' }}>
 
-                                                <Text style={{ fontSize: 18, fontWeight: 'bold', paddingRight: 235, color: '#ffd700' }}>From </Text>
+                                                <Text style={{ fontSize: 18, fontWeight: 'bold', paddingRight: 235, color: '#f7d081' }}>From </Text>
                                                 <TouchableOpacity onPress={() => Deletefeedback(item)}>
                                                     <MaterialCommunityIcons name="delete" color={'red'} size={30} />
                                                 </TouchableOpacity>
                                             </View>
 
                                             <View style={{ flexDirection: 'row' }}>
-                                                <MaterialCommunityIcons name="account" color={'#ffd700'} size={30} />
+                                                <MaterialCommunityIcons name="account" color={'#f7d081'} size={30} />
                                                 <Text style={{ paddingLeft: 20, color: "#fff", fontSize: 18 }}>
                                                     {item.username}
                                                 </Text>
                                             </View>
 
                                             <View style={{ flexDirection: 'row' }}>
-                                                <MaterialCommunityIcons name="clock" color={'#ffd700'} size={30} />
+                                                <MaterialCommunityIcons name="clock" color={'#f7d081'} size={30} />
                                                 <Text style={{ paddingLeft: 20, color: "#fff", fontSize: 18 }}>
                                                     {item.createdAt}
                                                 </Text>
                                             </View>
 
                                             <View style={{ flexDirection: 'row' }}>
-                                                <MaterialCommunityIcons name="message" color={'#ffd700'} size={30} />
+                                                <MaterialCommunityIcons name="message" color={'#f7d081'} size={30} />
                                                 <Text style={{ paddingLeft: 20, color: "#fff", fontSize: 18 }}>
                                                     {item.userfeedback}
                                                 </Text>
@@ -130,7 +130,7 @@ export default Userfeedback;
 const styles = StyleSheet.create({
     adminText: {
         fontSize: 20,
-        color: "#ffd700",
+        color: "#f7d081",
         fontWeight: "bold",
         letterSpacing: 1,
         padding: 20,
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     Box: {
         padding: 10,
         borderWidth: 2,
-        borderColor: '#ffd700',
+        borderColor: '#f7d081',
         //backgroundColor: "#f7d081",
         borderRadius: 20,
     },

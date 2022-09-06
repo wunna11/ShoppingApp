@@ -37,7 +37,7 @@ export default function Products({ navigation }) {
                 options={{
                     headerShown:false,
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="home" color={'#FFE89C'} size={30} />
+                        <Ionicons name="home" color={'#f7d081'} size={30} />
                     ),
                 }}
             />
@@ -47,7 +47,7 @@ export default function Products({ navigation }) {
                 options={{
                     headerShown:false,
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="man" color={'#FFE89C'} size={30} />
+                        <Ionicons name="man" color={'#f7d081'} size={30} />
                     ),
                 }}
             />
@@ -57,7 +57,7 @@ export default function Products({ navigation }) {
                 options={{
                     headerShown:false,
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="woman" color={'#FFE89C'} size={30} />
+                        <Ionicons name="woman" color={'#f7d081'} size={30} />
                     ),
                 }}
             />
@@ -68,7 +68,7 @@ export default function Products({ navigation }) {
                 options={{
                     headerShown:false,
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="shoe-heel" color={'#FFE89C'} size={30} />
+                        <MaterialCommunityIcons name="shoe-heel" color={'#f7d081'} size={30} />
                     ),
                 }}
             />
@@ -78,7 +78,7 @@ export default function Products({ navigation }) {
                 options={{
                     headerShown:false,
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="necklace" color={'#FFE89C'} size={30} />
+                        <MaterialCommunityIcons name="necklace" color={'#f7d081'} size={30} />
                     ),
                 }}
             />

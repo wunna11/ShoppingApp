@@ -7,8 +7,9 @@ import {
     TextInput,
     TouchableOpacity,
 } from "react-native";
+import { BackHandler } from "react-native";
 import { firebase } from "../config";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as Animatable from "react-native-animatable";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -27,6 +28,7 @@ export default function Register({ navigation }) {
     const [confirmpasswordError, setconfirmPasswordError] = useState("");
     const emailPattern =
         /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
     const onFooterLinkPress = () => {
         navigation.navigate("Login");
     };
@@ -124,7 +126,19 @@ export default function Register({ navigation }) {
                 });
         }
     };
+    useEffect(() => {
+        navigation.addListener("focus", () => {
+            function handleBackButtonClick() {
+                navigation.navigate('Login');
+                return true;
+            }
 
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+            return () => {
+                BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            };
+        })
+    }, [navigation]);
     return (
         <View style={styles.container}>
             <SafeAreaView style={{ flex: 1, padding: 5 }}>

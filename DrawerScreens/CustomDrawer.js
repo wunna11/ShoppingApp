@@ -1,13 +1,10 @@
-import React, { useContext, useEffect } from "react";
-import { View, Image, Text, TouchableOpacity } from 'react-native';
+import React from "react";
+import { View, Image, Text } from 'react-native';
 import {
     DrawerContentScrollView,
     DrawerItemList
 } from '@react-navigation/drawer';
-import { CommonActions } from '@react-navigation/native'
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { firebase } from '../config';
-import { Restart } from '../components/reload/reload'
+
 const CustomDrawer = (props) => {
 
 

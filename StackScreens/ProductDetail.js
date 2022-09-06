@@ -127,13 +127,13 @@ const ProductDetail = ({ route, navigation }) => {
                 <Text style={styles.text}>Price : $ {price}</Text>
                 <View style={{ flexDirection: 'row', }}>
                     <Text style={styles.text}>Qty : </Text>
-                    <View style={{ padding: 5, borderWidth: 1, borderColor: '#FFE89C', paddingTop: 10, }}>
-                        <MaterialCommunityIcons name="minus" size={20} color={'#FFE89C'}
+                    <View style={{ padding: 5, borderWidth: 1, borderColor: '#f7d081', paddingTop: 10, }}>
+                        <MaterialCommunityIcons name="minus" size={20} color={'#f7d081'}
                             onPress={decrease} />
                     </View>
                     <Text style={styles.textcount}>{count}</Text>
-                    <View style={{ padding: 5, borderWidth: 1, borderColor: '#FFE89C', paddingTop: 10, }}>
-                        <MaterialCommunityIcons name="plus" size={20} color={'#FFE89C'}
+                    <View style={{ padding: 5, borderWidth: 1, borderColor: '#f7d081', paddingTop: 10, }}>
+                        <MaterialCommunityIcons name="plus" size={20} color={'#f7d081'}
                             onPress={increase} />
                     </View>
                 </View>
@@ -202,12 +202,12 @@ const styles = StyleSheet.create({
     textcount: {
         //marginTop: 10,
         fontSize: 16,
-        color: '#FFE89C',
+        color: '#f7d081',
         fontWeight: "400",
         letterSpacing: 1,
         padding: 10,
         borderWidth: 1,
-        borderColor: '#FFE89C'
+        borderColor: '#f7d081'
     },
     text: {
         fontSize: 16,

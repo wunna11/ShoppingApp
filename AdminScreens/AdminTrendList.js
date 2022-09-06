@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     expoView: {
         textAlign: 'center',
         fontSize: 22,
-        color: '#FFE89C',
+        color: '#f7d081',
         fontWeight: '500',
         letterSpacing: 1,
     },
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
         //textAlign: 'center',
         paddingTop: 8,
         fontSize: 14,
-        color: "#FFE89C",
+        color: "#f7d081",
         fontWeight: "900",
         letterSpacing: 1,
         lineHeight: 18,
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
         margin: 10,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#FFE89C",
+        backgroundColor: "#f7d081",
         height: 50,
         width: 50,
 

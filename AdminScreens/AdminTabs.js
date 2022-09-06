@@ -46,7 +46,7 @@ export default function AdminTab({ navigation }) {
                 "tabBarActiveBackgroundColor": "#757271",
                 "tabBarInactiveBackgroundColor": "#000",
                 tabBarIcon: ({ color, size }) => (
-                    <MaterialCommunityIcons name="home" color={'#ffd700'} size={30} />
+                    <MaterialCommunityIcons name="home" color={'#f7d081'} size={30} />
                 ),
 
             }}
@@ -60,7 +60,7 @@ export default function AdminTab({ navigation }) {
                 component={AdminTopTabScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialIcons name="category" size={30} color={'#ffd700'} />
+                        <MaterialIcons name="category" size={30} color={'#f7d081'} />
                     ),
                 }}
 
@@ -70,7 +70,7 @@ export default function AdminTab({ navigation }) {
                 component={UserOrder}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="book" color={'#ffd700'} size={30} />
+                        <Ionicons name="book" color={'#f7d081'} size={30} />
                     ),
                 }}
             />
@@ -79,7 +79,7 @@ export default function AdminTab({ navigation }) {
                 component={UserList}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="person" color={'#ffd700'} size={30} />
+                        <Ionicons name="person" color={'#f7d081'} size={30} />
                     ),
                 }}
             />
@@ -88,7 +88,7 @@ export default function AdminTab({ navigation }) {
                 component={Feedback}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="chatbox-ellipses-outline" color={'#ffd700'} size={30} />
+                        <Ionicons name="chatbox-ellipses-outline" color={'#f7d081'} size={30} />
                     ),
                 }}
             />
@@ -97,7 +97,7 @@ export default function AdminTab({ navigation }) {
                 component={SignOut}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="exit" color={'#ffd700'} size={30} />
+                        <Ionicons name="exit" color={'#f7d081'} size={30} />
                     ),
                 }}
             />

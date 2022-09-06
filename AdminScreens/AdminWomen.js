@@ -82,9 +82,7 @@ const AdminWomen = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <View style={{ flex: 1 }}>
-        {/*<View style={{ padding: 10,paddingBottom: 20  }}>
-          <Text style={styles.expoView}>"Welcome from Woman Collection"</Text>
-        </View>*/}
+      
         <SafeAreaView style={{ flex: 2, padding: 10, paddingBottom: 20 }}>
           <FlatList
             data={data}
@@ -92,9 +90,7 @@ const AdminWomen = ({ route, navigation }) => {
             numColumns={1}
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
-              //<TouchableOpacity
-              //onPress={() => navigation.navigate("UpdateProduct", { item })}
-              //>
+              
               <View style={{ padding: 10, paddingTop: 10, }}>
                 <View style={{ flexDirection: "row", }}>
                   <View>
@@ -105,7 +101,7 @@ const AdminWomen = ({ route, navigation }) => {
                   </View>
 
                   <View style={{ padding: 10, width: 230 }}>
-                    {/*<Text style={styles.expoText}>{item.category_name}</Text>*/}
+                  
                     <Text style={styles.text}>Name : {item.name}</Text>
                     <Text style={styles.text}>Price : $ {item.price}</Text>
                     <View style={{ width: 140 }}>
@@ -115,14 +111,14 @@ const AdminWomen = ({ route, navigation }) => {
                         renderViewLess={renderViewLess}
 
                       >
-                        <Text style={styles.text}>{item.desc}</Text>
+                        <Text  style={[styles.text, styles.decText]}>{item.desc}</Text>
                       </ViewMoreText>
                     </View>
 
                   </View>
                 </View>
               </View>
-              //</TouchableOpacity>
+          
             )}
           />
         </SafeAreaView>
@@ -150,7 +146,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     fontSize: 16,
-    color: "#FFE89C",
+    color: "#f7d081",
     fontWeight: "900",
     letterSpacing: 1,
     lineHeight: 18,
@@ -158,7 +154,7 @@ const styles = StyleSheet.create({
   expoView: {
     textAlign: 'center',
     fontSize: 20,
-    color: '#FFE89C',
+    color: '#f7d081',
     fontWeight: '500',
     letterSpacing: 1,
     marginBottom: 30,
@@ -181,4 +177,10 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     width: 150,
   },
+  decText: {
+    fontSize: 12,
+    letterSpacing: 1.5,
+    color: '#f7d081',
+    fontWeight: 'bold',
+},
 })
