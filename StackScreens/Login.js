@@ -1,4 +1,4 @@
-import { Alert, SafeAreaView, StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ImageBackground } from 'react-native';
+import { ActivityIndicator,Alert, SafeAreaView, StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import { firebase } from '../config'
 import React, { useState, useEffect } from 'react';
 import * as Animatable from 'react-native-animatable';
@@ -9,6 +9,7 @@ export default function Login({ navigation }) {
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
+    const [show, setshow] = useState(false);
     const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     useEffect(() => {
         navigation.addListener("focus", () => {
@@ -24,9 +25,7 @@ export default function Login({ navigation }) {
                 return true;
             };
 
-
             BackHandler.addEventListener("hardwareBackPress", backAction);
-
             return () =>
                 BackHandler.removeEventListener("hardwareBackPress", backAction);
         });
@@ -40,10 +39,14 @@ export default function Login({ navigation }) {
     }
 
     const onLoginPress = () => {
-
+        setshow(true)
+        setTimeout(() => {
+            setshow(false)
+        }, 4000)
         var emailValid = false;
         if (email.length == 0) {
             setEmailError("Email is required");
+            setshow(false)
         }
         else if (email.length < 6) {
             setEmailError("Email should be minimum 6 characters");
@@ -63,6 +66,7 @@ export default function Login({ navigation }) {
         var passwordValid = false;
         if (password.length == 0) {
             setPasswordError("Password is Required!");
+            setshow(false)
         }
         else {
             firebase
@@ -97,6 +101,8 @@ export default function Login({ navigation }) {
                 .catch(error => {
                     console.log(error)
                     setPasswordError("Email or Password is wrong!Try Again...");
+                    setshow(false)
+
 
                 })
 
@@ -167,6 +173,7 @@ export default function Login({ navigation }) {
 
                                     <Text style={{ color: "red" }}>{passwordError}</Text>
                                 }
+                                  <ActivityIndicator size="large" color="gold" animating={show} style={styles.activityIndicator}></ActivityIndicator>
                                 <TouchableOpacity
                                     style={styles.button}
                                     onPress={() => onLoginPress()}>
@@ -238,4 +245,9 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
 
     },
+    activityIndicator: {
+        paddingTop: "95%",
+        paddingLeft: "65%",
+        position: 'absolute',
+    }
 });
