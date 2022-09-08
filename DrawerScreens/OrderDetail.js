@@ -50,7 +50,9 @@ export default function OrderDetail({ navigation }) {
 
         console.log("inside read function", userId);
 
-        dataRef.where("userid", "==", userId)
+        dataRef
+            .where("userid", "==", userId)
+            .orderBy("createdAt", "desc")
             .onSnapshot((querySnapshot) => {
                 const data = [];
 
